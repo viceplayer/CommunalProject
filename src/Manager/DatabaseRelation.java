@@ -68,4 +68,49 @@ public class DatabaseRelation {
 		}
 
 	}
+	
+	public static void createCard(int userId, int cardNumber, String date, String firstName, String lastName) {
+		String query = "INSERT INTO user VALUES(?,?,?,?,?,?)";
+		try {
+			PreparedStatement ps = con.prepareStatement(query);
+			ps.setInt(1, userId);
+			ps.setInt(2, cardNumber);
+			ps.setString(3, date);
+			ps.setString(4, firstName);
+			ps.setString(5, lastName);
+			ps.executeQuery();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public static void createCompany(String name) {
+		String query = "INSERT INTO company VALUES(?)";
+		try {
+			PreparedStatement ps = con.prepareStatement(query);
+			ps.setString(1, name);
+			ps.executeQuery();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	public static void createFolder(int userId, int type, String name) {
+		String query = "INSERT INTO object VALUES(?,?,?)";
+		try {
+			PreparedStatement ps = con.prepareStatement(query);
+			ps.setInt(1, userId);
+			ps.setInt(2, type);
+			ps.setString(3, name);
+			ps.executeQuery();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
 }
