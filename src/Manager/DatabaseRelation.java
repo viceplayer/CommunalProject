@@ -33,24 +33,6 @@ public class DatabaseRelation {
 		return result;
 	}
 
-	public static ArrayList<object> getObjects(int userId) {
-		String query = "SELECT * FROM object WHERE userId = ?";
-		ArrayList<object> result = new ArrayList<object>();
-		try {
-			PreparedStatement ps = con.prepareStatement(query);
-			ps.setString(1, ""+userId);
-			ResultSet rs = ps.executeQuery();
-			while (rs.next()) {
-				object temp = new object(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getString(4));
-				result.add(temp);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return result;
-
-	}
 
 	public static void createUser(String personalId, String firstName, String lastName, String date, String mail,
 			String mobile, String password) {
@@ -115,7 +97,24 @@ public class DatabaseRelation {
 		}
 
 	}
+	public static ArrayList<object> getObjects(int userId) {
+		String query = "SELECT * FROM object WHERE userId = ?";
+		ArrayList<object> result = new ArrayList<object>();
+		try {
+			PreparedStatement ps = con.prepareStatement(query);
+			ps.setString(1, ""+userId);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				object temp = new object(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getString(4));
+				result.add(temp);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result;
 
+	}
 	public static void createTransaction(int cardId, double amount, int companyId, String date, int objectId) {
 		String query = "INSERT INTO transaction(cardId, amount, companyId, transactionDate, objectId) VALUES(?,?,?,?,?)";
 		try {

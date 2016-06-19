@@ -38,25 +38,23 @@ public class AddServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-//	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		Manager.AccountManager am = (Manager.AccountManager) request.getServletContext()
-//				.getAttribute("Account Manager");
-//		String path = "";
-//		errors = new Vector<>();
-//		String name = request.getParameter("objectName");
-//		String type = request.getParameter("type");
-//		if (am.accountExists(personalId)) {
-//			path += "AccountAlreadyExists.jsp";
-//			System.out.print("Account already exists");
-//		} else {
-//			am.createAccount(personalId, firstName, lastName, date, mail, mobile, password);
-//			path += "Home.jsp";
-//			System.out.print("Success! Welcome");
-//
-//		}
-//		RequestDispatcher dispatch = request.getRequestDispatcher(path);
-//		dispatch.forward(request, response);
-//		doGet(request, response);
-//	}
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Manager.AccountManager am = (Manager.AccountManager) request.getServletContext()
+				.getAttribute("Account Manager");
+		String path = "";
+		String name = request.getParameter("objectName");
+		String type = request.getParameter("type");
+		if (!am.addObject(userId, type, name))) {
+			path += "ObjectAlreadyExists.jsp";
+			System.out.print("Object already exists");
+		} else {
+			path += "Home.jsp";
+			System.out.print("Success! Object Added");
+
+		}
+		RequestDispatcher dispatch = request.getRequestDispatcher(path);
+		dispatch.forward(request, response);
+		doGet(request, response);
+	}
 	
 }

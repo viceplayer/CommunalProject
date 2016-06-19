@@ -1,5 +1,7 @@
 package Manager;
 
+import java.util.ArrayList;
+
 public class AccountManager {
 	private DatabaseRelation db;
 
@@ -15,6 +17,17 @@ public class AccountManager {
 			return true;
 		}
 		return false;
+	}
+
+	public boolean addObject(int userId, int type, String name){
+		ArrayList<object> tmp =  DatabaseRelation.getObjects(userId);
+		for(int i = 0; i < tmp.size(); i++){
+			if(tmp.get(i).getName() == name) return false;
+		}
+		DatabaseRelation.createObject(userId, type, name);
+		return true;
+		
+		
 	}
 
 	public boolean accountExists(String personalId) {
