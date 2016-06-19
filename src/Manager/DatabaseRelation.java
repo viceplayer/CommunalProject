@@ -167,11 +167,62 @@ public class DatabaseRelation {
 
 	}
 
+	public static void createTransaction(int cardId, double amount, int companyId, String date, int objectId) {
+		String query = "INSERT INTO transaction VALUES(?,?,?,?,?)";
+		try {
+			PreparedStatement ps = con.prepareStatement(query);
+			ps.setInt(1, cardId);
+			ps.setDouble(2, amount);
+			ps.setInt(3, companyId);
+			ps.setString(4, date);
+			ps.setInt(5, objectId);
+			ps.executeQuery();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	public static void createTicket(int objectId, int companyId, String ticket) {
+		String query = "INSERT INTO transaction VALUES(?,?,?)";
+		try {
+			PreparedStatement ps = con.prepareStatement(query);
+			ps.setInt(1, objectId);
+			ps.setInt(2, companyId);
+			ps.setString(3, ticket);
+			ps.executeQuery();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	public static ArrayList<Ticket> getTickets(int objectId) {
+		String query = "SELECT objectId,ticket,companyName FROM ticket a join company b on a.companyId = b.id WHERE objectId = "
+				+ objectId;
+		ArrayList<Ticket> result = new ArrayList<Ticket>();
+		try {
+			PreparedStatement ps = con.prepareStatement(query);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				Ticket temp = new Ticket(rs.getInt(1), rs.getString(3), rs.getString(2));
+				result.add(temp);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result;
+
+	}
+
 	public static ArrayList<Transaction> getTransactions(ArrayList<object> arr) {
 		String query = "SELECT cardNumber,companyName,amount, transactionDate FROM transaction a join company b join card c join object d on a.companyId = b.id AND a.cardId = c.id AND a.objectId = d.id WHERE objectId = ";
-		for(int i=0;i<arr.size();i++){
+		for (int i = 0; i < arr.size(); i++) {
 			query += arr.get(i).getId();
-			if(i!=arr.size()-1){
+			if (i != arr.size() - 1) {
 				query += " OR objectId = ";
 			}
 		}
@@ -180,7 +231,7 @@ public class DatabaseRelation {
 			PreparedStatement ps = con.prepareStatement(query);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				Transaction temp = new Transaction(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getDate(4));
+				Transaction temp = new Transaction(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getString(4));
 				result.add(temp);
 			}
 		} catch (SQLException e) {
@@ -190,16 +241,15 @@ public class DatabaseRelation {
 		return result;
 
 	}
-	
+
 	public static ArrayList<card> getCards(int userId) {
-		String query = "SELECT userId, cardNumber, cardDate, firstName, lastName from card where userId = "
-				+ userId;
+		String query = "SELECT userId, cardNumber, cardDate, firstName, lastName from card where userId = " + userId;
 		ArrayList<card> result = new ArrayList<card>();
 		try {
 			PreparedStatement ps = con.prepareStatement(query);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				card temp = new card(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getString(5));
+				card temp = new card(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
 				result.add(temp);
 			}
 		} catch (SQLException e) {
@@ -210,4 +260,19 @@ public class DatabaseRelation {
 
 	}
 
+	public static boolean userExists(String personalId, String password) {
+		String query = "SELECT password FROM user WHERE personalId = " + personalId + "and password = " + password;
+		boolean result = false;
+		try {
+			PreparedStatement ps = con.prepareStatement(query);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				result = true;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result;
+	}
 }
