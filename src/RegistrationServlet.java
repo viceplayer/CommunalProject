@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import Manager.AccountManager;
+import Manager.DatabaseRelation;
 
 /**
  * Servlet implementation class RegistrationServlet
@@ -63,7 +64,7 @@ public class RegistrationServlet extends HttpServlet {
 		checkPassword(password);
 		checkMail(mail);
 		checkDate(date);
-		if (am.accountExists(personalId)) {
+		if (DatabaseRelation.getUserId(personalId) == -1) {
 			path += "accountAlreadyExists.jsp";
 		} else {
 			am.createAccount(personalId, firstName, lastName, date, mail, mobile, password);

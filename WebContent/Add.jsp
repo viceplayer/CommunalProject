@@ -9,7 +9,11 @@
 <body>
 	<form action="AddServlet" method="post">
 		Name:<br> <input type="text" name="objectName"><br>
-		Type:<br> <input type="text" name="type"><br> 
+		<select name="type">
+		  <option value="0">Home</option>
+		  <option value="1">Car</option>
+		  <option value="2">Other</option>
+		</select>
 		<input type="submit" value="Submit">
 	</form>
 </body>

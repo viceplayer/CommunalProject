@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import Manager.CheckInput;
 
@@ -43,8 +44,10 @@ public class AddServlet extends HttpServlet {
 				.getAttribute("Account Manager");
 		String path = "";
 		String name = request.getParameter("objectName");
-		String type = request.getParameter("type");
-		if (!am.addObject(userId, type, name))) {
+		int type = Integer.parseInt(request.getParameter("type"));
+		HttpSession session = request.getSession();
+		int userId = (int)session.getAttribute("userId");
+		if (!am.addObject(userId, type, name)){
 			path += "ObjectAlreadyExists.jsp";
 			System.out.print("Object already exists");
 		} else {

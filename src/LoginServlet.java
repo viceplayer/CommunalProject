@@ -7,8 +7,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import Manager.AccountManager;
+import Manager.DatabaseRelation;
 
 /**
  * Servlet implementation class LoginServlet
@@ -45,6 +47,9 @@ public class LoginServlet extends HttpServlet {
 			path += "Home.jsp";
 			System.out.println("Wrong input");
 		}
+		int userId = DatabaseRelation.getUserId(personalId);
+		HttpSession session = request.getSession();
+		session.setAttribute("userId", userId);
 		RequestDispatcher dispatch = request.getRequestDispatcher(path);
         dispatch.forward(request,response);
 		response.getWriter().append("Served at: ").append(request.getContextPath());
