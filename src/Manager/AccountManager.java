@@ -12,7 +12,7 @@ public class AccountManager {
 
 	public boolean createAccount(String personalId, String firstName, String lastName, String date, String mail,
 			String mobile, String password) {
-		if (accountExists(personalId) == false) {
+		if (DatabaseRelation.getUserId(personalId) == -1) {
 			DatabaseRelation.createUser(personalId, firstName, lastName, date, mail, mobile, password);
 			return true;
 		}
@@ -28,14 +28,6 @@ public class AccountManager {
 		return true;
 		
 		
-	}
-
-	public boolean accountExists(String personalId) {
-
-		if (DatabaseRelation.getUserId(personalId) == -1) {
-			return false;
-		}
-		return true;
 	}
 
 	public boolean logIn(String personalId, String password) {
