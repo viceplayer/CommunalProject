@@ -6,10 +6,10 @@ import java.sql.SQLException;
 
 public class DBConnection {
 
-	public static final String MYSQL_USERNAME = "root";
-	public static final String MYSQL_PASSWORD = "root";
-	public static final String MYSQL_DATABASE_SERVER = "jdbc:mysql://127.0.0.1:3306";
-	public static final String MYSQL_DATABASE_NAME = "oop";
+	public static final String MYSQL_USERNAME = "oopuser";
+	public static final String MYSQL_PASSWORD = "asd123";
+	public static final String MYSQL_DATABASE_SERVER = "jdbc:mysql://db4free.net:3306";
+	public static final String MYSQL_DATABASE_NAME = "oopproject";
 	public static Connection connection;
 
 	// This class just connects to database
@@ -52,7 +52,7 @@ public class DBConnection {
 		}
 	}
 
-//	public static void main(String[] args) {
-//		DBConnection n = new DBConnection();
-//	}
+	public static void main(String[] args) {
+		DBConnection n = new DBConnection();
+	}
 }
