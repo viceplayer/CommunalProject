@@ -14,14 +14,14 @@
 			for (int i = 0; i < DatabaseRelation
 					.getObjects(DatabaseRelation.getUserId(request.getParameter("personalId"))).size(); i++) {
 		%>
-		<a href="http://localhost:8080/OOPPROJECT/Other.jsp"> <%=DatabaseRelation.getObjects(DatabaseRelation.getUserId(request.getParameter("personalId")))
+		<a href="http://localhost:8080/CommunalProject/Other.jsp"> <%=DatabaseRelation.getObjects(DatabaseRelation.getUserId(request.getParameter("personalId")))
 						.get(i).getName()%></a> 
 
 		<%
 			}
 		%>
-		<a href="http://localhost:8080/OOPPROJECT/Other.jsp">Other</a> <a
-			href="http://localhost:8080/OOPPROJECT/Add.jsp">Add</a>
+		<a href="http://localhost:8080/CommunalProject/Other.jsp">Other</a> <a
+			href="http://localhost:8080/CommunalProject/Add.jsp">Add</a>
 	</h4>
 
 

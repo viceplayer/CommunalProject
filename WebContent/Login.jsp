@@ -13,9 +13,9 @@
 		PersonalId:<br> <input type="text" name="personalId"><br>
 		Password:<br> <input type="text" name="password"> <br>
 		<input type="submit" value="Submit"> <br> 
-		<a href="http://localhost:8080/OOPPROJECT/Registration.jsp">Register</a>
+		<a href="http://localhost:8080/CommunalProject/Registration.jsp">Register</a>
 		<br>
-		<a href="http://localhost:8080/OOPPROJECT/ForgetPassword.jsp">Forget Password</a>
+		<a href="http://localhost:8080/CommunalProject/ForgetPassword.jsp">Forget Password</a>
 	</form>
 </body>
 </html>
