@@ -1,7 +1,6 @@
 package Manager;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,26 +12,27 @@ public class DatabaseRelation {
 	private static Connection con;
 
 	public DatabaseRelation() {
-		// DBConnection asd = new DBConnection();
 		con = DBConnection.getConnection();
+
 	}
 
-	public static int getUserId(int personalId) {
+	public static int getUserId(String personalId) {
 		String query = "SELECT id FROM user WHERE personalId = " + personalId;
 		int result = -1;
 		try {
 			PreparedStatement ps = con.prepareStatement(query);
 			ResultSet rs = ps.executeQuery();
-			rs.next();
-			result = rs.getInt(1);
+			if (rs.next()) {
+				result = rs.getInt(1);
+			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			 
 			e.printStackTrace();
 		}
 		return result;
 	}
 
-	public static ArrayList<object> getTesseracts(int userId) {
+	public static ArrayList<object> getObjects(int userId) {
 		String query = "SELECT * FROM object WHERE userId = " + userId;
 		ArrayList<object> result = new ArrayList<object>();
 		try {
@@ -50,17 +50,18 @@ public class DatabaseRelation {
 
 	}
 
-	public static void createUser(int personalId, String firstName, String lastName, java.sql.Date date, String mail,
-			int mobile) {
-		String query = "INSERT INTO user VALUES(?,?,?,?,?,?)";
+	public static void createUser(String personalId, String firstName, String lastName, String date, String mail,
+			String mobile, String password) {
+		String query = "INSERT INTO user VALUES(?,?,?,?,?,?,?)";
 		try {
 			PreparedStatement ps = con.prepareStatement(query);
-			ps.setInt(1, personalId);
+			ps.setString(1, personalId);
 			ps.setString(2, firstName);
 			ps.setString(3, lastName);
-			ps.setDate(4, date);
+			ps.setString(4, date);
 			ps.setString(5, mail);
-			ps.setInt(6, mobile);
+			ps.setString(6, mobile);
+			ps.setString(7, password);
 			ps.executeQuery();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -68,13 +69,13 @@ public class DatabaseRelation {
 		}
 
 	}
-	
-	public static void createCard(int userId, int cardNumber, String date, String firstName, String lastName) {
+
+	public static void createCard(int userId, String cardNumber, String date, String firstName, String lastName) {
 		String query = "INSERT INTO user VALUES(?,?,?,?,?,?)";
 		try {
 			PreparedStatement ps = con.prepareStatement(query);
 			ps.setInt(1, userId);
-			ps.setInt(2, cardNumber);
+			ps.setString(2, cardNumber);
 			ps.setString(3, date);
 			ps.setString(4, firstName);
 			ps.setString(5, lastName);
@@ -112,6 +113,8 @@ public class DatabaseRelation {
 		}
 
 	}
+	
+	//-----------------
 	
 	public static void createTransaction(int cardId, double amount, int companyId, java.sql.Date date, int objectId) {
 		String query = "INSERT INTO transaction VALUES(?,?,?,?,?)";
