@@ -5,10 +5,10 @@ public class Transaction {
 
 	private int cardNumber;
 	private int amount;
-	private java.sql.Date date;
+	private String date;
 	private String companyName;
 	
-	public Transaction(int cardNumber,String companyName, int amount,java.sql.Date date){
+	public Transaction(int cardNumber,String companyName, int amount,String date){
 		this.cardNumber = cardNumber;
 		this.amount = amount;
 		this.date = date;
@@ -21,7 +21,7 @@ public class Transaction {
 	public int getAmount(){
 		return amount;
 	}
-	public java.sql.Date getDate(){
+	public String getDate(){
 		return date;
 	}
 	public String getName(){
