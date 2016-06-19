@@ -22,7 +22,8 @@ public class AccountManager {
 	public boolean addObject(int userId, int type, String name){
 		ArrayList<object> tmp =  DatabaseRelation.getObjects(userId);
 		for(int i = 0; i < tmp.size(); i++){
-			if(tmp.get(i).getName() == name) return false;
+			if(tmp.get(i).getName().equals(name)) return false;
+			
 		}
 		DatabaseRelation.createObject(userId, type, name);
 		return true;
