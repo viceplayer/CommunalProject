@@ -52,7 +52,7 @@ public class DBConnection {
 		}
 	}
 
-	public static void main(String[] args) {
-		DBConnection n = new DBConnection();
-	}
+//	public static void main(String[] args) {
+//		DBConnection n = new DBConnection();
+//	}
 }
