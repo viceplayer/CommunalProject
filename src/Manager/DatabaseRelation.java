@@ -26,7 +26,7 @@ public class DatabaseRelation {
 				result = rs.getInt(1);
 			}
 		} catch (SQLException e) {
-			 
+
 			e.printStackTrace();
 		}
 		return result;
@@ -52,7 +52,7 @@ public class DatabaseRelation {
 
 	public static void createUser(String personalId, String firstName, String lastName, String date, String mail,
 			String mobile, String password) {
-		String query = "INSERT INTO user VALUES(?,?,?,?,?,?,?)";
+		String query = "INSERT INTO user(personalId, firstName, lastName, birthDate, mail, mobile, password) VALUES(?,?,?,?,?,?,?)";
 		try {
 			PreparedStatement ps = con.prepareStatement(query);
 			ps.setString(1, personalId);
@@ -62,7 +62,7 @@ public class DatabaseRelation {
 			ps.setString(5, mail);
 			ps.setString(6, mobile);
 			ps.setString(7, password);
-			ps.executeQuery();
+			ps.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -71,7 +71,7 @@ public class DatabaseRelation {
 	}
 
 	public static void createCard(int userId, String cardNumber, String date, String firstName, String lastName) {
-		String query = "INSERT INTO user VALUES(?,?,?,?,?,?)";
+		String query = "INSERT INTO card(userId, cardNumber, cardDate, firstName, lastName) VALUES(?,?,?,?,?,?)";
 		try {
 			PreparedStatement ps = con.prepareStatement(query);
 			ps.setInt(1, userId);
@@ -79,7 +79,7 @@ public class DatabaseRelation {
 			ps.setString(3, date);
 			ps.setString(4, firstName);
 			ps.setString(5, lastName);
-			ps.executeQuery();
+			ps.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -87,11 +87,11 @@ public class DatabaseRelation {
 	}
 
 	public static void createCompany(String name) {
-		String query = "INSERT INTO company VALUES(?)";
+		String query = "INSERT INTO company(companyName) VALUES(?)";
 		try {
 			PreparedStatement ps = con.prepareStatement(query);
 			ps.setString(1, name);
-			ps.executeQuery();
+			ps.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -100,13 +100,13 @@ public class DatabaseRelation {
 	}
 
 	public static void createFolder(int userId, int type, String name) {
-		String query = "INSERT INTO object VALUES(?,?,?)";
+		String query = "INSERT INTO object(userId, objectType, objectName) VALUES(?,?,?)";
 		try {
 			PreparedStatement ps = con.prepareStatement(query);
 			ps.setInt(1, userId);
 			ps.setInt(2, type);
 			ps.setString(3, name);
-			ps.executeQuery();
+			ps.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -115,7 +115,7 @@ public class DatabaseRelation {
 	}
 
 	public static void createTransaction(int cardId, double amount, int companyId, String date, int objectId) {
-		String query = "INSERT INTO transaction VALUES(?,?,?,?,?)";
+		String query = "INSERT INTO transaction(cardId, amount, companyId, transactionDate, objectId) VALUES(?,?,?,?,?)";
 		try {
 			PreparedStatement ps = con.prepareStatement(query);
 			ps.setInt(1, cardId);
@@ -123,7 +123,7 @@ public class DatabaseRelation {
 			ps.setInt(3, companyId);
 			ps.setString(4, date);
 			ps.setInt(5, objectId);
-			ps.executeQuery();
+			ps.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -132,13 +132,13 @@ public class DatabaseRelation {
 	}
 
 	public static void createTicket(int objectId, int companyId, String ticket) {
-		String query = "INSERT INTO transaction VALUES(?,?,?)";
+		String query = "INSERT INTO ticket(objectId, companyId, ticket) VALUES(?,?,?)";
 		try {
 			PreparedStatement ps = con.prepareStatement(query);
 			ps.setInt(1, objectId);
 			ps.setInt(2, companyId);
 			ps.setString(3, ticket);
-			ps.executeQuery();
+			ps.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
