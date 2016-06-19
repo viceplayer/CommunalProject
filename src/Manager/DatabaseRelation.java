@@ -33,9 +33,9 @@ public class DatabaseRelation {
 		return result;
 	}
 
-	public static ArrayList<Object> getObjects(int userId) {
+	public static ArrayList<object> getObjects(int userId) {
 		String query = "SELECT * FROM object WHERE userId = ?";
-		ArrayList<Object> result = new ArrayList<Object>();
+		ArrayList<object> result = new ArrayList<object>();
 		try {
 			PreparedStatement ps = con.prepareStatement(query);
 			ps.setString(1, ""+userId);
@@ -167,7 +167,7 @@ public class DatabaseRelation {
 
 	}
 
-	public static ArrayList<Transaction> getTransactions(ArrayList<Object> arr) {
+	public static ArrayList<Transaction> getTransactions(ArrayList<object> arr) {
 		String query = "SELECT cardNumber,companyName,amount, transactionDate FROM transaction a join company b join card c join object d on a.companyId = b.id AND a.cardId = c.id AND a.objectId = d.id WHERE objectId = ";
 		for (int i = 0; i < arr.size(); i++) {
 			query += arr.get(i).getId();
