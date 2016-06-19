@@ -17,10 +17,11 @@ public class DatabaseRelation {
 	}
 
 	public static int getUserId(String personalId) {
-		String query = "SELECT id FROM user WHERE personalId = " + personalId;
+		String query = "SELECT id FROM user WHERE personalId = ?";
 		int result = -1;
 		try {
 			PreparedStatement ps = con.prepareStatement(query);
+			ps.setString(1, personalId);
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
 				result = rs.getInt(1);
@@ -32,14 +33,15 @@ public class DatabaseRelation {
 		return result;
 	}
 
-	public static ArrayList<object> getObjects(int userId) {
-		String query = "SELECT * FROM object WHERE userId = " + userId;
-		ArrayList<object> result = new ArrayList<object>();
+	public static ArrayList<Object> getObjects(int userId) {
+		String query = "SELECT * FROM object WHERE userId = ?";
+		ArrayList<Object> result = new ArrayList<Object>();
 		try {
 			PreparedStatement ps = con.prepareStatement(query);
+			ps.setString(1, ""+userId);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				object temp = new object(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getString(4));
+				Object temp = new Object(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getString(4));
 				result.add(temp);
 			}
 		} catch (SQLException e) {
@@ -99,7 +101,7 @@ public class DatabaseRelation {
 
 	}
 
-	public static void createFolder(int userId, int type, String name) {
+	public static void createObject(int userId, int type, String name) {
 		String query = "INSERT INTO object(userId, objectType, objectName) VALUES(?,?,?)";
 		try {
 			PreparedStatement ps = con.prepareStatement(query);
@@ -147,11 +149,11 @@ public class DatabaseRelation {
 	}
 
 	public static ArrayList<Ticket> getTickets(int objectId) {
-		String query = "SELECT objectId,ticket,companyName FROM ticket a join company b on a.companyId = b.id WHERE objectId = "
-				+ objectId;
+		String query = "SELECT objectId,ticket,companyName FROM ticket a join company b on a.companyId = b.id WHERE objectId = ?";
 		ArrayList<Ticket> result = new ArrayList<Ticket>();
 		try {
 			PreparedStatement ps = con.prepareStatement(query);
+			ps.setString(1, ""+objectId);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				Ticket temp = new Ticket(rs.getInt(1), rs.getString(3), rs.getString(2));
@@ -165,7 +167,7 @@ public class DatabaseRelation {
 
 	}
 
-	public static ArrayList<Transaction> getTransactions(ArrayList<object> arr) {
+	public static ArrayList<Transaction> getTransactions(ArrayList<Object> arr) {
 		String query = "SELECT cardNumber,companyName,amount, transactionDate FROM transaction a join company b join card c join object d on a.companyId = b.id AND a.cardId = c.id AND a.objectId = d.id WHERE objectId = ";
 		for (int i = 0; i < arr.size(); i++) {
 			query += arr.get(i).getId();
@@ -189,14 +191,15 @@ public class DatabaseRelation {
 
 	}
 
-	public static ArrayList<card> getCards(int userId) {
-		String query = "SELECT userId, cardNumber, cardDate, firstName, lastName from card where userId = " + userId;
-		ArrayList<card> result = new ArrayList<card>();
+	public static ArrayList<Card> getCards(int userId) {
+		String query = "SELECT userId, cardNumber, cardDate, firstName, lastName from card where userId = ?";
+		ArrayList<Card> result = new ArrayList<Card>();
 		try {
 			PreparedStatement ps = con.prepareStatement(query);
+			ps.setString(1, ""+userId);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				card temp = new card(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
+				Card temp = new Card(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
 				result.add(temp);
 			}
 		} catch (SQLException e) {
@@ -208,10 +211,30 @@ public class DatabaseRelation {
 	}
 
 	public static boolean userExists(String personalId, String password) {
-		String query = "SELECT password FROM user WHERE personalId = " + personalId + "and password = " + password;
+		String query = "SELECT password FROM user WHERE personalId = ? and password = ?";
 		boolean result = false;
 		try {
 			PreparedStatement ps = con.prepareStatement(query);
+			ps.setString(1, personalId);
+			ps.setString(2, password);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				result = true;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	public static boolean objectExist(int userId, String objectName) {
+		String query = "SELECT password FROM user WHERE userId = ? and objectName = ?";
+		boolean result = false;
+		try {
+			PreparedStatement ps = con.prepareStatement(query);
+			ps.setString(1, ""+userId);
+			ps.setString(2, objectName);
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
 				result = true;
