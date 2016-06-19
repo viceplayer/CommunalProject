@@ -41,7 +41,7 @@ public class DatabaseRelation {
 			ps.setString(1, ""+userId);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				object temp = new object(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getString(4));
+				Object temp = new Object(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getString(4));
 				result.add(temp);
 			}
 		} catch (SQLException e) {
