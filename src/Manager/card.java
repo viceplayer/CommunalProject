@@ -2,12 +2,12 @@ package Manager;
 
 public class card {
 	private int userId;
-	private int cardNumber;
+	private String cardNumber;
 	private String date;
 	private String firstName;
 	private String lastName;
 	
-	public card(int userId, int cardNumber, String date, String firstName, String lastName){
+	public card(int userId, String cardNumber, String date, String firstName, String lastName){
 		this.cardNumber = cardNumber;
 		this.userId = userId;
 		this.date = date;
@@ -15,7 +15,7 @@ public class card {
 		this.lastName = lastName;
 	}
 	
-	public int getCardNumber(){
+	public String getCardNumber(){
 		return cardNumber;
 	}
 	public int getUserId(){

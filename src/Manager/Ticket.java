@@ -15,10 +15,8 @@ public class Ticket {
 		return objectId;
 	}
 
-	//Returns Company name
 	public String getCompanyName() {
 		return companyName;
-		
 	}
 
 	public String getTicket() {
