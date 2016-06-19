@@ -113,59 +113,6 @@ public class DatabaseRelation {
 		}
 
 	}
-	
-	//-----------------
-	
-	public static void createTransaction(int cardId, double amount, int companyId, java.sql.Date date, int objectId) {
-		String query = "INSERT INTO transaction VALUES(?,?,?,?,?)";
-		try {
-			PreparedStatement ps = con.prepareStatement(query);
-			ps.setInt(1, cardId);
-			ps.setDouble(2, amount);
-			ps.setInt(3, companyId);
-			ps.setDate(4, date);
-			ps.setInt(5, objectId);
-			ps.executeQuery();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-	}
-
-	public static void createTicket(int objectId, int companyId, String ticket) {
-		String query = "INSERT INTO transaction VALUES(?,?,?)";
-		try {
-			PreparedStatement ps = con.prepareStatement(query);
-			ps.setInt(1, objectId);
-			ps.setInt(2, companyId);
-			ps.setString(3, ticket);
-			ps.executeQuery();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-	}
-	
-	public static ArrayList<Ticket> getTickets(int objectId) {
-		String query = "SELECT objectId,ticket,companyName FROM ticket a join company b on a.companyId = b.id WHERE objectId = "
-				+ objectId;
-		ArrayList<Ticket> result = new ArrayList<Ticket>();
-		try {
-			PreparedStatement ps = con.prepareStatement(query);
-			ResultSet rs = ps.executeQuery();
-			while (rs.next()) {
-				Ticket temp = new Ticket(rs.getInt(1), rs.getString(3), rs.getString(2));
-				result.add(temp);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return result;
-
-	}
 
 	public static void createTransaction(int cardId, double amount, int companyId, String date, int objectId) {
 		String query = "INSERT INTO transaction VALUES(?,?,?,?,?)";
