@@ -1,13 +1,13 @@
 package Manager;
 
-public class object {
+public class Object {
 
 	private int id;
 	private int userId;
 	private int type;
 	private String name;
 
-	public object(int id, int userId, int type, String name) {
+	public Object(int id, int userId, int type, String name) {
 		this.id = id;
 		this.userId = userId;
 		this.type = type;

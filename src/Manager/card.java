@@ -1,13 +1,13 @@
 package Manager;
 
-public class card {
+public class Card {
 	private int userId;
 	private String cardNumber;
 	private String date;
 	private String firstName;
 	private String lastName;
 	
-	public card(int userId, String cardNumber, String date, String firstName, String lastName){
+	public Card(int userId, String cardNumber, String date, String firstName, String lastName){
 		this.cardNumber = cardNumber;
 		this.userId = userId;
 		this.date = date;
