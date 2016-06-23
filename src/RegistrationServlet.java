@@ -65,13 +65,13 @@ public class RegistrationServlet extends HttpServlet {
 		checkMail(mail);
 		checkDate(date);
 		if (DatabaseRelation.getUserId(personalId) == -1) {
-			path += "accountAlreadyExists.jsp";
+			path += "AccountAlreadyExists.jsp";
 		} else {
 			am.createAccount(personalId, firstName, lastName, date, mail, mobile, password);
 			path += "Welcome.jsp";
 		}
 		RequestDispatcher dispatch = request.getRequestDispatcher(path);
-		///dispatch.forward(request, response);
+		dispatch.forward(request, response);
 		doGet(request, response);
 	}
 

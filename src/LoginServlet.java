@@ -44,7 +44,6 @@ public class LoginServlet extends HttpServlet {
 			path += "Home.jsp";
 			System.out.println("Success! Welcome");
 		}else{
-			path += "Home.jsp";
 			System.out.println("Wrong input");
 		}
 		int userId = DatabaseRelation.getUserId(personalId);
