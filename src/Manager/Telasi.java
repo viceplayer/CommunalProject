@@ -18,7 +18,7 @@ public class Telasi {
 
 	}
 
-	private static String getTicketInfo() {
+	public static String getTicketInfo() {
 		String start = "class=\"list-group\">";
 		String end = "</ul>";
 		String result = "<ul";
@@ -41,7 +41,7 @@ public class Telasi {
 	private static void getUrl(String url) {
 		try {
 			connection = new URL(url).openConnection();
-			Scanner scanner = new Scanner(connection.getInputStream());
+			Scanner scanner = new Scanner(connection.getInputStream(), "UTF-8");
 			scanner.useDelimiter("\\Z");
 			content = scanner.next();
 			scanner.close();
@@ -50,7 +50,7 @@ public class Telasi {
 		}
 	}
 	
-	private static String getNameAndNumber() {
+	public static String getNameAndNumber() {
 		String start = "class=\"page-header\">";
 		String end = "</div>";
 		String result = "<div";
