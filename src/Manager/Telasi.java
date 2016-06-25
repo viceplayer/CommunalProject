@@ -1,6 +1,7 @@
 package Manager;
 
 
+
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.Scanner;
@@ -68,6 +69,7 @@ public class Telasi {
 		return result;
 		
 	}
+
 
 
 //	public static void main(String[] args) {
