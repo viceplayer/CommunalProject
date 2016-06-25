@@ -1,8 +1,6 @@
 package Manager;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.Scanner;
@@ -20,17 +18,19 @@ public class Telasi {
 	}
 
 	private static String getTicketInfo() {
-		String result = "<ul ";
-		int start = 0;
+		String start = "class=\"list-group\">";
+		String end = "</ul>";
+		String result = "<ul";
+		int started = 0;
 		String[] tokens = content.split("[\\s]");
 		for (String s : tokens) {
-			if (s.equals("class=\"list-group\">")) {
-				start = 1;
+			if (s.equals(start)) {
+				started = 1;
 			}
-			if (start == 1 && !s.equals("")) {
+			if (started == 1 && !s.equals("")) {
 				result = result + " " + s;
 			}
-			if (start == 1 && s.equals("</ul>"))
+			if (started == 1 && s.equals(end))
 				break;
 		}
 		return result;
@@ -48,24 +48,32 @@ public class Telasi {
 			ex.printStackTrace();
 		}
 	}
-
-	private static String getUrlSource(String url) throws IOException {
-
-		URL web = new URL(url);
-		URLConnection wc = web.openConnection();
-		BufferedReader in = new BufferedReader(new InputStreamReader(wc.getInputStream(), "UTF-8"));
-		String inputLine;
-		StringBuilder a = new StringBuilder();
-		while ((inputLine = in.readLine()) != null)
-			a.append(inputLine);
-		in.close();
-
-		return a.toString();
+	
+	private static String getNameAndNumber() {
+		String start = "class=\"page-header\">";
+		String end = "</div>";
+		String result = "<div";
+		int started = 0;
+		String[] tokens = content.split("[\\s]");
+		for (String s : tokens) {
+			if (s.equals(start)) {
+				started = 1;
+			}
+			if (started == 1 && !s.equals("")) {
+				result = result + " " + s;
+			}
+			if (started == 1 && s.equals(end))
+				break;
+		}
+		return result;
+		
 	}
 
-	public static void main(String[] args) {
-		Telasi t = new Telasi(192819);
-		System.out.println(t.getTicketInfo());
-	}
+
+//	public static void main(String[] args) {
+//		Telasi t = new Telasi(192819);
+//		System.out.println(t.getTicketInfo());
+//		System.out.println(t.getNameAndNumber());
+//	}
 
 }
