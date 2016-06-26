@@ -16,6 +16,30 @@ public class DatabaseRelation {
 
 	}
 
+	public static void makeUpdateToUsersInfo(int userId, String columnToUpdate, String valueToUpdate){
+		
+	}
+	public static String getUserData(int userId, String infoType) {
+		String queryStart = "SELECT ";
+		String queryMiddle = infoType;
+		String queryEnd = " FROM user WHERE id = ?";
+		String query = queryStart + queryMiddle + queryEnd;
+		String result = "";
+		try {
+			PreparedStatement ps = con.prepareStatement(query);
+			ps.setInt(1, userId);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				result = rs.getString(1);
+			}
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+		System.out.println(result);
+		return result;
+	}
+
 	public static int getUserId(String personalId) {
 		String query = "SELECT id FROM user WHERE personalId = ?";
 		int result = -1;
@@ -27,12 +51,10 @@ public class DatabaseRelation {
 				result = rs.getInt(1);
 			}
 		} catch (SQLException e) {
-
 			e.printStackTrace();
 		}
 		return result;
 	}
-
 
 	public static void createUser(String personalId, String firstName, String lastName, String date, String mail,
 			String mobile, String password) {
@@ -97,12 +119,13 @@ public class DatabaseRelation {
 		}
 
 	}
+
 	public static ArrayList<object> getObjects(int userId) {
 		String query = "SELECT * FROM object WHERE userId = ?";
 		ArrayList<object> result = new ArrayList<object>();
 		try {
 			PreparedStatement ps = con.prepareStatement(query);
-			ps.setString(1, ""+userId);
+			ps.setString(1, "" + userId);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				object temp = new object(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getString(4));
@@ -115,6 +138,7 @@ public class DatabaseRelation {
 		return result;
 
 	}
+
 	public static void createTransaction(int cardId, double amount, int companyId, String date, int objectId) {
 		String query = "INSERT INTO transaction(cardId, amount, companyId, transactionDate, objectId) VALUES(?,?,?,?,?)";
 		try {
@@ -152,7 +176,7 @@ public class DatabaseRelation {
 		ArrayList<Ticket> result = new ArrayList<Ticket>();
 		try {
 			PreparedStatement ps = con.prepareStatement(query);
-			ps.setString(1, ""+objectId);
+			ps.setString(1, "" + objectId);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				Ticket temp = new Ticket(rs.getInt(1), rs.getString(3), rs.getString(2));
@@ -195,7 +219,7 @@ public class DatabaseRelation {
 		ArrayList<Card> result = new ArrayList<Card>();
 		try {
 			PreparedStatement ps = con.prepareStatement(query);
-			ps.setString(1, ""+userId);
+			ps.setString(1, "" + userId);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				Card temp = new Card(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
@@ -232,7 +256,7 @@ public class DatabaseRelation {
 		boolean result = false;
 		try {
 			PreparedStatement ps = con.prepareStatement(query);
-			ps.setString(1, ""+userId);
+			ps.setString(1, "" + userId);
 			ps.setString(2, objectName);
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
