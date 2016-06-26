@@ -4,26 +4,24 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+<script src="scripts.js"></script>
+<link rel="stylesheet" type="text/css" href="css/style.css">
+
+
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Home</title>
 </head>
 <body>
 	<h1>Home Page</h1>
+	<div class=folderManager>
+		<ul class=data></ul>
+	</div>
+	
 	<h4>
-		<%
-			for (int i = 0; i < DatabaseRelation
-					.getObjects(DatabaseRelation.getUserId(request.getParameter("personalId"))).size(); i++) {
-		%>
-		<a href="http://localhost:8080/CommunalProject/Folder.jsp"> <%=DatabaseRelation.getObjects(DatabaseRelation.getUserId(request.getParameter("personalId")))
-						.get(i).getName()%></a> 
-
-		<%
-			}
-		%>
-		<a href="http://localhost:8080/CommunalProject/Other.jsp">Other</a> <a
+		 <a
 			href="http://localhost:8080/CommunalProject/Add.jsp">Add</a>
 	</h4>
-
 
 
 </body>

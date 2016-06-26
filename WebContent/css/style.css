@@ -1,0 +1,17 @@
+@CHARSET "UTF-8";
+.data{
+	list-style-type: none;
+}
+.data li {
+	border-radius: 400px; 
+	background:#b30707;
+	float:left;
+	margin: 50px;
+	border-radius: 50%;
+	width: 180px;
+	height: 180px; 
+	text-align: center; 
+	display: flex;
+  align-items: center;
+  justify-content: center;
+}
