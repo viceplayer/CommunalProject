@@ -10,7 +10,7 @@
 <body>
 	<h1>Please log in</h1>
 
-	<form action="LoginServlet" method="get">
+	<form action="LoginServlet" method="post">
 		PersonalId:<br> <input type="text" name="personalId"><br>
 		Password:<br> <input type="text" name="password"> <br>
 		<input type="submit" value="Submit"> <br> 
