@@ -1,7 +1,5 @@
 package Manager;
 
-
-
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.Scanner;
@@ -12,37 +10,56 @@ public class Telasi {
 	private String endUrl = "&commit=ძებნა";
 	private static String content = null;
 	private static URLConnection connection = null;
+	private static String water;
+	private static String trash;
+	private static String electric;
 
 	public Telasi(int TicketNum) {
 		url = url + TicketNum + endUrl;
 		getUrl(url);
+		getTicketInfo();
 
 	}
-	
-	
-	public static String getTicketInfo() {
+
+	private static void getTicketInfo() {
 		String start = "class=\"list-group\">";
 		String end = "</ul>";
-		String result = "<ul";
+		String indicator = "<code>";
 		int started = 0;
-		boolean  valid = true;
 		String[] tokens = content.split("[\\s]");
 		for (String s : tokens) {
-			if (s.equals("<a")) valid = false;
-			if (s.equals("</div>")) valid = true;
 			if (s.equals(start)) {
 				started = 1;
 			}
-			if (started == 1 && !s.equals("")) {
-				if(valid) result = result + " " + s;
+			if (started == 3 && s.startsWith(indicator)) {
+				water = s.substring(s.indexOf('>') + 1, s.indexOf('/') - 1);
+				started++;
 			}
-			if (started == 1 && s.equals(end))
+			if (started == 2 && s.startsWith(indicator)) {
+				trash = s.substring(s.indexOf('>') + 1, s.indexOf('/') - 1);
+				started++;
+			}
+			if (started == 1 && s.startsWith(indicator)) {
+				electric = s.substring(s.indexOf('>') + 1, s.indexOf('/') - 1);
+				started++;
+			}
+			if (started >= 1 && s.equals(end))
 				break;
 		}
-		return result;
 
 	}
 	
+	public String trashTaxes(){
+		return trash;
+	}
+	
+	public String electricTaxes(){
+		return electric;
+	}
+	
+	public String waterTaxes(){
+		return water;
+	}
 
 	private static void getUrl(String url) {
 		try {
@@ -55,34 +72,29 @@ public class Telasi {
 			ex.printStackTrace();
 		}
 	}
-	
-	public static String getNameAndNumber() {
+
+	public static String getName() {
 		String start = "class=\"page-header\">";
 		String end = "</div>";
-		String result = "<div";
+		String result = "";
 		int started = 0;
 		String[] tokens = content.split("[\\s]");
 		for (String s : tokens) {
 			if (s.equals(start)) {
 				started = 1;
 			}
-			if (started == 1 && !s.equals("")) {
-				result = result + " " + s;
-				System.err.println(s);
+			if (started >= 1 && !s.equals("")) {
+				if (started == 3)
+					result = result + " " + s;
+				started++;
 			}
-			if (started == 1 && s.equals(end))
+			if (started >= 1 && s.equals(end))
 				break;
 		}
 		return result;
-		
+
 	}
 
 
-
-//	public static void main(String[] args) {
-//		Telasi t = new Telasi(3691785);
-//		System.out.println(t.getTicketInfo());
-//		System.out.println(t.getNameAndNumber());
-//	}
 
 }

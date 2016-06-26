@@ -9,9 +9,7 @@
 </head>
 <body>
 	<%
-		Telasi t = new Telasi(3691785);
-		out.write(t.getNameAndNumber());
-		out.write(t.getTicketInfo());
+		
 	%>
 </body>
 </html>
