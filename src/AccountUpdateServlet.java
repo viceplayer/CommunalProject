@@ -55,6 +55,7 @@ public class AccountUpdateServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		int userId = (int)session.getAttribute("userId");
 		if(!newName.isEmpty()){
+			System.out.println("shesrulda name");
 			DatabaseRelation.makeUpdateToUsersInfo(userId, "firstName", newName);
 		}
 		if(!newLastName.isEmpty()){
@@ -73,15 +74,9 @@ public class AccountUpdateServlet extends HttpServlet {
 			//aq jer unda shevadarot dzveli pw sworia tu ara
 			DatabaseRelation.makeUpdateToUsersInfo(userId, "password", newPassword);
 		}
-//		if (DatabaseRelation.getUserId(personalId) == -1) {
-//			path += "AccountAlreadyExists.jsp";
-//		} else {
-//			am.createAccount(personalId, firstName, lastName, date, mail, mobile, password);
-//			path += "Welcome.jsp";
-//		}
+		path += "AccountPanel.jsp";
 		RequestDispatcher dispatch = request.getRequestDispatcher(path);
 		dispatch.forward(request, response);
-		doGet(request, response);
 		doGet(request, response);
 	}
 

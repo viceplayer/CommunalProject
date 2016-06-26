@@ -16,9 +16,23 @@ public class DatabaseRelation {
 
 	}
 
-	public static void makeUpdateToUsersInfo(int userId, String columnToUpdate, String valueToUpdate){
-		
+	public static void makeUpdateToUsersInfo(int userId, String columnToUpdate, String valueToUpdate) {
+		/*
+		 * UPDATE table_name SET column1=value1,column2=value2,... WHERE
+		 * some_column=some_value;
+		 */
+		String query = "Update user SET ";
+		query += columnToUpdate + " = " + "'" + valueToUpdate + "'" + " WHERE id = " + userId;
+		try {
+			PreparedStatement ps = con.prepareStatement(query);
+			ps.executeUpdate();
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+
 	}
+
 	public static String getUserData(int userId, String infoType) {
 		String queryStart = "SELECT ";
 		String queryMiddle = infoType;
@@ -36,7 +50,6 @@ public class DatabaseRelation {
 
 			e.printStackTrace();
 		}
-		System.out.println(result);
 		return result;
 	}
 
