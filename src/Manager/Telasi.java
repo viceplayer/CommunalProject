@@ -13,6 +13,7 @@ public class Telasi {
 	private static String water;
 	private static String trash;
 	private static String electric;
+	private static String name = "";
 
 	public Telasi(int TicketNum) {
 		url = url + TicketNum + endUrl;
@@ -76,7 +77,6 @@ public class Telasi {
 	public static String getName() {
 		String start = "class=\"page-header\">";
 		String end = "</div>";
-		String result = "";
 		int started = 0;
 		String[] tokens = content.split("[\\s]");
 		for (String s : tokens) {
@@ -85,16 +85,29 @@ public class Telasi {
 			}
 			if (started >= 1 && !s.equals("")) {
 				if (started == 3)
-					result = result + " " + s;
+					name = name + " " + s;
 				started++;
 			}
 			if (started >= 1 && s.equals(end))
 				break;
 		}
-		return result;
+		chackName();
+		return name;
 
 	}
 
+	private static void chackName() {
+		
+		for (int i = 0; i < name.length(); i++) {
+			if(name.charAt(i) < 'ა' || name.charAt(i) > 'ჰ'){
+				String replace = "" + name.charAt(i);
+				name = name.replaceAll(replace, "");
+				i--;
+			}
+
+		}
+		
+	}
 
 
 }
