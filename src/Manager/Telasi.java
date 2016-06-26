@@ -14,12 +14,12 @@ public class Telasi {
 	private static String trash;
 	private static String electric;
 	private static String name = "";
+	private static String deadLine = "";
 
 	public Telasi(int TicketNum) {
 		url = url + TicketNum + endUrl;
 		getUrl(url);
 		getTicketInfo();
-
 	}
 
 	private static void getTicketInfo() {
@@ -27,38 +27,58 @@ public class Telasi {
 		String end = "</ul>";
 		String indicator = "<code>";
 		int started = 0;
+		int time = 0;
+		boolean invalid = true;
 		String[] tokens = content.split("[\\s]");
 		for (String s : tokens) {
 			if (s.equals(start)) {
 				started = 1;
 			}
-			if (started == 3 && s.startsWith(indicator)) {
-				water = s.substring(s.indexOf('>') + 1, s.indexOf('/') - 1);
-				started++;
+			if (!invalid) {
+				if (started == 3 && !s.equals("") && s.startsWith(indicator)) {
+					water = s.substring(s.indexOf('>') + 1, s.indexOf('/') - 1);
+					started++;
+				}
+				if (started == 2 && !s.equals("") && s.startsWith(indicator)) {
+					trash = s.substring(s.indexOf('>') + 1, s.indexOf('/') - 1);
+					started++;
+				}
+				if (started == 1 && !s.equals("") && s.startsWith(indicator)) {
+					electric = s.substring(s.indexOf('>') + 1, s.indexOf('/') - 1);
+					started++;
+				}
+				if (started >= 1 && !s.equals("") && time == 1) {
+					deadLine = s;
+					time = 0;
+				}
 			}
-			if (started == 2 && s.startsWith(indicator)) {
-				trash = s.substring(s.indexOf('>') + 1, s.indexOf('/') - 1);
-				started++;
+			if (started >= 1 && s.startsWith("fa-time")) {
+				time = 1;
 			}
-			if (started == 1 && s.startsWith(indicator)) {
-				electric = s.substring(s.indexOf('>') + 1, s.indexOf('/') - 1);
-				started++;
+			if (started >= 1 && s.startsWith("გადახდა")) {
+				invalid = true;
+			}
+			if (started >= 1 && !s.startsWith("გადახდა")) {
+				invalid = false;
 			}
 			if (started >= 1 && s.equals(end))
 				break;
 		}
-
 	}
-	
-	public String trashTaxes(){
+
+	public String getTrashTaxes() {
 		return trash;
 	}
-	
-	public String electricTaxes(){
+
+	public String getDeadLine() {
+		return deadLine;
+	}
+
+	public String getElectricTaxes() {
 		return electric;
 	}
-	
-	public String waterTaxes(){
+
+	public String getWaterTaxes() {
 		return water;
 	}
 
@@ -74,7 +94,7 @@ public class Telasi {
 		}
 	}
 
-	public static String getName() {
+	public String getName() {
 		String start = "class=\"page-header\">";
 		String end = "</div>";
 		int started = 0;
@@ -93,21 +113,16 @@ public class Telasi {
 		}
 		chackName();
 		return name;
-
 	}
 
 	private static void chackName() {
-		
 		for (int i = 0; i < name.length(); i++) {
-			if(name.charAt(i) < 'ა' || name.charAt(i) > 'ჰ'){
+			if (name.charAt(i) < 'ა' || name.charAt(i) > 'ჰ') {
 				String replace = "" + name.charAt(i);
 				name = name.replaceAll(replace, "");
 				i--;
 			}
-
 		}
-		
 	}
-
-
+	
 }
