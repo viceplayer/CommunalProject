@@ -53,6 +53,22 @@ public class DatabaseRelation {
 		return result;
 	}
 
+	public static String getUserPassword(int userId) {
+		String query = "SELECT password FROM user where id = ?";
+		String result = "";
+		try {
+			PreparedStatement ps = con.prepareStatement(query);
+			ps.setInt(1, userId);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				result = rs.getString(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
 	public static int getUserId(String personalId) {
 		String query = "SELECT id FROM user WHERE personalId = ?";
 		int result = -1;

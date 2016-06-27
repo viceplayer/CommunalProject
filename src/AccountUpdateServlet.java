@@ -53,23 +53,27 @@ public class AccountUpdateServlet extends HttpServlet {
 		String oldPassword = request.getParameter("oldPassword");
 		String newPassword = request.getParameter("newPassword");
 		HttpSession session = request.getSession();
-		int userId = (int)session.getAttribute("userId");
-		if(!newName.isEmpty()){
+		int userId = (int) session.getAttribute("userId");
+		if (!newName.isEmpty()) {
 			System.out.println("shesrulda name");
 			DatabaseRelation.makeUpdateToUsersInfo(userId, "firstName", newName);
 		}
-		if(!newLastName.isEmpty()){
+		if (!newLastName.isEmpty()) {
 			DatabaseRelation.makeUpdateToUsersInfo(userId, "lastName", newLastName);
 		}
-		if(!newMail.isEmpty()){
+		if (!newMail.isEmpty()) {
 			DatabaseRelation.makeUpdateToUsersInfo(userId, "mail", newMail);
 		}
-		if(!newMobile.isEmpty()){
+		if (!newMobile.isEmpty()) {
 			DatabaseRelation.makeUpdateToUsersInfo(userId, "mobile", newMobile);
 		}
-		if(!oldPassword.isEmpty() && !newPassword.isEmpty()){
-			//aq jer unda shevadarot dzveli pw sworia tu ara
-			DatabaseRelation.makeUpdateToUsersInfo(userId, "password", newPassword);
+		if (!oldPassword.isEmpty() && !newPassword.isEmpty()) {
+			if (oldPassword.equals(DatabaseRelation.getUserPassword(userId))) {
+				DatabaseRelation.makeUpdateToUsersInfo(userId, "password", newPassword);
+			}else{
+				System.out.println("Password doesn't match an old password");
+			}
+			
 		}
 		path += "AccountPanel.jsp";
 		RequestDispatcher dispatch = request.getRequestDispatcher(path);
