@@ -68,7 +68,7 @@ public class RegistrationServlet extends HttpServlet {
 			path += "AccountAlreadyExists.jsp";
 		} else {
 			am.createAccount(personalId, firstName, lastName, date, mail, mobile, password);
-			path += "Welcome.jsp";
+			path += "Home.jsp";
 		}
 		RequestDispatcher dispatch = request.getRequestDispatcher(path);
 		dispatch.forward(request, response);
