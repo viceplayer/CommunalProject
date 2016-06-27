@@ -1,17 +1,31 @@
 @CHARSET "UTF-8";
 .data{
 	list-style-type: none;
+	width: 60%;
+	margin: 0 auto;
 }
+
+.Add{
+	background:#336699 !important;
+}
+
 .data li {
 	border-radius: 400px; 
-	background:#b30707;
+	background:#330066;
 	float:left;
-	margin: 50px;
-	border-radius: 50%;
-	width: 180px;
-	height: 180px; 
+	margin: 30px;
+	border-radius: 40%;
+	width: 120px;
+	color: white;
+	height: 120px; 
 	text-align: center; 
 	display: flex;
-  align-items: center;
-  justify-content: center;
+  	align-items: center;
+  	justify-content: center;
+  	cursor: pointer;
 }
+
+.data li:hover{
+	background:#330099 !important;
+}
+
