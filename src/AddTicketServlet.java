@@ -47,6 +47,8 @@ public class AddTicketServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		int userId = (int)session.getAttribute("userId");
 		// aq unda shevamowmot ticketi ari tu ara objectshi
+		int objectId = Integer.parseInt(request.getParameter("id"));
+		System.out.println(objectId);
 		DatabaseRelation.createTicket(objectId, companyId, ticketNumber);
 
 		//		if (!am.addObject(userId, type, name)){
