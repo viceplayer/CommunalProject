@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="AddServlet" method="post">
+	<form action="AddObjectServlet" method="post">
 		Name:<br> <input type="text" name="objectName"><br>
 		<select name="type">
 		  <option value="0">Home</option>

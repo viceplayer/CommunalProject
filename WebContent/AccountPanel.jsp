@@ -19,6 +19,7 @@
 	Change: <input type="text" name="newMail"> </h5>
 	<h5>Mobile : <%out.write(DatabaseRelation.getUserData((int)session.getAttribute("userId"), "mobile"));%> <br>
 	Change: <input type="text" name="newMobile"> </h5>
+	<h5>Change Password:</h5>
 		Old password:<br> <input type="text" name="oldPassword"> <br>
 		New password:<br> <input type="text" name="newPassword"> <br>
 		<input type="submit" value="Submit"> <br> 
