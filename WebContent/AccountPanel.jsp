@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="css/Form.css">
 <title>Account Control Panel</title>
 </head>
 <body>
@@ -15,7 +16,7 @@
 	<h5>Last name : <%out.write(DatabaseRelation.getUserData((int)session.getAttribute("userId"), "lastName"));%> <br>
 	Change: <input type="text" name="newLastName"> </h5>
 	<h5>Mail : <%out.write(DatabaseRelation.getUserData((int)session.getAttribute("userId"), "mail"));%> <br>
-	Change: <input type="mail" name="newMail"> </h5>
+	Change: <input type="text" name="newMail"> </h5>
 	<h5>Mobile : <%out.write(DatabaseRelation.getUserData((int)session.getAttribute("userId"), "mobile"));%> <br>
 	Change: <input type="text" name="newMobile"> </h5>
 		Old password:<br> <input type="text" name="oldPassword"> <br>
