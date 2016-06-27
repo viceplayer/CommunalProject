@@ -5,10 +5,10 @@
 <head>
 
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" type="text/css" href="css/Form.css">
 <title>Login Page</title>
 </head>
 <body>
-	<h1>Please log in</h1>
 
 	<form action="LoginServlet" method="post">
 		PersonalId:<br> <input type="text" name="personalId"><br>

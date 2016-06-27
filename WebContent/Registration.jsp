@@ -4,10 +4,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" type="text/css" href="css/Form.css">
 <title>Registration</title>
 </head>
 <body>
-	<h1>Registration Page</h1>
 	<form action="RegistrationServlet" method="post">
 		PersonalId:<br> <input type="text" name="personalId"><br>
 		First name:<br> <input type="text" name="firstName"><br>
