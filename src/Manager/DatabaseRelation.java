@@ -96,7 +96,7 @@ public class DatabaseRelation {
 			ps.setString(4, date);
 			ps.setString(5, mail);
 			ps.setString(6, mobile);
-			ps.setString(7, password);
+			ps.setString(7, hexToString(hexToArray(password)));
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -268,7 +268,7 @@ public class DatabaseRelation {
 		try {
 			PreparedStatement ps = con.prepareStatement(query);
 			ps.setString(1, personalId);
-			ps.setString(2, password);
+			ps.setString(2, hexToString(hexToArray(password)));
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
 				result = true;
@@ -312,5 +312,18 @@ public class DatabaseRelation {
 			buff.append(Integer.toString(val, 16));
 		}
 		return buff.toString();
+	}
+
+	/*
+	 * Given a string of hex byte values such as "24a26f", creates a byte[]
+	 * array of those values, one byte value -128..127 for each 2 chars.
+	 * (provided code) 
+	 */
+	public static byte[] hexToArray(String hex) {
+		byte[] result = new byte[hex.length() / 2];
+		for (int i = 0; i < hex.length(); i += 2) {
+			result[i / 2] = (byte) Integer.parseInt(hex.substring(i, i + 2), 16);
+		}
+		return result;
 	}
 }
