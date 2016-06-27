@@ -20,7 +20,7 @@
 	</div>
 
 	<h4>
-		<a href="http://localhost:8080/CommunalProject/Add.jsp">Add</a>
+		<a href="http://localhost:8080/CommunalProject/AddObject.jsp">Add</a>
 		<a href="http://localhost:8080/CommunalProject/AccountPanel.jsp">Panel</a>
 
 	</h4>
