@@ -1,6 +1,6 @@
 
 import java.io.IOException;
-import java.util.Vector;
+import java.security.NoSuchAlgorithmException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import Manager.DatabaseRelation;
+import Manager.ShaOne;
 
 /**
  * Servlet implementation class AccountUpdateServlet
@@ -42,16 +43,20 @@ public class AccountUpdateServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		Manager.AccountManager am = (Manager.AccountManager) request.getServletContext()
-				.getAttribute("Account Manager");
 		String path = "";
 		String newName = request.getParameter("newName");
 		String newLastName = request.getParameter("newLastName");
-		String newPersonalId = request.getParameter("newPersonalId");
 		String newMail = request.getParameter("newMail");
 		String newMobile = request.getParameter("newMobile");
-		String oldPassword = request.getParameter("oldPassword");
-		String newPassword = request.getParameter("newPassword");
+		String oldPassword = "";
+		String newPassword = "";
+		try {
+			oldPassword = ShaOne.sha1(request.getParameter("oldPassword"));
+			newPassword = ShaOne.sha1(request.getParameter("newPassword"));
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		HttpSession session = request.getSession();
 		int userId = (int) session.getAttribute("userId");
 		if (!newName.isEmpty()) {
@@ -70,10 +75,10 @@ public class AccountUpdateServlet extends HttpServlet {
 		if (!oldPassword.isEmpty() && !newPassword.isEmpty()) {
 			if (oldPassword.equals(DatabaseRelation.getUserPassword(userId))) {
 				DatabaseRelation.makeUpdateToUsersInfo(userId, "password", newPassword);
-			}else{
+			} else {
 				System.out.println("Password doesn't match an old password");
 			}
-			
+
 		}
 		path += "AccountPanel.jsp";
 		RequestDispatcher dispatch = request.getRequestDispatcher(path);

@@ -1,5 +1,6 @@
 
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import Manager.AccountManager;
 import Manager.DatabaseRelation;
+import Manager.ShaOne;
 
 /**
  * Servlet implementation class LoginServlet
@@ -48,7 +49,14 @@ public class LoginServlet extends HttpServlet {
 		Manager.AccountManager am = (Manager.AccountManager) request.getServletContext()
 				.getAttribute("Account Manager");
 		String personalId = request.getParameter("personalId");
-		String password = request.getParameter("password");
+		String password = "";
+		try {
+			password = ShaOne.sha1(request.getParameter("password"));
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			System.err.println("LoginServlet Sha1");
+			e.printStackTrace();
+		}
 		String path = "";
 		if (am.logIn(personalId, password)) {
 			path += "Home.jsp";

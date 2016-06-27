@@ -1,8 +1,6 @@
 
 import java.io.IOException;
-import java.sql.Date;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.security.NoSuchAlgorithmException;
 import java.util.Vector;
 
 import javax.servlet.RequestDispatcher;
@@ -12,8 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import Manager.AccountManager;
 import Manager.DatabaseRelation;
+import Manager.ShaOne;
 
 /**
  * Servlet implementation class RegistrationServlet
@@ -67,7 +65,13 @@ public class RegistrationServlet extends HttpServlet {
 		if (DatabaseRelation.getUserId(personalId) != -1) {
 			path += "AccountAlreadyExists.jsp";
 		} else {
-			am.createAccount(personalId, firstName, lastName, date, mail, mobile, password);
+			try {
+				am.createAccount(personalId, firstName, lastName, date, mail, mobile, ShaOne.sha1(password));
+			} catch (NoSuchAlgorithmException e) {
+				// TODO Auto-generated catch block
+				System.err.println("RegstrationServlet Sha1");
+				e.printStackTrace();
+			}
 			path += "Home.jsp";
 		}
 		RequestDispatcher dispatch = request.getRequestDispatcher(path);
