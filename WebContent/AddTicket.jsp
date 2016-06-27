@@ -11,7 +11,7 @@
 <body>
 	<form action="AddTicketServlet" method="post">
 		Company:
-		<select name="type">
+		<select name="companyId">
 			<option value="0">Telasi</option>
 			<option value="1">GWP</option>
 			<option value="2">Junk</option>
