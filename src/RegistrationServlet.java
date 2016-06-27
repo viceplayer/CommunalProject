@@ -64,7 +64,7 @@ public class RegistrationServlet extends HttpServlet {
 		checkPassword(password);
 		checkMail(mail);
 		checkDate(date);
-		if (DatabaseRelation.getUserId(personalId) == -1) {
+		if (DatabaseRelation.getUserId(personalId) != -1) {
 			path += "AccountAlreadyExists.jsp";
 		} else {
 			am.createAccount(personalId, firstName, lastName, date, mail, mobile, password);

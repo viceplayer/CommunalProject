@@ -12,7 +12,7 @@
 
 	<form action="LoginServlet" method="post">
 		PersonalId:<br> <input type="text" name="personalId"><br>
-		Password:<br> <input type="text" name="password"> <br>
+		Password:<br> <input type="password" name="password"> <br>
 		<input type="submit" value="Submit"> <br> 
 		<a href="http://localhost:8080/CommunalProject/Registration.jsp">Register</a>
 		<br>
