@@ -61,9 +61,6 @@ public class AccountUpdateServlet extends HttpServlet {
 		if(!newLastName.isEmpty()){
 			DatabaseRelation.makeUpdateToUsersInfo(userId, "lastName", newLastName);
 		}
-		if(!newPersonalId.isEmpty()){
-			DatabaseRelation.makeUpdateToUsersInfo(userId, "personalId", newPersonalId);
-		}
 		if(!newMail.isEmpty()){
 			DatabaseRelation.makeUpdateToUsersInfo(userId, "mail", newMail);
 		}

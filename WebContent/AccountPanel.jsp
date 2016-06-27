@@ -14,8 +14,6 @@
 	Change: <input type="text" name="newName"> </h5>
 	<h5>Last name : <%out.write(DatabaseRelation.getUserData((int)session.getAttribute("userId"), "lastName"));%> <br>
 	Change: <input type="text" name="newLastName"> </h5>
-	<h5>Personal Id : <%out.write(DatabaseRelation.getUserData((int)session.getAttribute("userId"), "personalId"));%> <br>
-	Change: <input type="text" name="newPersonalId"> </h5>
 	<h5>Mail : <%out.write(DatabaseRelation.getUserData((int)session.getAttribute("userId"), "mail"));%> <br>
 	Change: <input type="mail" name="newMail"> </h5>
 	<h5>Mobile : <%out.write(DatabaseRelation.getUserData((int)session.getAttribute("userId"), "mobile"));%> <br>
