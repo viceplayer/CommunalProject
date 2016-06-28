@@ -5,22 +5,22 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" type="text/css" href="css/Form.css">
-<title>Forget password</title>
+<title>Recovery Password</title>
 </head>
 <body>
-
-	<form action="ForgetPasswordServlet" method="post">
+	<form action="RecoveryPasswordServlet" method="post">
+		<h5>Your new password to sent mail:</h5>
 		<h5>
 			<%
-				String error = (String) request.getAttribute("error");
-				if (error != null)
-					out.println("<font color=red size=4px>" + error + "</font>");
+				String mail = (String) request.getAttribute("mail");
+				if (mail != null)
+					out.println("<font color=Green size=4px>" + mail + "</font>");
 			%>
 		</h5>
-		<h5>Enter Your ID:</h5>
-		User ID:<br> <input type="text" name="userId"> <br>
-		<input type="submit" value="Submit"> <br>
+		<h5>Go end check you mail!</h5>
+		<input type="submit" value="Login"> <br>
 	</form>
+
 
 </body>
 </html>

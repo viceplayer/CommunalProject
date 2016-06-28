@@ -59,7 +59,39 @@ public class DatabaseRelation {
 			ps.setInt(1, userId);
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
-				result = rs.getString(1);
+				result += rs.getString(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	public static boolean PersonalIdExsist(String Id) {
+		String query = "SELECT personalId FROM user where personalId = ?";
+		boolean result = false;
+		try {
+			PreparedStatement ps = con.prepareStatement(query);
+			ps.setString(1, Id);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				result = false;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	public static String getUserMail(String userId) {
+		String query = "SELECT mail FROM user where id = ?";
+		String result = "";
+		try {
+			PreparedStatement ps = con.prepareStatement(query);
+			ps.setString(1, userId);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				result += rs.getString(1);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
