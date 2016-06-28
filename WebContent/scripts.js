@@ -22,7 +22,7 @@ function show(){
 	
 }
 
-$(document).on("click", ".Type0", function (ev) {
+$(document).on("click", ".Type0, .Type1, .Type2", function (ev) {
 	var folderManager = $('.folderManager')
 	var data = $('.data')
 	data.empty()
@@ -36,11 +36,6 @@ $(document).on("click", ".Back", function (ev) {
 	show()
 });
 
-$(document).on("click", ".Add1", function (ev) {
-	var data = $('.data')
-	data.empty()
-	show()
-});
 
 
 $(document).on("click", ".Add", function (ev) {
