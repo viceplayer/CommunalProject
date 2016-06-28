@@ -35,7 +35,7 @@ public class AccountManager {
 		ArrayList<Ticket> tmp =  DatabaseRelation.getTickets(objectId);
 		for(int i = 0; i < tmp.size(); i++){
 			System.out.println(tmp.get(i).getTicket());
-			if(tmp.get(i).getTicket().equals(ticket)) return false;
+			if(tmp.get(i).getCompanyId()==companyId) return false;
 			
 		}
 		System.out.println("asd");
