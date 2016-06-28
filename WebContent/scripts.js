@@ -30,8 +30,8 @@ $(document).on("click", ".Type0, .Type1, .Type2", function (ev) {
 	$("<li>").text("Back").addClass("Back").appendTo(data);
 	
 	$.get("TicketServlet",{id: ev.target.id}, function(responseJson) {      
-        $.each(responseJson, function(index, Object) {    
-        	$("<li>").text(Object.CompanyName).appendTo(data);
+        $.each(responseJson, function(index, Ticket) {    
+        	$("<li>").text(Ticket.companyName).appendTo(data);
         });
     });
 });

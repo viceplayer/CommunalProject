@@ -13,9 +13,9 @@
 	<input type="hidden" name="id" value=<%= request.getParameter("id") %> />
 		Company:
 		<select name="companyId">
-			<option value="0">Telasi</option>
-			<option value="1">GWP</option>
-			<option value="2">Junk</option>
+			<option value="1">Telasi</option>
+			<option value="2">GWP</option>
+			<option value="3">Junk</option>
 		</select> <input type="submit" value="Submit"><br>
 		Ticket Number:<br> <input type="text" name="ticketNumber">
 		

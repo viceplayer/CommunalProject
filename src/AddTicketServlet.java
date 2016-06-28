@@ -49,16 +49,15 @@ public class AddTicketServlet extends HttpServlet {
 		// aq unda shevamowmot ticketi ari tu ara objectshi
 		int objectId = Integer.parseInt(request.getParameter("id"));
 		System.out.println(objectId);
-		DatabaseRelation.createTicket(objectId, companyId, ticketNumber);
 
-		//		if (!am.addObject(userId, type, name)){
-//			path += "ObjectAlreadyExists.jsp";
-//			System.out.print("Object already exists");
-//		} else {
-//			path += "Home.jsp";
-//			System.out.print("Success! Object Added");
-//
-//		}
+		if (!am.addTicket(objectId, companyId, ticketNumber)){
+			path += "TicketAlreadyExists.jsp";
+			System.out.print("Ticket already exists");
+		} else {
+			path += "Home.jsp";
+			System.out.print("Success! Ticket Added");
+
+		}
 		RequestDispatcher dispatch = request.getRequestDispatcher(path);
 		dispatch.forward(request, response);
 		doGet(request, response);
