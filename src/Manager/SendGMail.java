@@ -29,18 +29,18 @@ public class SendGMail {
 		    char c = chars[random.nextInt(chars.length)];
 		    sb.append(c);
 		}
-//		try {
-//			DatabaseRelation.makeUpdateToUsersInfo(DatabaseRelation.getUserId(personalId), "password", ShaOne.sha1(sb.toString()));
-//		} catch (NoSuchAlgorithmException e) {
-//			System.err.println("gmail password update");
-//			e.printStackTrace();
-//		}
+		try {
+		DatabaseRelation.makeUpdateToUsersInfo(DatabaseRelation.getUserId(personalId), "password", ShaOne.sha1(sb.toString()));
+	} catch (NoSuchAlgorithmException e) {
+		System.err.println("gmail password update");
+		e.printStackTrace();
+	}
 		return sb.toString();
 	}
 
 	public static void send(String userAddres, String personalId) {
 //https://www.google.com/settings/security/lesssecureapps
-		String addres = "lmach14@freeuni.edu.ge";//userAddres;
+		String addres = userAddres;
 
 		Properties props = new Properties();
 
@@ -66,7 +66,7 @@ public class SendGMail {
 
 		try {
 
-			Message message = new MimeMessage(session);
+			Message message = new MimeMessage(session );
 
 			message.setFrom(new InternetAddress(username));
 
@@ -87,4 +87,7 @@ public class SendGMail {
 
 	}
 
+//	public static void main(String[] args) {
+//		send("lmach14@freeuni.edu.ge", "18001068662");
+//	}
 }
