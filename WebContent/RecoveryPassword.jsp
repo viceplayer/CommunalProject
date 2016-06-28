@@ -9,7 +9,7 @@
 </head>
 <body>
 	<form action="RecoveryPasswordServlet" method="post">
-		<h5>Your new password to sent mail:</h5>
+		<h5>Your new password have sent this mail:</h5>
 		<h5>
 			<%
 				String mail = (String) request.getAttribute("mail");

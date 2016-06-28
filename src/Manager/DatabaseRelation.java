@@ -67,15 +67,15 @@ public class DatabaseRelation {
 		return result;
 	}
 	
-	public static boolean PersonalIdExsist(String Id) {
+	public static boolean PersonalIdExsist(String userId) {
 		String query = "SELECT personalId FROM user where personalId = ?";
 		boolean result = false;
 		try {
 			PreparedStatement ps = con.prepareStatement(query);
-			ps.setString(1, Id);
+			ps.setString(1, userId);
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
-				result = false;
+				result = true;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -83,12 +83,12 @@ public class DatabaseRelation {
 		return result;
 	}
 	
-	public static String getUserMail(String userId) {
-		String query = "SELECT mail FROM user where id = ?";
+	public static String getUserMail(String personalId) {
+		String query = "SELECT mail FROM user where personalId = ?";
 		String result = "";
 		try {
 			PreparedStatement ps = con.prepareStatement(query);
-			ps.setString(1, userId);
+			ps.setString(1, personalId);
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
 				result += rs.getString(1);

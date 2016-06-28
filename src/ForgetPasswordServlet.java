@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 import Manager.DatabaseRelation;
+import Manager.SendGMail;
 
 /**
  * Servlet implementation class ForgetPasswordServlet
@@ -33,26 +33,24 @@ public class ForgetPasswordServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String path = "";
-		// HttpSession session = request.getSession();
-		// int userId = (int) session.getAttribute("userId");
-		String userId = request.getParameter("userId");
-//		if (DatabaseRelation.PersonalIdExsist(userId)) {
-//			if (DatabaseRelation.getUserMail(userId).equals("")) {
-//				request.setAttribute("error", "This User Have Not Mail You Can Not Recovery Password");
-//				path += "ForgetPassword.jsp";
-//			} else {
-//				// request.setAttribute("error",
-//				// DatabaseRelation.getUserMail(userId));
-//				// path += "RecoveryPassword.jsp";
-//				path += "ForgetPassword.jsp";
-//			}
-//
-//		} else {
+		String personalId = request.getParameter("userId");
+		if (DatabaseRelation.PersonalIdExsist(personalId)) {
+			if (DatabaseRelation.getUserMail(personalId).equals("")) {
+				request.setAttribute("error", "This User Have Not Mail You Can Not Recovery Password");
+				path += "ForgetPassword.jsp";
+			} else {
+				request.setAttribute("mail", DatabaseRelation.getUserMail(personalId));
+
+				SendGMail.send(DatabaseRelation.getUserMail(personalId), personalId);
+				path += "RecoveryPassword.jsp";
+			}
+
+		} else {
 
 			request.setAttribute("error", "User Does Not Exist");
 			path += "ForgetPassword.jsp";
 
-//		}
+		}
 
 		RequestDispatcher dispatch = request.getRequestDispatcher(path);
 		dispatch.forward(request, response);
