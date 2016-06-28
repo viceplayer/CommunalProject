@@ -4,8 +4,8 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Properties;
 import java.util.Random;
 
-import javax.mail.Authenticator;
 import javax.mail.Message;
+import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
@@ -14,8 +14,8 @@ import javax.mail.internet.MimeMessage;
 
 public class SendGMail {
 	// https://www.google.com/settings/security/lesssecureapps
-	final static String SENDERS_EMAIL = "lukamatcharadze13@gmail.com";
-	final static String SENDERS_PWD = "19960504";
+	final static String username = "lukamatcharadze13@gmail.com";
+	final static String password = "19960504";
 	final static String subject = "Communal Recovery Password";
 	final static String startText = "Your new password is  ";
 	final static String endTeext = " Now you can use your new password!";
@@ -41,46 +41,54 @@ public class SendGMail {
 
 	public static void send(String userAddres, String personalId) {
 		// https://www.google.com/settings/security/lesssecureapps
-		Properties mailProps = new Properties();
+		String addres = userAddres;
 
-		// Set properties required to connect to Gmail's SMTP server
-		mailProps.put("mail.smtp.host", "smtp.gmail.com");
-		mailProps.put("mail.smtp.port", "587");
-		mailProps.put("mail.smtp.auth", "true");
-		mailProps.put("mail.smtp.starttls.enable", "true");
+		Properties props = new Properties();
 
-		// Create a username-password authenticator to authenticate SMTP session
-		Authenticator authenticator = new Authenticator() {
-			// override the getPasswordAuthentication method
-			protected PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication(SENDERS_EMAIL, SENDERS_PWD);
-			}
-		};
+		props.put("mail.smtp.auth", "true");
 
-		// Create the mail session
-		Session session = Session.getDefaultInstance(mailProps, authenticator);
+		props.put("mail.smtp.starttls.enable", "true");
+
+		props.put("mail.smtp.host", "smtp.gmail.com");
+
+		props.put("mail.smtp.port", "587");
+
+		Session session = Session.getInstance(props,
+
+				new javax.mail.Authenticator() {
+
+					protected PasswordAuthentication getPasswordAuthentication() {
+
+						return new PasswordAuthentication(username, password);
+
+					}
+
+				});
+
 		try {
-			// Create a default MimeMessage object.
-			final MimeMessage message = new MimeMessage(session);
 
-			// Set the sender's email address
-			message.setFrom(new InternetAddress(SENDERS_EMAIL));
+			Message message = new MimeMessage(session);
 
-			// Set recipient's email address
-			message.addRecipient(Message.RecipientType.TO, new InternetAddress(userAddres));
+			message.setFrom(new InternetAddress(username));
 
-			// Set the subject of the email
+			message.setRecipients(Message.RecipientType.TO,
+
+					InternetAddress.parse(addres));
 			message.setSubject(subject);
 
-			// Now set the actual message body of the email
 			message.setText(startText + randomPassword(personalId) + endTeext);
 
-			// Send message
 			Transport.send(message);
 
-		} catch (Exception e) {
-			System.err.println("Problem sending email. Exception : " + e.getMessage());
+		} catch (MessagingException e) {
+
+			throw new RuntimeException(e);
+
 		}
 
 	}
+
+	// public static void main(String[] args) {
+	// send("lmach14@freeuni.edu.ge", "18001068662");
+	// }
 }
