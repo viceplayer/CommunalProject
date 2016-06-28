@@ -28,6 +28,12 @@ $(document).on("click", ".Type0, .Type1, .Type2", function (ev) {
 	data.empty()
 	$("<li>").text("Add").addClass("Add1").attr("id",ev.target.id).appendTo(data);
 	$("<li>").text("Back").addClass("Back").appendTo(data);
+	
+	$.get("TicketServlet",{id: ev.target.id}, function(responseJson) {      
+        $.each(responseJson, function(index, Object) {    
+        	$("<li>").text(Object.CompanyName).appendTo(data);
+        });
+    });
 });
 
 $(document).on("click", ".Back", function (ev) {
