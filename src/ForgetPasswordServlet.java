@@ -40,7 +40,7 @@ public class ForgetPasswordServlet extends HttpServlet {
 				path += "ForgetPassword.jsp";
 			} else {
 				request.setAttribute("mail", DatabaseRelation.getUserMail(personalId));
-
+				
 				SendGMail.send(DatabaseRelation.getUserMail(personalId), personalId);
 				path += "RecoveryPassword.jsp";
 			}
