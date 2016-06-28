@@ -22,12 +22,18 @@ function show(){
 	
 }
 
-$(document).on("click", ".Type0", function (ev) {
+$(document).on("click", ".Type0, .Type1, .Type2", function (ev) {
 	var folderManager = $('.folderManager')
 	var data = $('.data')
 	data.empty()
 	$("<li>").text("Add").addClass("Add1").attr("id",ev.target.id).appendTo(data);
 	$("<li>").text("Back").addClass("Back").appendTo(data);
+	
+	$.get("TicketServlet",{id: ev.target.id}, function(responseJson) {      
+        $.each(responseJson, function(index, Ticket) {    
+        	$("<li>").text(Ticket.companyName).appendTo(data);
+        });
+    });
 });
 
 $(document).on("click", ".Back", function (ev) {
@@ -36,11 +42,6 @@ $(document).on("click", ".Back", function (ev) {
 	show()
 });
 
-$(document).on("click", ".Add1", function (ev) {
-	var data = $('.data')
-	data.empty()
-	show()
-});
 
 
 $(document).on("click", ".Add", function (ev) {

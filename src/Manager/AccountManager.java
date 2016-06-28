@@ -30,6 +30,18 @@ public class AccountManager {
 		
 		
 	}
+	
+	public boolean addTicket(int objectId,int companyId,String ticket){
+		ArrayList<Ticket> tmp =  DatabaseRelation.getTickets(objectId);
+		for(int i = 0; i < tmp.size(); i++){
+			System.out.println(tmp.get(i).getTicket());
+			if(tmp.get(i).getCompanyId()==companyId) return false;
+			
+		}
+		System.out.println("asd");
+		DatabaseRelation.createTicket(objectId,companyId,ticket);
+		return true;
+	}
 
 	public boolean logIn(String personalId, String password) {
 		if (DatabaseRelation.userExists(personalId, password)) {

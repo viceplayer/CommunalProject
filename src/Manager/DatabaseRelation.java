@@ -231,14 +231,14 @@ public class DatabaseRelation {
 	}
 
 	public static ArrayList<Ticket> getTickets(int objectId) {
-		String query = "SELECT objectId,ticket,companyName FROM ticket a join company b on a.companyId = b.id WHERE objectId = ?";
+		String query = "SELECT objectId,ticket,companyName,b.id FROM ticket a join company b on a.companyId = b.id WHERE objectId = ?";
 		ArrayList<Ticket> result = new ArrayList<Ticket>();
 		try {
 			PreparedStatement ps = con.prepareStatement(query);
 			ps.setString(1, "" + objectId);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				Ticket temp = new Ticket(rs.getInt(1), rs.getString(3), rs.getString(2));
+				Ticket temp = new Ticket(rs.getInt(1), rs.getString(3), rs.getString(2),rs.getInt(4));
 				result.add(temp);
 			}
 		} catch (SQLException e) {

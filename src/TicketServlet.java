@@ -1,6 +1,7 @@
 
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -13,19 +14,20 @@ import javax.servlet.http.HttpSession;
 import com.google.gson.Gson;
 
 import Manager.DatabaseRelation;
+import Manager.Ticket;
 import Manager.object;
 
 /**
- * Servlet implementation class ObjectServlet
+ * Servlet implementation class TicketServlet
  */
-@WebServlet("/ObjectServlet")
-public class ObjectServlet extends HttpServlet {
+@WebServlet("/TicketServlet")
+public class TicketServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ObjectServlet() {
+    public TicketServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,8 +39,10 @@ public class ObjectServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
 		int userId = (int)session.getAttribute("userId");
-		List<object> objects = DatabaseRelation.getObjects(userId);
-	    String json = new Gson().toJson(objects);
+		int objectId = Integer.parseInt(request.getParameter("id"));
+		System.out.println(objectId);
+		List<Ticket> tickets = DatabaseRelation.getTickets(objectId);
+	    String json = new Gson().toJson(tickets);
 	    response.setContentType("application/json");
 	    response.setCharacterEncoding("UTF-8");
 	    response.getWriter().write(json);
