@@ -6,11 +6,30 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" type="text/css" href="css/Form.css">
+<link rel="stylesheet" type="text/css" href="css/style.css">
 <title>Account Control Panel</title>
 </head>
 <body>
+	<div class = "header">
+		<div class = "name">
+			
+		</div>
+		
+		<div class = nav>
+			<ul>
+			<li><a href="http://localhost:8080/CommunalProject/LogOutServlet">Logout</a></li>
+			<li><a href="#">Transactions</a></li>
+				<li><a href="#" class="active">Panel</a></li>
+				<li><a href="http://localhost:8080/CommunalProject/Home.jsp" >Home</a></li>
+				<li class="title"><a class="title">Communal Project</a></li>
+				
+			</ul>
+			
+			
+		</div>
+	</div>
 
-	<form action="AccountUpdateServlet" method="post">
+	<form action="AccountUpdateServlet" method="post" style = "margin-top:50px;">
 	<h5> Name : <%out.write(DatabaseRelation.getUserData((int)session.getAttribute("userId"), "firstName"));%> <br>
 	Change: <input type="text" name="newName"> </h5>
 	<h5>Last name : <%out.write(DatabaseRelation.getUserData((int)session.getAttribute("userId"), "lastName"));%> <br>

@@ -20,11 +20,12 @@
 		</h5>
 		PersonalId:<br> <input type="text" name="personalId"><br>
 		Password:<br> <input type="password" name="password"> <br>
-		<input type="submit" value="Submit"> <br> <a
-			href="http://localhost:8080/CommunalProject/Registration.jsp">Register</a>
-		<br> <a
-			href="http://localhost:8080/CommunalProject/ForgetPassword.jsp">Forget
-			Password</a>
+		<input type="submit" value="Submit"> <br>
+		<div class="blobs">
+			<a href="http://localhost:8080/CommunalProject/Registration.jsp" class="blob">Register</a>
+			<a href="http://localhost:8080/CommunalProject/ForgetPassword.jsp" class="blob">Forgot Password</a>
+		</div>
+		
 	</form>
 </body>
 </html>

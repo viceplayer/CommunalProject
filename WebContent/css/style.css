@@ -29,3 +29,61 @@
 	background:#330099 !important;
 }
 
+body{
+	margin:0px;
+}
+
+
+
+
+
+
+.nav ul{
+	list-style-type: none;
+    background-color: #000000;
+    overflow: hidden;
+    margin:0px;
+    border-bottom: 4px solid #ff0000;
+}
+
+.nav ul li{
+	display: inline;
+	float:right;
+	height:100%;
+}
+
+.nav ul li.title{
+	display: inline;
+	float:left;
+	height:100%;
+}
+
+.nav ul li a{
+	display:block;
+	padding: 14px 32px;
+	text-align: center;
+	color:white;
+	text-decoration:none;
+}
+
+.nav ul li a:hover {
+    background-color: #CD5C5C;
+}
+
+.nav ul li a.active {
+    background-color: #ff0000; !important
+}
+
+.nav ul li a.title{
+	float:left;
+	display:block;
+	padding: 14px 32px;
+	text-align: center;
+	color:white;
+	text-decoration:none;
+}
+
+.nav ul li a.title:hover{
+	background-color: #000000;
+}
+

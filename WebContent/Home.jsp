@@ -14,17 +14,28 @@
 <title>Home</title>
 </head>
 <body>
-	<h1>Home Page</h1>
+	<div class = "header">
+		<div class = "name">
+			
+		</div>
+		
+		<div class = nav>
+			<ul>
+			<li><a href="http://localhost:8080/CommunalProject/LogOutServlet">Logout</a></li>
+			<li><a href="#">Transactions</a></li>
+				<li><a href="http://localhost:8080/CommunalProject/AccountPanel.jsp">Panel</a></li>
+				<li><a href="#" class="active">Home</a></li>
+				<li class="title"><a class="title">Communal Project</a></li>
+				
+			</ul>
+			
+			
+		</div>
+	</div>
 	<div class=folderManager>
 		<ul class=data></ul>
 	</div>
 
-	<h4>
-		<a href="http://localhost:8080/CommunalProject/AddObject.jsp">Add</a>
-		<a href="http://localhost:8080/CommunalProject/AccountPanel.jsp">Panel</a>
-		<a href="http://localhost:8080/CommunalProject/LogOutServlet">Logout</a>
-
-	</h4>
 
 
 </body>
