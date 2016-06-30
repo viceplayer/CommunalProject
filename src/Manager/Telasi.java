@@ -21,8 +21,8 @@ public class Telasi {
 	 * which makes filtering of the url
 	 * @param TicketNum
 	 */
-	public Telasi(int TicketNum) {
-		url = url + TicketNum + endUrl;
+	public Telasi(int ticketNum) {
+		url = url + ticketNum + endUrl;
 		getUrl(url);
 		getTicketInfo();
 	}
