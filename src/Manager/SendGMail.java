@@ -20,6 +20,13 @@ public class SendGMail {
 	final static String startText = "Your new password is  ";
 	final static String endTeext = " Now you can use your new password!";
 
+	/**
+	 * This method generates password randomly, which is sent to the mail of the
+	 * user
+	 * 
+	 * @param personalId
+	 * @return
+	 */
 	private static String randomPassword(String personalId) {
 		char[] chars = "abcdefghijklmnopqrstuvwxyz0123456789".toCharArray();
 		StringBuilder sb = new StringBuilder();
@@ -39,6 +46,12 @@ public class SendGMail {
 		return sb.toString();
 	}
 
+	/**
+	 * This method sends mail to the userAddress of the user with personalId
+	 * 
+	 * @param userAddres
+	 * @param personalId
+	 */
 	public static void send(String userAddres, String personalId) {
 		// https://www.google.com/settings/security/lesssecureapps
 		String addres = userAddres;

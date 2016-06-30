@@ -5,6 +5,12 @@ import java.security.NoSuchAlgorithmException;
 
 public class ShaOne {
 
+	/**
+	 * This is just shaOne algorithm, wihch generates hash code for the given input
+	 * @param input
+	 * @return
+	 * @throws NoSuchAlgorithmException
+	 */
 	public static String sha1(String input) throws NoSuchAlgorithmException {
 		MessageDigest mDigest = MessageDigest.getInstance("SHA1");
 		byte[] result = mDigest.digest(input.getBytes());

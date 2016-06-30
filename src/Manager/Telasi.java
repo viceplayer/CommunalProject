@@ -15,13 +15,21 @@ public class Telasi {
 	private static String electric;
 	private static String name = "";
 	private static String deadLine = "";
-
+	/**
+	 * This constructor connects to the url and calls method
+	 * which makes filtering of the url
+	 * @param TicketNum
+	 */
 	public Telasi(int TicketNum) {
 		url = url + TicketNum + endUrl;
 		getUrl(url);
 		getTicketInfo();
 	}
 
+	/**
+	 * This method filters page of the telasi in a specific way.
+	 * It gets all the information from it and saves into instance variables.
+	 */
 	private static void getTicketInfo() {
 		String start = "class=\"list-group\">";
 		String end = "</ul>";
@@ -65,23 +73,39 @@ public class Telasi {
 				break;
 		}
 	}
-
+	/**
+	 * 
+	 * @return fee of the trash
+	 */
 	public String getTrashTaxes() {
 		return trash;
 	}
-
+	/**
+	 * 
+	 * @return last date, until user must pay
+	 */
 	public String getDeadLine() {
 		return deadLine;
 	}
 
+	/**
+	 * 
+	 * @return fee of electricity
+	 */
 	public String getElectricTaxes() {
 		return electric;
 	}
-
+	/**
+	 * 
+	 * @return fee of water
+	 */
 	public String getWaterTaxes() {
 		return water;
 	}
-
+	/**
+	 * Connects to the url and scans whole source
+	 * @param url
+	 */
 	private static void getUrl(String url) {
 		try {
 			connection = new URL(url).openConnection();
@@ -94,6 +118,10 @@ public class Telasi {
 		}
 	}
 
+	/**
+	 * Filters the source and gets name of the user from the url
+	 * @return name of the user
+	 */
 	public String getName() {
 		String start = "class=\"page-header\">";
 		String end = "</div>";
@@ -115,6 +143,9 @@ public class Telasi {
 		return name;
 	}
 
+	/**
+	 * Checks, whether each letter of the  name is in georgian alphabet
+	 */
 	private static void chackName() {
 		for (int i = 0; i < name.length(); i++) {
 			if (name.charAt(i) < 'ა' || name.charAt(i) > 'ჰ') {
