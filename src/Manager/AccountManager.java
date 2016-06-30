@@ -10,6 +10,18 @@ public class AccountManager {
 
 	}
 
+	/**
+	 * This method receives all the parameters, which are required to create
+	 * account. it at first checks, whether account already exists or not, if it
+	 * doesn't it creates account and returns true else false.
+	 * @param personalId
+	 * @param firstName
+	 * @param lastName
+	 * @param date
+	 * @param mail
+	 * @param mobile
+	 * @param
+	 */
 	public boolean createAccount(String personalId, String firstName, String lastName, String date, String mail,
 			String mobile, String password) {
 		if (DatabaseRelation.getUserId(personalId) == -1) {
@@ -19,30 +31,57 @@ public class AccountManager {
 		return false;
 	}
 
-	public boolean addObject(int userId, int type, String name){
-		ArrayList<object> tmp =  DatabaseRelation.getObjects(userId);
-		for(int i = 0; i < tmp.size(); i++){
-			if(tmp.get(i).getName().equals(name)) return false;
-			
+	/**
+	 * This method receives all the parameters, which are
+	 * required to create object. it checks, whether object already
+	 * exists or not. if it doesn't method adds it to database.
+	 * @param userId
+	 * @param type
+	 * @param name
+	 * @return
+	 */
+	public boolean addObject(int userId, int type, String name) {
+		ArrayList<object> tmp = DatabaseRelation.getObjects(userId);
+		for (int i = 0; i < tmp.size(); i++) {
+			if (tmp.get(i).getName().equals(name))
+				return false;
+
 		}
 		DatabaseRelation.createObject(userId, type, name);
 		return true;
-		
-		
+
 	}
-	
-	public boolean addTicket(int objectId,int companyId,String ticket){
-		ArrayList<Ticket> tmp =  DatabaseRelation.getTickets(objectId);
-		for(int i = 0; i < tmp.size(); i++){
+
+	/**
+	 * This method receives all the parameters, which are required
+	 * to create ticket. It checks whether ticket already exists or not, in that exact
+	 * object, if it doesn't method adds given information to database.
+	 * @param objectId
+	 * @param companyId
+	 * @param ticket
+	 * @return
+	 */
+	public boolean addTicket(int objectId, int companyId, String ticket) {
+		ArrayList<Ticket> tmp = DatabaseRelation.getTickets(objectId);
+		for (int i = 0; i < tmp.size(); i++) {
 			System.out.println(tmp.get(i).getTicket());
-			if(tmp.get(i).getCompanyId()==companyId) return false;
-			
+			if (tmp.get(i).getCompanyId() == companyId)
+				return false;
+
 		}
 		System.out.println("asd");
-		DatabaseRelation.createTicket(objectId,companyId,ticket);
+		DatabaseRelation.createTicket(objectId, companyId, ticket);
 		return true;
 	}
 
+	/**
+	 * This method is used, when user tries to log in.
+	 * this method checks given personalId and password in database
+	 * and if they both exist, returns true;
+	 * @param personalId
+	 * @param password
+	 * @return
+	 */
 	public boolean logIn(String personalId, String password) {
 		if (DatabaseRelation.userExists(personalId, password)) {
 			return true;
