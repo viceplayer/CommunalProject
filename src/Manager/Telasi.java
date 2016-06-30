@@ -4,16 +4,16 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.Scanner;
 
+
 public class Telasi {
 
 	private String url = "http://my.telasi.ge/customers/search?utf8=%E2%9C%93&accnumb=";
 	private String endUrl = "&commit=ძებნა";
 	private static String content = null;
 	private static URLConnection connection = null;
-	private static String water;
-	private static String trash;
-	private static String traki = "traki";
-	private static String electric;
+	private static String water= "";
+	private static String trash= "";
+	private static String electric= "";
 	private static String name = "";
 	private static String deadLine = "";
 	/**
@@ -22,9 +22,34 @@ public class Telasi {
 	 * @param TicketNum
 	 */
 	public Telasi(int ticketNum) {
+		System.out.println("x" + ticketNum + "x");
 		url = url + ticketNum + endUrl;
 		getUrl(url);
 		getTicketInfo();
+		findName();
+		System.out.println(getName());
+		System.out.println("-"+ getElectricTaxes() +"-"+ getWaterTaxes() +"-"+  getTrashTaxes() +"-"+ getDeadLine());
+	}
+
+	private void findName() {
+		String start = "class=\"page-header\">";
+		String end = "</div>";
+		int started = 0;
+		String[] tokens = content.split("[\\s]");
+		for (String s : tokens) {
+			if (s.equals(start)) {
+				started = 1;
+			}
+			if (started >= 1 && !s.equals("")) {
+				if (started == 3)
+					name = name + " " + s;
+				started++;
+			}
+			if (started >= 1 && s.equals(end))
+				break;
+		}
+		chackName();
+		
 	}
 
 	/**
@@ -124,23 +149,6 @@ public class Telasi {
 	 * @return name of the user
 	 */
 	public String getName() {
-		String start = "class=\"page-header\">";
-		String end = "</div>";
-		int started = 0;
-		String[] tokens = content.split("[\\s]");
-		for (String s : tokens) {
-			if (s.equals(start)) {
-				started = 1;
-			}
-			if (started >= 1 && !s.equals("")) {
-				if (started == 3)
-					name = name + " " + s;
-				started++;
-			}
-			if (started >= 1 && s.equals(end))
-				break;
-		}
-		chackName();
 		return name;
 	}
 
@@ -157,4 +165,18 @@ public class Telasi {
 		}
 	}
 	
+//	public static void main(String[] args) {
+//		Telasi t = new Telasi(1129335);
+//		System.out.println(t.getDeadLine());
+//		System.out.println(t.getElectricTaxes());
+//		System.out.println(t.getName());
+//		System.out.println(t.getTrashTaxes());
+//		System.out.println(t.getWaterTaxes());
+//		t = new Telasi(3691785);
+//		System.out.println(t.getDeadLine());
+//		System.out.println(t.getElectricTaxes());
+//		System.out.println(t.getName());
+//		System.out.println(t.getTrashTaxes());
+//		System.out.println(t.getWaterTaxes());
+//	}
 }
