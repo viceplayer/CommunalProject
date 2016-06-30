@@ -12,6 +12,7 @@ public class Telasi {
 	private static URLConnection connection = null;
 	private static String water;
 	private static String trash;
+	private static String traki = "traki";
 	private static String electric;
 	private static String name = "";
 	private static String deadLine = "";

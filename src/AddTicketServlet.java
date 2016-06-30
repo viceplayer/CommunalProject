@@ -47,7 +47,7 @@ public class AddTicketServlet extends HttpServlet {
 		String path = "";
 		String ticketNumber = request.getParameter("ticketNumber");
 		int companyId = Integer.parseInt(request.getParameter("companyId"));
-		int objectId = Integer.parseInt(request.getParameter("objectId"));
+		int objectId = Integer.parseInt(request.getParameter("id"));
 		System.out.println(objectId);
 
 		if (!am.addTicket(objectId, companyId, ticketNumber)){

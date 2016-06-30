@@ -45,16 +45,16 @@ $(document).on("click", ".Type0, .Type1, .Type2", function (ev) {
 	data.empty()
 	$("<li>").text("Add").addClass("Add1").attr("id",ev.target.id).appendTo(data);
 	$("<li>").text("Back").addClass("Back").appendTo(data);
-	
+
 	$.get("TicketServlet",{id: ev.target.id}, function(responseJson) {      
-        $.each(responseJson, function(index, Ticket) {  
+        $.each(responseJson, function(index, Ticket) { 
         	$.get("InfoServlet",{ticket: Ticket.ticket}, function(responseJson) { 
         		$.each(responseJson, function(index, Telasi) { 
-        			
-        			var temp = ticketStyle(Telasi.ticket,Telasi.name,Telasi.deadLine,ev.target.class,Telasi.water);
-        			temp.appendTo(data);
+        			var temp = ticketStyle(Ticket.ticket,Telasi.traki,Telasi.deadLine,ev.target.class,Telasi.water);
+        			$(temp).appendTo(data);
         		});
         	});
+        	
         });
     });
 });

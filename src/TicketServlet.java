@@ -37,6 +37,7 @@ public class TicketServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
 		int objectId = Integer.parseInt(request.getParameter("id"));
 		System.out.println(objectId);
 		List<Ticket> tickets = DatabaseRelation.getTickets(objectId);

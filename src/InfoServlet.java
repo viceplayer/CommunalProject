@@ -33,14 +33,23 @@ public class InfoServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		System.out.println("asd");
+		int ticketNum = Integer.parseInt(request.getParameter("ticket"));
+		Telasi t = new Telasi(ticketNum);
+		List<Telasi> tel = new ArrayList<Telasi>();
+		tel.add(t);
+	    String json = new Gson().toJson(tel);
+	    response.setContentType("application/json");
+	    response.setCharacterEncoding("UTF-8");
+	    response.getWriter().write(json);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		System.out.println("asd");
 		int ticketNum = Integer.parseInt(request.getParameter("ticket"));
 		Telasi t = new Telasi(ticketNum);
 		List<Telasi> tel = new ArrayList<Telasi>();
