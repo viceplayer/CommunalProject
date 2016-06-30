@@ -11,15 +11,32 @@ function show(){
 	var data = $('.data')
 	
 	
-	$("<li>").text("Add").addClass("Add").appendTo(data);
+
 	$.get("ObjectServlet", function(responseJson) {      
         $.each(responseJson, function(index, Object) {    
         	$("<li>").text(Object.name).addClass("Type"+Object.type).attr("id",""+Object.id).appendTo(data);
         });
+        $("<li>").text("Add").addClass("Add").appendTo(data);
     });
 	
 	
 	
+	
+}
+
+function ticketStyle(ticket,user,dedalaini,company,money){
+	var text = '<div class=ticket><div><div class=title1>ქვითრის ნომერი:</div><div class = number>';
+	text+=ticket;
+	text+='</div><div class = title2>გადახდის ვადა</div></div><div><div class = title1>მომხმარებელი:</div><div class = number>';
+	text+=user;
+	text+='</div><div class = dedaline>';
+	text+=dedalaini;
+	text+='</div></div><div><div class = title1>';
+	text+=company;
+	text+='</div><div class = number>';
+	text+=money;
+	text+='</div><button class = pay>ადახდა</button></div>';
+	return text;
 }
 
 $(document).on("click", ".Type0, .Type1, .Type2", function (ev) {
@@ -30,8 +47,14 @@ $(document).on("click", ".Type0, .Type1, .Type2", function (ev) {
 	$("<li>").text("Back").addClass("Back").appendTo(data);
 	
 	$.get("TicketServlet",{id: ev.target.id}, function(responseJson) {      
-        $.each(responseJson, function(index, Ticket) {    
-        	$("<li>").text(Ticket.companyName).appendTo(data);
+        $.each(responseJson, function(index, Ticket) {  
+        	$.get("InfoServlet",{ticket: Ticket.ticket}, function(responseJson) { 
+        		$.each(responseJson, function(index, Telasi) { 
+        			
+        			var temp = ticketStyle(Telasi.ticket,Telasi.name,Telasi.deadLine,ev.target.class,Telasi.water);
+        			temp.appendTo(data);
+        		});
+        	});
         });
     });
 });

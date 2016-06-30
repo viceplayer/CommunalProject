@@ -1,23 +1,28 @@
 @CHARSET "UTF-8";
 .data{
 	list-style-type: none;
-	width: 60%;
+	width: 70%;
 	margin: 0 auto;
+	margin-top:30px;
 }
 
 .Add{
-	background:#336699 !important;
+	background:#00478c !important;
+}
+
+.Add:hover{
+	background:#002a54 !important;
 }
 
 .data li {
-	border-radius: 400px; 
-	background:#330066;
+	border-radius: 10px; 
+	border: 1px solid red;
+	background:#262626;
 	float:left;
-	margin: 30px;
-	border-radius: 40%;
-	width: 120px;
+	margin: 20px;
+	width: 27%;
 	color: white;
-	height: 120px; 
+	height: 135px; 
 	text-align: center; 
 	display: flex;
   	align-items: center;
@@ -25,12 +30,70 @@
   	cursor: pointer;
 }
 
-.data li:hover{
-	background:#330099 !important;
+.ticket{
+	border-radius: 10px; 
+	border: 1px solid red;
+	background:#262626;
+	margin: 0 auto;
+	margin-top:20px;
+	width: 80%;
+	color: white;
+	height: 135px; 
+	
+	
+  	cursor: pointer;
 }
 
-body{
+.title1{
+	margin-left:30px;
+	margin-top:20px;
+	display:inline-block;
+	clear:both;
+}
+
+.title2{
+	margin-right:30px;
+	margin-top:20px;
+	display:inline-block;
+	float:right;
+}
+
+.number{
+	display:inline-block;
+	margin-left:30px;
+	
+	
+}
+
+.dedaline{
+	margin-right:30px;
+	margin-top:20px;
+	display:inline-block;
+	float:right;
+}
+
+.pay{
+	margin-right:30px;
+	margin-top:10px;
+	display:inline-block;
+	float:right;
+	background-color: #4CAF50;
+    color: white;
+    padding: 9px;
+    border-radius: 6px;
+}
+
+.data li:hover{
+	background:#000000 ;
+}
+
+body {
 	margin:0px;
+	
+}
+
+html {
+	background:#E0E0E0 ;
 }
 
 
