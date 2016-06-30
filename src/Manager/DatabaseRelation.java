@@ -327,6 +327,51 @@ public class DatabaseRelation {
 		}
 		return result;
 	}
+	
+	public static void deleteTicket(int objectId, int companyId) {
+		String query = "DELETE FROM Ticket WHERE objectId = ? and companyId = ?";
+		
+		try {
+			PreparedStatement ps = con.prepareStatement(query);
+			ps.setInt(1, objectId);
+			ps.setInt(2, companyId);
+			ps.executeQuery();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public static void deleteObject(int objectId) {
+		String query = "DELETE FROM Ticket WHERE objectId = ?";
+		
+		try {
+			PreparedStatement ps = con.prepareStatement(query);
+			ps.setInt(1, objectId);
+			ps.executeQuery();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		query = "DELETE FROM Object WHERE objectId = ?";
+		
+		try {
+			PreparedStatement ps = con.prepareStatement(query);
+			ps.setInt(1, objectId);
+			ps.executeQuery();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
+	}
 
 	@Override
 	protected Object clone() throws CloneNotSupportedException {

@@ -39,12 +39,14 @@ input[type=submit]:hover {
     border: none;
     border-radius: 6px;
     display:block;
-    
+    text-decoration:none;
 }
 
 .blob:hover {
     background-color: #0077ea;
 }
+
+
 
 .blobs{
 	margin: 0 auto; 
