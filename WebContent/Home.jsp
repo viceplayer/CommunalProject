@@ -22,6 +22,7 @@
 	<h4>
 		<a href="http://localhost:8080/CommunalProject/AddObject.jsp">Add</a>
 		<a href="http://localhost:8080/CommunalProject/AccountPanel.jsp">Panel</a>
+		<a href="http://localhost:8080/CommunalProject/LogOutServlet">Logout</a>
 
 	</h4>
 

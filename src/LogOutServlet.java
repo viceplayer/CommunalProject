@@ -1,8 +1,8 @@
 
 
 import java.io.IOException;
-import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,22 +10,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.google.gson.Gson;
-
-import Manager.DatabaseRelation;
-import Manager.object;
-
 /**
- * Servlet implementation class ObjectServlet
+ * Servlet implementation class LogOutServlet
  */
-@WebServlet("/ObjectServlet")
-public class ObjectServlet extends HttpServlet {
+@WebServlet("/LogOutServlet")
+public class LogOutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ObjectServlet() {
+    public LogOutServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,21 +31,20 @@ public class ObjectServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
-		int userId = (int)session.getAttribute("userId");
-		System.out.println(userId);
-		List<object> objects = DatabaseRelation.getObjects(userId);
-	    String json = new Gson().toJson(objects);
-	    response.setContentType("application/json");
-	    response.setCharacterEncoding("UTF-8");
-	    response.getWriter().write(json);
+		session.removeAttribute("userId");
+		System.out.println("asdfd");
+		session.invalidate();
+		RequestDispatcher dispatch = request.getRequestDispatcher("Login.jsp");
+		System.out.println("asdfd");
+		dispatch.forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		doGet(request,response);
+		
 	}
 
 }
