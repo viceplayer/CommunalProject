@@ -8,9 +8,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import Manager.DatabaseRelation;
+
 
 /**
  * Servlet implementation class AddTicketServlet
@@ -48,8 +47,6 @@ public class AddTicketServlet extends HttpServlet {
 		String path = "";
 		String ticketNumber = request.getParameter("ticketNumber");
 		int companyId = Integer.parseInt(request.getParameter("companyId"));
-		HttpSession session = request.getSession();
-		int userId = (int)session.getAttribute("userId");
 		int objectId = Integer.parseInt(request.getParameter("objectId"));
 		System.out.println(objectId);
 

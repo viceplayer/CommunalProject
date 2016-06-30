@@ -1,7 +1,7 @@
 
 
 import java.io.IOException;
-
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -12,45 +12,43 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
-import Manager.DatabaseRelation;
-import Manager.Ticket;
-
+import Manager.Telasi;
 
 /**
- * Servlet implementation class TicketServlet
+ * Servlet implementation class InfoServlet
  */
-@WebServlet("/TicketServlet")
-public class TicketServlet extends HttpServlet {
+@WebServlet("/InfoServlet")
+public class InfoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public TicketServlet() {
+    public InfoServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
 
 	/**
-	 * This servlet returns list of objects to javascript request
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		int objectId = Integer.parseInt(request.getParameter("id"));
-		System.out.println(objectId);
-		List<Ticket> tickets = DatabaseRelation.getTickets(objectId);
-	    String json = new Gson().toJson(tickets);
-	    response.setContentType("application/json");
-	    response.setCharacterEncoding("UTF-8");
-	    response.getWriter().write(json);
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		int ticketNum = Integer.parseInt(request.getParameter("ticket"));
+		Telasi t = new Telasi(ticketNum);
+		List<Telasi> tel = new ArrayList<Telasi>();
+		tel.add(t);
+	    String json = new Gson().toJson(tel);
+	    response.setContentType("application/json");
+	    response.setCharacterEncoding("UTF-8");
+	    response.getWriter().write(json);
 		doGet(request, response);
 	}
 
