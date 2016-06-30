@@ -10,7 +10,7 @@
 </head>
 <body>
 	<form action="AddTicketServlet" method="post">
-	<input type="hidden" name="id" value=<%= request.getParameter("id") %> />
+	<input type="hidden" name="id" value=<%= request.getParameter("objectId") %> />
 		Company:
 		<select name="companyId">
 			<option value="1">Telasi</option>
@@ -20,6 +20,5 @@
 		Ticket Number:<br> <input type="text" name="ticketNumber">
 		
 	</form>
-
 </body>
 </html>

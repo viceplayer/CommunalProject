@@ -47,7 +47,7 @@ public class AddTicketServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		int userId = (int)session.getAttribute("userId");
 		// aq unda shevamowmot ticketi ari tu ara objectshi
-		int objectId = Integer.parseInt(request.getParameter("id"));
+		int objectId = Integer.parseInt(request.getParameter("objectId"));
 		System.out.println(objectId);
 
 		if (!am.addTicket(objectId, companyId, ticketNumber)){
