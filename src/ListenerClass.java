@@ -41,6 +41,7 @@ public class ListenerClass implements HttpSessionListener, ServletContextListene
 	}
 
 	/**
+	 * We are creating account manager object in this class.
 	 * @see ServletContextListener#contextInitialized(ServletContextEvent)
 	 */
 	public void contextInitialized(ServletContextEvent arg0) {

@@ -37,6 +37,7 @@ public class DeleteObjectServlet extends HttpServlet {
 	}
 
 	/**
+	 * This servlet is being used, when user tries to delete specific object on home page.
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */

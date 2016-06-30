@@ -31,6 +31,7 @@ public class ObjectServlet extends HttpServlet {
     }
 
 	/**
+	 * This servlet returns list of objects to javascript request in json.
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

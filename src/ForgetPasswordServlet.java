@@ -27,6 +27,10 @@ public class ForgetPasswordServlet extends HttpServlet {
 	}
 
 	/**
+	 * This servlet is being used, when user tries to recover password. He/she types
+	 * personalId and then using sendGMail class, method sends him/her reseted password.
+	 * If the input is wrong, or user doesn't exist or  user hasn't got mail, method
+	 * shows proper result "no mail or user doesn't exist"
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
@@ -51,7 +55,6 @@ public class ForgetPasswordServlet extends HttpServlet {
 			path += "ForgetPassword.jsp";
 
 		}
-
 		RequestDispatcher dispatch = request.getRequestDispatcher(path);
 		dispatch.forward(request, response);
 		doGet(request, response);

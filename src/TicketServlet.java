@@ -33,6 +33,7 @@ public class TicketServlet extends HttpServlet {
     }
 
 	/**
+	 * This servlet returns list of objects to javascript request
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

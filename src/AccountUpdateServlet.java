@@ -38,6 +38,10 @@ public class AccountUpdateServlet extends HttpServlet {
 	}
 
 	/**
+	 * This doPost method receives values of all of the fields. It has got
+	 * specific TO-DO for each field, if one of the fields isn't empty it does the thing.
+	 * This server is being used when user goes to his/her account panel and wants to change
+	 * personal information.
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */

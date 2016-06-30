@@ -40,6 +40,11 @@ public class LoginServlet extends HttpServlet {
 	}
 
 	/**
+	 * this method is being used, when user tries to login.
+	 * if the inpuit is wrong, page is being refreshed and result is shown, that
+	 * "wrong input was typed", if everything is ok, it dispatchs link to home page.
+	 * Also shaOne algorithm is being used to hash the entered password, so we can 
+	 * check the password in the database.
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
@@ -53,7 +58,6 @@ public class LoginServlet extends HttpServlet {
 		try {
 			password = ShaOne.sha1(request.getParameter("password"));
 		} catch (NoSuchAlgorithmException e) {
-			// TODO Auto-generated catch block
 			System.err.println("LoginServlet Sha1");
 			e.printStackTrace();
 		}

@@ -36,6 +36,10 @@ public class AddTicketServlet extends HttpServlet {
 	}
 
 	/**
+	 * This servlet is being used when user tries to add ticket in specific object.
+	 * At first method checks, whether ticket exists or not in that object. If it does, 
+	 * path is dispatched to an error page, where it says "ticket exists" if it doesn't, page is
+	 * dispatched to home page and ticket is being added.
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -46,7 +50,6 @@ public class AddTicketServlet extends HttpServlet {
 		int companyId = Integer.parseInt(request.getParameter("companyId"));
 		HttpSession session = request.getSession();
 		int userId = (int)session.getAttribute("userId");
-		// aq unda shevamowmot ticketi ari tu ara objectshi
 		int objectId = Integer.parseInt(request.getParameter("objectId"));
 		System.out.println(objectId);
 

@@ -26,16 +26,16 @@ public class LogOutServlet extends HttpServlet {
     }
 
 	/**
+	 * this servlet is being used, when user logs out. It removes userId from the attributes
+	 * and closes session
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
 		session.removeAttribute("userId");
-		System.out.println("asdfd");
 		session.invalidate();
 		RequestDispatcher dispatch = request.getRequestDispatcher("Login.jsp");
-		System.out.println("asdfd");
 		dispatch.forward(request, response);
 	}
 

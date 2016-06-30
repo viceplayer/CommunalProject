@@ -39,6 +39,10 @@ public class RegistrationServlet extends HttpServlet {
 	}
 
 	/**
+	 * This servlet is being used while registrering user. it checks each field
+	 * in a specific way, and if everything is okay, it tries to add user into
+	 * database, if it doesn't already exists there.
+	 * 
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */

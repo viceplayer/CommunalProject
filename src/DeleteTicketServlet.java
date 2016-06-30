@@ -36,6 +36,8 @@ public class DeleteTicketServlet extends HttpServlet {
 	}
 
 	/**
+	 * This servlet is being used, when user tries to delete specific ticket from
+	 * one of the objects.
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */

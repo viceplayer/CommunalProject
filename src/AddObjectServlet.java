@@ -37,6 +37,10 @@ public class AddObjectServlet extends HttpServlet {
 	}
 
 	/**
+	 * Using this servlet, user can add object in his/her account. Method 
+	 * first checks, whether object exists or not, if it does, path is dispatched to
+	 * Error, which says: object exists. If it doesn't, Object is being added and page is
+	 * being refreshed.
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
