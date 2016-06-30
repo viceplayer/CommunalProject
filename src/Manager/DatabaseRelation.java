@@ -14,11 +14,15 @@ public class DatabaseRelation {
 
 	}
 
+	/**
+	 * This method updates specified column in the database using given values,
+	 * to the given user
+	 * 
+	 * @param userId
+	 * @param columnToUpdate
+	 * @param valueToUpdate
+	 */
 	public static void makeUpdateToUsersInfo(int userId, String columnToUpdate, String valueToUpdate) {
-		/*
-		 * UPDATE table_name SET column1=value1,column2=value2,... WHERE
-		 * some_column=some_value;
-		 */
 		String query = "Update user SET ";
 		query += columnToUpdate + " = " + "'" + valueToUpdate + "'" + " WHERE id = " + userId;
 		try {
@@ -31,6 +35,14 @@ public class DatabaseRelation {
 
 	}
 
+	/**
+	 * This method returns userData. While using this method, you must say,
+	 * which info you want to retreive from database and also specify the user.
+	 * 
+	 * @param userId
+	 * @param infoType
+	 * @return
+	 */
 	public static String getUserData(int userId, String infoType) {
 		String queryStart = "SELECT ";
 		String queryMiddle = infoType;
@@ -51,6 +63,11 @@ public class DatabaseRelation {
 		return result;
 	}
 
+	/**
+	 * This method returns password of the user
+	 * 
+	 * @param userId
+	 */
 	public static String getUserPassword(int userId) {
 		String query = "SELECT password FROM user where id = ?";
 		String result = "";
@@ -66,13 +83,20 @@ public class DatabaseRelation {
 		}
 		return result;
 	}
-	
-	public static boolean PersonalIdExsist(String userId) {
+
+	/**
+	 * This method returns true if given personalId exists in database. if it
+	 * doesn't exists, it returns false.
+	 * 
+	 * @param userId
+	 * @return
+	 */
+	public static boolean PersonalIdExsist(String personalId) {
 		String query = "SELECT personalId FROM user where personalId = ?";
 		boolean result = false;
 		try {
 			PreparedStatement ps = con.prepareStatement(query);
-			ps.setString(1, userId);
+			ps.setString(1, personalId);
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
 				result = true;
@@ -82,7 +106,13 @@ public class DatabaseRelation {
 		}
 		return result;
 	}
-	
+
+	/**
+	 * This method returns the mail of the specified user from the database.
+	 * 
+	 * @param personalId
+	 * @return
+	 */
 	public static String getUserMail(String personalId) {
 		String query = "SELECT mail FROM user where personalId = ?";
 		String result = "";
@@ -99,6 +129,9 @@ public class DatabaseRelation {
 		return result;
 	}
 
+	/**
+	 * This method returns id of the user using personalId
+	 */
 	public static int getUserId(String personalId) {
 		String query = "SELECT id FROM user WHERE personalId = ?";
 		int result = -1;
@@ -115,6 +148,18 @@ public class DatabaseRelation {
 		return result;
 	}
 
+	/**
+	 * This method is being used, while registering. It receives all the
+	 * information that are needed to create user in database.
+	 * 
+	 * @param personalId
+	 * @param firstName
+	 * @param lastName
+	 * @param date
+	 * @param mail
+	 * @param mobile
+	 * @param password
+	 */
 	public static void createUser(String personalId, String firstName, String lastName, String date, String mail,
 			String mobile, String password) {
 		String query = "INSERT INTO user(personalId, firstName, lastName, birthDate, mail, mobile, password) VALUES(?,?,?,?,?,?,?)";
@@ -151,6 +196,11 @@ public class DatabaseRelation {
 		}
 	}
 
+	/**
+	 * This method is being used to add company
+	 * 
+	 * @param name
+	 */
 	public static void createCompany(String name) {
 		String query = "INSERT INTO company(companyName) VALUES(?)";
 		try {
@@ -164,6 +214,13 @@ public class DatabaseRelation {
 
 	}
 
+	/**
+	 * This method is used to create object to the specific user in database
+	 * 
+	 * @param userId
+	 * @param type
+	 * @param name
+	 */
 	public static void createObject(int userId, int type, String name) {
 		String query = "INSERT INTO object(userId, objectType, objectName) VALUES(?,?,?)";
 		try {
@@ -179,6 +236,12 @@ public class DatabaseRelation {
 
 	}
 
+	/**
+	 * This method returns list of the objects of the given user
+	 * 
+	 * @param userId
+	 * @return
+	 */
 	public static ArrayList<object> getObjects(int userId) {
 		String query = "SELECT * FROM object WHERE userId = ?";
 		ArrayList<object> result = new ArrayList<object>();
@@ -198,6 +261,16 @@ public class DatabaseRelation {
 
 	}
 
+	/**
+	 * This method is used, while adding transaction into database to the
+	 * specific user
+	 * 
+	 * @param cardId
+	 * @param amount
+	 * @param companyId
+	 * @param date
+	 * @param objectId
+	 */
 	public static void createTransaction(int cardId, double amount, int companyId, String date, int objectId) {
 		String query = "INSERT INTO transaction(cardId, amount, companyId, transactionDate, objectId) VALUES(?,?,?,?,?)";
 		try {
@@ -215,6 +288,14 @@ public class DatabaseRelation {
 
 	}
 
+	/**
+	 * This method is used, while adding ticket into database to the specific
+	 * user
+	 * 
+	 * @param objectId
+	 * @param companyId
+	 * @param ticket
+	 */
 	public static void createTicket(int objectId, int companyId, String ticket) {
 		String query = "INSERT INTO ticket(objectId, companyId, ticket) VALUES(?,?,?)";
 		try {
@@ -230,6 +311,12 @@ public class DatabaseRelation {
 
 	}
 
+	/**
+	 * This method returns all the ticket of the given object
+	 * 
+	 * @param objectId
+	 * @return
+	 */
 	public static ArrayList<Ticket> getTickets(int objectId) {
 		String query = "SELECT objectId,ticket,companyName,b.id FROM ticket a join company b on a.companyId = b.id WHERE objectId = ?";
 		ArrayList<Ticket> result = new ArrayList<Ticket>();
@@ -238,7 +325,7 @@ public class DatabaseRelation {
 			ps.setString(1, "" + objectId);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				Ticket temp = new Ticket(rs.getInt(1), rs.getString(3), rs.getString(2),rs.getInt(4));
+				Ticket temp = new Ticket(rs.getInt(1), rs.getString(3), rs.getString(2), rs.getInt(4));
 				result.add(temp);
 			}
 		} catch (SQLException e) {
@@ -249,6 +336,12 @@ public class DatabaseRelation {
 
 	}
 
+	/**
+	 * This method returns list of transactions of the given objects
+	 * 
+	 * @param arr
+	 * @return
+	 */
 	public static ArrayList<Transaction> getTransactions(ArrayList<object> arr) {
 		String query = "SELECT cardNumber,companyName,amount, transactionDate FROM transaction a join company b join card c join object d on a.companyId = b.id AND a.cardId = c.id AND a.objectId = d.id WHERE objectId = ";
 		for (int i = 0; i < arr.size(); i++) {
@@ -273,6 +366,12 @@ public class DatabaseRelation {
 
 	}
 
+	/**
+	 * This method returns list of cards of the given user
+	 * 
+	 * @param userId
+	 * @return
+	 */
 	public static ArrayList<Card> getCards(int userId) {
 		String query = "SELECT userId, cardNumber, cardDate, firstName, lastName from card where userId = ?";
 		ArrayList<Card> result = new ArrayList<Card>();
@@ -292,6 +391,13 @@ public class DatabaseRelation {
 
 	}
 
+	/**
+	 * This method checks, whether user exists or not in the database.
+	 * 
+	 * @param personalId
+	 * @param password
+	 * @return
+	 */
 	public static boolean userExists(String personalId, String password) {
 		String query = "SELECT password FROM user WHERE personalId = ? and password = ?";
 		boolean result = false;
@@ -310,6 +416,14 @@ public class DatabaseRelation {
 		return result;
 	}
 
+	/**
+	 * This method checks, whether object exists or not in the database of the
+	 * given user
+	 * 
+	 * @param userId
+	 * @param objectName
+	 * @return
+	 */
 	public static boolean objectExist(int userId, String objectName) {
 		String query = "SELECT password FROM user WHERE userId = ? and objectName = ?";
 		boolean result = false;
@@ -327,50 +441,61 @@ public class DatabaseRelation {
 		}
 		return result;
 	}
-	
+
+	/**
+	 * This method is used to delete ticket for the specific user's object from
+	 * the database
+	 * 
+	 * @param objectId
+	 * @param companyId
+	 */
 	public static void deleteTicket(int objectId, int companyId) {
 		String query = "DELETE FROM Ticket WHERE objectId = ? and companyId = ?";
-		
+
 		try {
 			PreparedStatement ps = con.prepareStatement(query);
 			ps.setInt(1, objectId);
 			ps.setInt(2, companyId);
 			ps.executeQuery();
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 	}
-	
+
+	/**
+	 * This method at first deletes all the tickets in the given object, and
+	 * then deletes object itself
+	 * 
+	 * @param objectId
+	 */
 	public static void deleteObject(int objectId) {
 		String query = "DELETE FROM Ticket WHERE objectId = ?";
-		
+
 		try {
 			PreparedStatement ps = con.prepareStatement(query);
 			ps.setInt(1, objectId);
 			ps.executeQuery();
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		query = "DELETE FROM Object WHERE objectId = ?";
-		
+
 		try {
 			PreparedStatement ps = con.prepareStatement(query);
 			ps.setInt(1, objectId);
 			ps.executeQuery();
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
-		
+
 	}
 
 	@Override
