@@ -25,7 +25,7 @@ function show(){
 }
 
 function ticketStyle(ticket,user,dedalaini,company,money){
-	var text = '<div class=ticket><div><div class=title1>ქვითრის ნომერი:</div><div class = number>';
+	var text = '<li class=ticket><div><div class=title1>ქვითრის ნომერი:</div><div class = number>';
 	text+=ticket;
 	text+='</div><div class = title2>გადახდის ვადა</div></div><div><div class = title1>მომხმარებელი:</div><div class = number>';
 	text+=user;
@@ -35,7 +35,7 @@ function ticketStyle(ticket,user,dedalaini,company,money){
 	text+=company;
 	text+='</div><div class = number>';
 	text+=money;
-	text+='</div><button class = pay>ადახდა</button></div>';
+	text+='</div><button class = pay>ადახდა</button></li>';
 	return text;
 }
 
@@ -43,19 +43,20 @@ $(document).on("click", ".Type0, .Type1, .Type2", function (ev) {
 	var folderManager = $('.folderManager')
 	var data = $('.data')
 	data.empty()
+	
 	$("<li>").text("Add").addClass("Add1").attr("id",ev.target.id).appendTo(data);
 	$("<li>").text("Back").addClass("Back").appendTo(data);
-
 	$.get("TicketServlet",{id: ev.target.id}, function(responseJson) {      
         $.each(responseJson, function(index, Ticket) { 
         	$.get("InfoServlet",{ticket: Ticket.ticket}, function(responseJson) { 
         		$.each(responseJson, function(index, Telasi) { 
-        			var temp = ticketStyle(Ticket.ticket,Telasi.traki,Telasi.deadLine,ev.target.class,Telasi.water);
+        			var temp = ticketStyle(Ticket.ticket,Telasi.name,Telasi.deadLine,ev.target.id,Telasi.water);
         			$(temp).appendTo(data);
         		});
         	});
         	
         });
+      
     });
 });
 

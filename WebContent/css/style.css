@@ -34,14 +34,13 @@
 	border-radius: 10px; 
 	border: 1px solid red;
 	background:#262626;
-	margin: 0 auto;
-	margin-top:20px;
-	width: 80%;
+	
 	color: white;
 	height: 135px; 
-	
-	
-  	cursor: pointer;
+	width:90% !important;
+	display:inline !important;
+	text-align:initial !important;
+    cursor:default !important;
 }
 
 .title1{
@@ -65,6 +64,13 @@
 	
 }
 
+.Add1{
+	width:43% !important;
+}
+.Back{
+	width:43% !important;
+}
+
 .dedaline{
 	margin-right:30px;
 	margin-top:20px;
@@ -81,10 +87,15 @@
     color: white;
     padding: 9px;
     border-radius: 6px;
+    cursor:pointer;
 }
 
 .data li:hover{
 	background:#000000 ;
+}
+
+.ticket:hover{
+	background:#262626 !important;
 }
 
 body {

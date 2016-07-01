@@ -11,11 +11,11 @@ public class Telasi {
 	private String endUrl = "&commit=ძებნა";
 	private static String content = null;
 	private static URLConnection connection = null;
-	private static String water= "";
-	private static String trash= "";
-	private static String electric= "";
-	private static String name = "";
-	private static String deadLine = "";
+	private String water= "";
+	private String trash= "";
+	private String electric= "";
+	private String name = "";
+	private String deadLine = "";
 	/**
 	 * This constructor connects to the url and calls method
 	 * which makes filtering of the url
@@ -56,7 +56,7 @@ public class Telasi {
 	 * This method filters page of the telasi in a specific way.
 	 * It gets all the information from it and saves into instance variables.
 	 */
-	private static void getTicketInfo() {
+	private void getTicketInfo() {
 		String start = "class=\"list-group\">";
 		String end = "</ul>";
 		String indicator = "<code>";
@@ -132,7 +132,7 @@ public class Telasi {
 	 * Connects to the url and scans whole source
 	 * @param url
 	 */
-	private static void getUrl(String url) {
+	private void getUrl(String url) {
 		try {
 			connection = new URL(url).openConnection();
 			Scanner scanner = new Scanner(connection.getInputStream(), "UTF-8");
@@ -155,7 +155,7 @@ public class Telasi {
 	/**
 	 * Checks, whether each letter of the  name is in georgian alphabet
 	 */
-	private static void chackName() {
+	private void chackName() {
 		for (int i = 0; i < name.length(); i++) {
 			if (name.charAt(i) < 'ა' || name.charAt(i) > 'ჰ') {
 				String replace = "" + name.charAt(i);
@@ -165,18 +165,18 @@ public class Telasi {
 		}
 	}
 	
-//	public static void main(String[] args) {
-//		Telasi t = new Telasi(1129335);
-//		System.out.println(t.getDeadLine());
-//		System.out.println(t.getElectricTaxes());
-//		System.out.println(t.getName());
-//		System.out.println(t.getTrashTaxes());
-//		System.out.println(t.getWaterTaxes());
-//		t = new Telasi(3691785);
-//		System.out.println(t.getDeadLine());
-//		System.out.println(t.getElectricTaxes());
-//		System.out.println(t.getName());
-//		System.out.println(t.getTrashTaxes());
-//		System.out.println(t.getWaterTaxes());
-//	}
+	public static void main(String[] args) {
+		Telasi t = new Telasi(1129335);
+		System.out.println(t.getDeadLine());
+		System.out.println(t.getElectricTaxes());
+		System.out.println(t.getName());
+		System.out.println(t.getTrashTaxes());
+		System.out.println(t.getWaterTaxes());
+		t = new Telasi(3691785);
+		System.out.println(t.getDeadLine());
+		System.out.println(t.getElectricTaxes());
+		System.out.println(t.getName());
+		System.out.println(t.getTrashTaxes());
+		System.out.println(t.getWaterTaxes());
+	}
 }
