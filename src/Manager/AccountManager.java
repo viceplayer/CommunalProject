@@ -64,16 +64,30 @@ public class AccountManager {
 	public boolean addTicket(int objectId, int companyId, String ticket) {
 		ArrayList<Ticket> tmp = DatabaseRelation.getTickets(objectId);
 		for (int i = 0; i < tmp.size(); i++) {
-			System.out.println(tmp.get(i).getTicket());
 			if (tmp.get(i).getCompanyId() == companyId)
 				return false;
 
 		}
-		System.out.println("asd");
 		DatabaseRelation.createTicket(objectId, companyId, ticket);
 		return true;
 	}
-
+	/**
+	 * 
+	 * @param userId
+	 * @param cardNumber
+	 * @return
+	 */
+	public boolean addCard(int userId, String cardNumber, String date, String firstName, String lastName){
+		ArrayList<Card> tmp = DatabaseRelation.getCards(userId);
+		for(int i = 0; i < tmp.size(); i++){
+			if(tmp.get(i).getCardNumber().equals(cardNumber)){
+				return false;
+			}
+		}
+		DatabaseRelation.createCard(userId, cardNumber, date, firstName, lastName);
+		return  true;
+		
+	}
 	/**
 	 * This method is used, when user tries to log in.
 	 * this method checks given personalId and password in database
@@ -89,4 +103,5 @@ public class AccountManager {
 		return false;
 	}
 
+	
 }
