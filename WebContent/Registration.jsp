@@ -9,7 +9,7 @@
 </head>
 <body>
 	<form action="RegistrationServlet" method="post">
-	AccountAlreadyExists
+	
 			<h5>
 			<%
 				String AccountAlreadyExists = (String) request.getParameter("AccountAlreadyExists");

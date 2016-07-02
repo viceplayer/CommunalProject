@@ -18,7 +18,7 @@
 			%>
 		</h5>
 		<h5>Go end check you mail!</h5>
-		<input type="submit" value="Login"> <br>
+		<a href="http://localhost:8080/CommunalProject/Login.jsp" class="blob">Login</a>
 	</form>
 
 
