@@ -84,7 +84,6 @@ public class RegistrationServlet extends HttpServlet {
 			path += "Registration.jsp" + errors;
 		}
 		response.sendRedirect(path);
-		doGet(request, response);
 	}
 
 }
