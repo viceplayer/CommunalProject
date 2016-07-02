@@ -90,6 +90,10 @@
     cursor:pointer;
 }
 
+.pay:hover{
+	background-color: #45a049;
+}
+
 .data li:hover{
 	background:#000000 ;
 }

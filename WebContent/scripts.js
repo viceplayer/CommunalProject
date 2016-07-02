@@ -48,9 +48,9 @@ $(document).on("click", ".Type0, .Type1, .Type2", function (ev) {
 	$("<li>").text("Back").addClass("Back").appendTo(data);
 	$.get("TicketServlet",{id: ev.target.id}, function(responseJson) {      
         $.each(responseJson, function(index, Ticket) { 
-        	$.get("InfoServlet",{ticket: Ticket.ticket}, function(responseJson) { 
-        		$.each(responseJson, function(index, Telasi) { 
-        			var temp = ticketStyle(Ticket.ticket,Telasi.name,Telasi.deadLine,ev.target.id,Telasi.water);
+        	$.get("InfoServlet",{ticket: Ticket.ticket,company: Ticket.companyId}, function(responseJson) { 
+        		$.each(responseJson, function(index, Obj) { 
+        			var temp = ticketStyle(Ticket.ticket,Obj.name,Obj.deadLine,ev.target.id,Obj.water);
         			$(temp).appendTo(data);
         		});
         	});
