@@ -24,7 +24,7 @@ public class ChackParametrs {
 	}
 
 	public  String checkPassword(String password) {
-		if (password.length() == 0 || password.length() < 4 || password.length() > 16) {
+		if (password.length() == 0 || password.length() < 6 || password.length() > 16) {
 			error = true;
 			return "Password is too long or short!";
 		}
@@ -34,7 +34,7 @@ public class ChackParametrs {
 	public  String checkName(String name) {
 		if (name.length() == 0) {
 			error = true;
-			return "Name is ampty";
+			return "Name is empty";
 		}
 		for (int i = 0; i < name.length(); i++) {
 			if (!Character.isLetter(name.charAt(i))) {

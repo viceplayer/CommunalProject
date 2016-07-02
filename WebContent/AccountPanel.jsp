@@ -30,17 +30,55 @@
 	</div>
 
 	<form action="AccountUpdateServlet" method="post" style = "margin-top:50px;">
-	<h5> Name : <%out.write(DatabaseRelation.getUserData((int)session.getAttribute("userId"), "firstName"));%> <br>
+	<h5> First Name : <%out.write(DatabaseRelation.getUserData((int)session.getAttribute("userId"), "firstName"));%> <br>
+	<br>
+	<%
+				String firstNameError = (String) request.getParameter("firstName");
+				if (firstNameError != null)
+					out.println("<font color=red size=3px>" + firstNameError + "</font>");
+			%>
 	Change: <input type="text" name="newName"> </h5>
 	<h5>Last name : <%out.write(DatabaseRelation.getUserData((int)session.getAttribute("userId"), "lastName"));%> <br>
+	<br>
+	<%
+				String lastNameError = (String) request.getParameter("lastName");
+				if (lastNameError != null)
+					out.println("<font color=red size=3px>" + lastNameError + "</font>");
+			%>
 	Change: <input type="text" name="newLastName"> </h5>
 	<h5>Mail : <%out.write(DatabaseRelation.getUserData((int)session.getAttribute("userId"), "mail"));%> <br>
+	<br>
+	<%
+				String mailError = (String) request.getParameter("mail");
+				if (mailError != null)
+					out.println("<font color=red size=3px>" + mailError + "</font>");
+			%>
 	Change: <input type="text" name="newMail"> </h5>
 	<h5>Mobile : <%out.write(DatabaseRelation.getUserData((int)session.getAttribute("userId"), "mobile"));%> <br>
+	<br>
+	<% 
+				String mobileError = (String) request.getParameter("mobile");
+				if (mobileError != null)
+					out.println("<font color=red size=3px>" + mobileError + "</font>");
+			%>
 	Change: <input type="text" name="newMobile"> </h5>
 	<h5>Change Password:</h5>
-		Old password:<br> <input type="text" name="oldPassword"> <br>
-		New password:<br> <input type="text" name="newPassword"> <br>
+		Old password:
+		<br>
+		<% 
+				String oldPasswordError = (String) request.getParameter("oldPassword");
+				if (oldPasswordError != null)
+					out.println("<font color=red size=3px>" + oldPasswordError + "</font>");
+			%>
+		<br> <input type="text" name="oldPassword"> <br>
+		New password:
+		<br>
+		<% 
+				String newPasswordError = (String) request.getParameter("newPassword");
+				if (newPasswordError != null)
+					out.println("<font color=red size=3px>" + newPasswordError + "</font>");
+			%>
+		<br> <input type="text" name="newPassword"> <br>
 		<input type="submit" value="Submit"> <br> 
 	</form>
 

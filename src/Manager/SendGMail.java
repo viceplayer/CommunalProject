@@ -31,7 +31,7 @@ public class SendGMail {
 		char[] chars = "abcdefghijklmnopqrstuvwxyz0123456789".toCharArray();
 		StringBuilder sb = new StringBuilder();
 		Random random = new Random();
-		int size = 7 + random.nextInt(10);
+		int size = 6 + random.nextInt(10);
 		for (int i = 0; i < size; i++) {
 			char c = chars[random.nextInt(chars.length)];
 			sb.append(c);
