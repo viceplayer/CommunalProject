@@ -85,9 +85,7 @@ public class AccountUpdateServlet extends HttpServlet {
 
 		}
 		path += "AccountPanel.jsp";
-		RequestDispatcher dispatch = request.getRequestDispatcher(path);
-		dispatch.forward(request, response);
-		doGet(request, response);
+		response.sendRedirect(path);
 	}
 
 }

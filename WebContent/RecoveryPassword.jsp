@@ -12,7 +12,7 @@
 		<h5>Your new password have sent this mail:</h5>
 		<h5>
 			<%
-				String mail = (String) request.getAttribute("mail");
+				String mail = (String) request.getParameter("mail");
 				if (mail != null)
 					out.println("<font color=Green size=4px>" + mail + "</font>");
 			%>

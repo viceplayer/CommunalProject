@@ -59,9 +59,7 @@ public class AddObjectServlet extends HttpServlet {
 			System.out.print("Success! Object Added");
 
 		}
-		RequestDispatcher dispatch = request.getRequestDispatcher(path);
-		dispatch.forward(request, response);
-		doGet(request, response);
+		response.sendRedirect(path);
 	}
 	
 }

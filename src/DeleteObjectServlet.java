@@ -33,7 +33,12 @@ public class DeleteObjectServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		String path = "";
+		int objectId = Integer.parseInt(request.getParameter("objectId"));
+		DatabaseRelation.deleteObject(objectId);
+		path += "Home.jsp";
+		System.out.print("Success! Object Deleted");
+		
 	}
 
 	/**
@@ -43,13 +48,7 @@ public class DeleteObjectServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String path = "";
-		int objectId = Integer.parseInt(request.getParameter("objectId"));
-		DatabaseRelation.deleteObject(objectId);
-		path += "Home.jsp";
-		System.out.print("Success! Object Deleted");
-		RequestDispatcher dispatch = request.getRequestDispatcher(path);
-		dispatch.forward(request, response);
+		
 		doGet(request, response);
 	}
 

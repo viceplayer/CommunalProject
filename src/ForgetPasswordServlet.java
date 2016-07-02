@@ -40,23 +40,22 @@ public class ForgetPasswordServlet extends HttpServlet {
 		String personalId = request.getParameter("userId");
 		if (DatabaseRelation.PersonalIdExsist(personalId)) {
 			if (DatabaseRelation.getUserMail(personalId).equals("")) {
-				request.setAttribute("error", "This User Have Not Mail You Can Not Recovery Password");
-				path += "ForgetPassword.jsp";
+				
+				path += "ForgetPassword.jsp?error=This User Have Not Mail You Can Not Recovery Password";
 			} else {
-				request.setAttribute("mail", DatabaseRelation.getUserMail(personalId));
+				
 				
 				SendGMail.send(DatabaseRelation.getUserMail(personalId), personalId);
-				path += "RecoveryPassword.jsp";
+				path += "RecoveryPassword.jsp?mail=";
+				path+=DatabaseRelation.getUserMail(personalId);
 			}
 
 		} else {
 
-			request.setAttribute("error", "User Does Not Exist");
-			path += "ForgetPassword.jsp";
+			
+			path += "ForgetPassword.jsp?error=User Does Not Exist";
 
 		}
-		RequestDispatcher dispatch = request.getRequestDispatcher(path);
-		dispatch.forward(request, response);
-		doGet(request, response);
+		response.sendRedirect(path);
 	}
 }

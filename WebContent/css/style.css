@@ -64,12 +64,7 @@
 	
 }
 
-.Add1{
-	width:43% !important;
-}
-.Back{
-	width:43% !important;
-}
+
 
 .dedaline{
 	margin-right:30px;
@@ -92,6 +87,21 @@
 
 .pay:hover{
 	background-color: #45a049;
+}
+.delTic{
+	margin-right:30px;
+	margin-top:10px;
+	display:inline-block;
+	float:right;
+	background-color: #b30000;
+    color: white;
+    padding: 9px;
+    border-radius: 6px;
+    cursor:pointer;
+}
+
+.delTic:hover{
+	background-color: #990000;
 }
 
 .data li:hover{

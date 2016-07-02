@@ -58,9 +58,7 @@ public class AddCardServlet extends HttpServlet {
 			System.out.print("Success! Card Added");
 
 		}
-		RequestDispatcher dispatch = request.getRequestDispatcher(path);
-		dispatch.forward(request, response);
-		doGet(request, response);
+		response.sendRedirect(path);
 	}
 
 }

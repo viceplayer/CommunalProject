@@ -13,7 +13,7 @@
 	<form action="LoginServlet" method="post">
 		<h5>
 			<%
-				String loginError = (String) request.getAttribute("LogInError");
+				String loginError = (String) request.getParameter("error");
 				if (loginError != null)
 					out.println("<font color=red size=4px>" + loginError + "</font>");
 			%>

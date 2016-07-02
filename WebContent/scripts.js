@@ -24,8 +24,10 @@ function show(){
 	
 }
 
-function ticketStyle(ticket,user,dedalaini,company,money){
-	var text = '<li class=ticket><div><div class=title1>ქვითრის ნომერი:</div><div class = number>';
+function ticketStyle(ticket,user,dedalaini,company,money,companyId,objectId){
+	var text = '<li class=ticket id='
+	text+=objectId;
+	text+='><div><div class=title1>ქვითრის ნომერი:</div><div class = number>';
 	text+=ticket;
 	text+='</div><div class = title2>გადახდის ვადა</div></div><div><div class = title1>მომხმარებელი:</div><div class = number>';
 	text+=user;
@@ -35,7 +37,11 @@ function ticketStyle(ticket,user,dedalaini,company,money){
 	text+=company;
 	text+='</div><div class = number>';
 	text+=money;
-	text+='</div><button class = pay>ადახდა</button></li>';
+	text+='</div><button class = pay id =';
+	text+=companyId;
+	text+='>ადახდა</button><button class = delTic id ='
+	text+=companyId;
+	text+='>ქვითრის წაშლა</button></li>';
 	return text;
 }
 
@@ -46,11 +52,12 @@ $(document).on("click", ".Type0, .Type1, .Type2", function (ev) {
 	
 	$("<li>").text("Add").addClass("Add1").attr("id",ev.target.id).appendTo(data);
 	$("<li>").text("Back").addClass("Back").appendTo(data);
+	$("<li>").text("Delete Object").addClass("Delete").attr("id",ev.target.id).appendTo(data);
 	$.get("TicketServlet",{id: ev.target.id}, function(responseJson) {      
         $.each(responseJson, function(index, Ticket) { 
         	$.get("InfoServlet",{ticket: Ticket.ticket,companyId: Ticket.companyId}, function(responseJson) { 
         		
-        		var temp = ticketStyle(Ticket.ticket,responseJson[3],responseJson[2],responseJson[0],responseJson[1]);
+        		var temp = ticketStyle(Ticket.ticket,responseJson[3],responseJson[2],responseJson[0],responseJson[1],Ticket.companyId,ev.target.id);
         		$(temp).appendTo(data);
         		
         	});
@@ -75,6 +82,38 @@ $(document).on("click", ".Add", function (ev) {
 $(document).on("click", ".Add1", function (ev) {
 	window.location.href = ("http://localhost:8080/CommunalProject/AddTicket.jsp?id=" + ev.target.id);
 });
+
+$(document).on("click", ".Delete", function (ev) {
+	if (confirm('Delete object?')) {
+		$.get("DeleteObjectServlet",{objectId:ev.target.id}, function(responseJson) {      
+			var data = $('.data')
+			data.empty()
+			show()
+	        	
+	        	
+	    });
+	} 
+	
+	
+	
+});
+
+$(document).on("click", ".delTic", function (ev) {
+	if (confirm('Delete ticket?')) {
+		$.get("DeleteTicketServlet",{objectId:ev.target.parentNode.parentNode.id,companyId:ev.target.id}, function(responseJson) {      
+			var data = $('.data')
+			data.empty()
+			show()
+	        	
+	        	
+	    });
+	} 
+	
+	
+	
+});
+
+
 
 
 

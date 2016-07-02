@@ -450,13 +450,13 @@ public class DatabaseRelation {
 	 * @param companyId
 	 */
 	public static void deleteTicket(int objectId, int companyId) {
-		String query = "DELETE FROM Ticket WHERE objectId = ? and companyId = ?";
+		String query = "DELETE FROM ticket WHERE objectId = ? and companyId = ?";
 
 		try {
 			PreparedStatement ps = con.prepareStatement(query);
 			ps.setInt(1, objectId);
 			ps.setInt(2, companyId);
-			ps.executeQuery();
+			ps.executeUpdate();
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -472,24 +472,24 @@ public class DatabaseRelation {
 	 * @param objectId
 	 */
 	public static void deleteObject(int objectId) {
-		String query = "DELETE FROM Ticket WHERE objectId = ?";
+		String query = "DELETE FROM ticket WHERE objectId = ?";
 
 		try {
 			PreparedStatement ps = con.prepareStatement(query);
 			ps.setInt(1, objectId);
-			ps.executeQuery();
+			ps.executeUpdate();
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		query = "DELETE FROM Object WHERE objectId = ?";
+		query = "DELETE FROM object WHERE id = ?";
 
 		try {
 			PreparedStatement ps = con.prepareStatement(query);
 			ps.setInt(1, objectId);
-			ps.executeQuery();
+			ps.executeUpdate();
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
