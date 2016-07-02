@@ -1,34 +1,35 @@
 package Manager;
 
+
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
 import java.util.Scanner;
 
-
-public class Telasi {
+public class CompanyInfo {
 
 	private String url = "http://my.telasi.ge/customers/search?utf8=%E2%9C%93&accnumb=";
 	private String endUrl = "&commit=ძებნა";
 	private static String content = null;
 	private static URLConnection connection = null;
-	private String water= "";
-	private String trash= "";
-	private String electric= "";
+	private String GWPTaxes = "";
+	private String TrashTaxes = "";
+	private String TelasiTaxes = "";
 	private String name = "";
 	private String deadLine = "";
+
 	/**
-	 * This constructor connects to the url and calls method
-	 * which makes filtering of the url
+	 * This constructor connects to the url and calls method which makes
+	 * filtering of the url
+	 * 
 	 * @param TicketNum
 	 */
-	public Telasi(int ticketNum) {
-		System.out.println("x" + ticketNum + "x");
+	public CompanyInfo(int ticketNum) {
 		url = url + ticketNum + endUrl;
 		getUrl(url);
 		getTicketInfo();
 		findName();
-		System.out.println(getName());
-		System.out.println("-"+ getElectricTaxes() +"-"+ getWaterTaxes() +"-"+  getTrashTaxes() +"-"+ getDeadLine());
+
 	}
 
 	private void findName() {
@@ -49,12 +50,12 @@ public class Telasi {
 				break;
 		}
 		chackName();
-		
+
 	}
 
 	/**
-	 * This method filters page of the telasi in a specific way.
-	 * It gets all the information from it and saves into instance variables.
+	 * This method filters page of the telasi in a specific way. It gets all the
+	 * information from it and saves into instance variables.
 	 */
 	private void getTicketInfo() {
 		String start = "class=\"list-group\">";
@@ -70,15 +71,15 @@ public class Telasi {
 			}
 			if (!invalid) {
 				if (started == 3 && !s.equals("") && s.startsWith(indicator)) {
-					water = s.substring(s.indexOf('>') + 1, s.indexOf('/') - 1);
+					GWPTaxes = s.substring(s.indexOf('>') + 1, s.indexOf('/') - 1);
 					started++;
 				}
 				if (started == 2 && !s.equals("") && s.startsWith(indicator)) {
-					trash = s.substring(s.indexOf('>') + 1, s.indexOf('/') - 1);
+					TrashTaxes = s.substring(s.indexOf('>') + 1, s.indexOf('/') - 1);
 					started++;
 				}
 				if (started == 1 && !s.equals("") && s.startsWith(indicator)) {
-					electric = s.substring(s.indexOf('>') + 1, s.indexOf('/') - 1);
+					TelasiTaxes = s.substring(s.indexOf('>') + 1, s.indexOf('/') - 1);
 					started++;
 				}
 				if (started >= 1 && !s.equals("") && time == 1) {
@@ -99,37 +100,51 @@ public class Telasi {
 				break;
 		}
 	}
+
 	/**
 	 * 
 	 * @return fee of the trash
 	 */
-	public String getTrashTaxes() {
-		return trash;
+	public ArrayList<String> getTrashTaxes() {
+		ArrayList<String> l = new ArrayList<String>();
+		l.add("დასუფთავების  გადასახადი: ");
+		l.add(TrashTaxes);
+		l.add(deadLine);
+		l.add(name);
+		return l;
 	}
-	/**
-	 * 
-	 * @return last date, until user must pay
-	 */
-	public String getDeadLine() {
-		return deadLine;
-	}
+
+
 
 	/**
 	 * 
 	 * @return fee of electricity
 	 */
-	public String getElectricTaxes() {
-		return electric;
+	public ArrayList<String> getTelasiTaxes() {
+		ArrayList<String> l = new ArrayList<String>();
+		l.add("თელასის გადასახადი: ");
+		l.add(TelasiTaxes);
+		l.add(deadLine);
+		l.add(name);
+		return l;
 	}
+
 	/**
 	 * 
 	 * @return fee of water
 	 */
-	public String getWaterTaxes() {
-		return water;
+	public ArrayList<String> getGWPTaxes() {
+		ArrayList<String> l = new ArrayList<String>();
+		l.add("წალმომარაგების გადასახადი: ");
+		l.add(GWPTaxes);
+		l.add(deadLine);
+		l.add(name);
+		return l;
 	}
+
 	/**
 	 * Connects to the url and scans whole source
+	 * 
 	 * @param url
 	 */
 	private void getUrl(String url) {
@@ -144,16 +159,10 @@ public class Telasi {
 		}
 	}
 
-	/**
-	 * Filters the source and gets name of the user from the url
-	 * @return name of the user
-	 */
-	public String getName() {
-		return name;
-	}
+
 
 	/**
-	 * Checks, whether each letter of the  name is in georgian alphabet
+	 * Checks, whether each letter of the name is in georgian alphabet
 	 */
 	private void chackName() {
 		for (int i = 0; i < name.length(); i++) {
@@ -163,20 +172,5 @@ public class Telasi {
 				i--;
 			}
 		}
-	}
-	
-	public static void main(String[] args) {
-		Telasi t = new Telasi(1129335);
-		System.out.println(t.getDeadLine());
-		System.out.println(t.getElectricTaxes());
-		System.out.println(t.getName());
-		System.out.println(t.getTrashTaxes());
-		System.out.println(t.getWaterTaxes());
-		t = new Telasi(3691785);
-		System.out.println(t.getDeadLine());
-		System.out.println(t.getElectricTaxes());
-		System.out.println(t.getName());
-		System.out.println(t.getTrashTaxes());
-		System.out.println(t.getWaterTaxes());
 	}
 }

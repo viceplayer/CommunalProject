@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
-import Manager.Telasi;
+import Manager.CompanyInfo;
 
 /**
  * Servlet implementation class InfoServlet
@@ -35,12 +35,10 @@ public class InfoServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 		int ticketNum = Integer.parseInt(request.getParameter("ticket"));
-		Telasi t = new Telasi(ticketNum);
-		System.out.println("luka");
-		System.out.println(t.getName() +"-"+ t.getElectricTaxes() +"-"+ t.getWaterTaxes() +"-"+  t.getTrashTaxes() +"-"+ t.getDeadLine());
-		List<Telasi> tel = new ArrayList<Telasi>();
-		tel.add(t);
-	    String json = new Gson().toJson(tel);
+		int companyId = Integer.parseInt(request.getParameter("companyId"));
+		CompanyInfo company = new CompanyInfo(ticketNum);
+		List<String> l = company.getGWPTaxes();
+	    String json = new Gson().toJson(l);
 	    System.out.println(json);
 	    response.setContentType("application/json");
 	    response.setCharacterEncoding("UTF-8");
