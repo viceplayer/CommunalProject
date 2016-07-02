@@ -49,10 +49,10 @@ $(document).on("click", ".Type0, .Type1, .Type2", function (ev) {
 	$.get("TicketServlet",{id: ev.target.id}, function(responseJson) {      
         $.each(responseJson, function(index, Ticket) { 
         	$.get("InfoServlet",{ticket: Ticket.ticket,companyId: Ticket.companyId}, function(responseJson) { 
-        		$.each(responseJson, function(index, Obj) { 
-        			var temp = ticketStyle(Ticket.ticket,Obj.name,Obj.deadLine,ev.target.id,Obj.water);
-        			$(temp).appendTo(data);
-        		});
+        		
+        		var temp = ticketStyle(Ticket.ticket,responseJson[3],responseJson[2],responseJson[0],responseJson[1]);
+        		$(temp).appendTo(data);
+        		
         	});
         	
         });
