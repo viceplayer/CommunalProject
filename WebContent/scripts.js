@@ -46,6 +46,7 @@ $(document).on("click", ".Type0, .Type1, .Type2", function (ev) {
 	
 	$("<li>").text("Add").addClass("Add1").attr("id",ev.target.id).appendTo(data);
 	$("<li>").text("Back").addClass("Back").appendTo(data);
+	$("<li>").text("Delete Object").addClass("Delete").attr("id",ev.target.id).appendTo(data);
 	$.get("TicketServlet",{id: ev.target.id}, function(responseJson) {      
         $.each(responseJson, function(index, Ticket) { 
         	$.get("InfoServlet",{ticket: Ticket.ticket,companyId: Ticket.companyId}, function(responseJson) { 
@@ -75,6 +76,20 @@ $(document).on("click", ".Add", function (ev) {
 $(document).on("click", ".Add1", function (ev) {
 	window.location.href = ("http://localhost:8080/CommunalProject/AddTicket.jsp?id=" + ev.target.id);
 });
+
+$(document).on("click", ".Delete", function (ev) {
+	alert(ev.target.id);
+	$.get("DeleteObjectServlet",{objectId:ev.target.id}, function(responseJson) {      
+		var data = $('.data')
+		data.empty()
+		show()
+        	
+        	
+    });
+	
+	
+});
+
 
 
 

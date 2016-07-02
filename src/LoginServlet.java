@@ -35,7 +35,7 @@ public class LoginServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
 
 	}
 
@@ -73,9 +73,8 @@ public class LoginServlet extends HttpServlet {
 		int userId = DatabaseRelation.getUserId(personalId);
 		HttpSession session = request.getSession();
 		session.setAttribute("userId", userId);
-		RequestDispatcher dispatch = request.getRequestDispatcher(path);
-		dispatch.forward(request, response);
-		doGet(request, response);
+		response.sendRedirect(path);
+		
 	}
 
 }

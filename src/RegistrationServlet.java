@@ -78,9 +78,7 @@ public class RegistrationServlet extends HttpServlet {
 			}
 			path += "Home.jsp";
 		}
-		RequestDispatcher dispatch = request.getRequestDispatcher(path);
-		dispatch.forward(request, response);
-		doGet(request, response);
+		response.sendRedirect(path);
 	}
 
 	private void checkDate(String date) {

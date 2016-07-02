@@ -55,8 +55,6 @@ public class ForgetPasswordServlet extends HttpServlet {
 			path += "ForgetPassword.jsp";
 
 		}
-		RequestDispatcher dispatch = request.getRequestDispatcher(path);
-		dispatch.forward(request, response);
-		doGet(request, response);
+		response.sendRedirect(path);
 	}
 }
