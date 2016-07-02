@@ -1,15 +1,14 @@
 
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
-import java.util.Vector;
-
-import javax.servlet.RequestDispatcher;
+ 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import Manager.ChackParametrs;
 import Manager.DatabaseRelation;
 import Manager.ShaOne;
 
@@ -51,7 +50,7 @@ public class RegistrationServlet extends HttpServlet {
 		Manager.AccountManager am = (Manager.AccountManager) request.getServletContext()
 				.getAttribute("Account Manager");
 		String path = "";
-		errors = new Vector<>();
+		String errors = "?";
 		String personalId = request.getParameter("personalId");
 		String firstName = request.getParameter("firstName");
 		String lastName = request.getParameter("lastName");
@@ -59,71 +58,33 @@ public class RegistrationServlet extends HttpServlet {
 		String mobile = request.getParameter("mobile");
 		String mail = request.getParameter("mail");
 		String date = request.getParameter("date");
-		checkEnteredInteger(personalId, 11, "personalId");
-		checkEnteredInteger(mobile, 9, "mobile");
-		checkName(firstName, "firstName");
-		checkName(lastName, "lastName");
-		checkPassword(password);
-		checkMail(mail);
-		checkDate(date);
-		if (DatabaseRelation.getUserId(personalId) != -1) {
-			path += "AccountAlreadyExists.jsp";
-		} else {
-			try {
-				am.createAccount(personalId, firstName, lastName, date, mail, mobile, ShaOne.sha1(password));
-			} catch (NoSuchAlgorithmException e) {
-				// TODO Auto-generated catch block
-				System.err.println("RegstrationServlet Sha1");
-				e.printStackTrace();
+		ChackParametrs chackParametrs = new ChackParametrs();
+		errors = errors + "personalId=" + chackParametrs.checkEnteredInteger(personalId, 11) + "&";
+		errors = errors + "firstName=" + chackParametrs.checkName(firstName) + "&";
+		errors = errors + "lastName=" + chackParametrs.checkName(lastName) + "&";
+		errors = errors + "password=" + chackParametrs.checkPassword(password) + "&";
+		errors = errors + "mail=" + chackParametrs.checkMail(mail) + "&";
+		errors = errors + "mobile=" + chackParametrs.checkEnteredInteger(mobile, 9) + "&";
+		errors = errors + "birthDate=" + chackParametrs.checkDate(date);
+
+		if (chackParametrs.error == false) {
+			if (DatabaseRelation.getUserId(personalId) != -1) {
+				path += "Registration.jsp" + "?AccountAlreadyExists=AccountAlreadyExists";
+			} else {
+				try {
+					am.createAccount(personalId, firstName, lastName, date, mail, mobile, ShaOne.sha1(password));
+				} catch (NoSuchAlgorithmException e) {
+					// TODO Auto-generated catch block
+					System.err.println("RegstrationServlet Sha1");
+					e.printStackTrace();
+				}
+				path += "Home.jsp";
 			}
-			path += "Home.jsp";
+		}else{
+			path += "Registration.jsp" + errors;
 		}
-		RequestDispatcher dispatch = request.getRequestDispatcher(path);
-		dispatch.forward(request, response);
+		response.sendRedirect(path);
 		doGet(request, response);
 	}
 
-	private void checkDate(String date) {
-
-	}
-
-	private void checkMail(String mail) {
-
-	}
-
-	private void checkPassword(String password) {
-		if (password.length() == 0 || password.length() < 4 || password.length() > 16) {
-			errors.add("password");
-			return;
-		}
-
-	}
-
-	private void checkName(String name, String errorName) {
-		if (name.length() == 0) {
-			errors.add(errorName);
-			return;
-		}
-		for (int i = 0; i < name.length(); i++) {
-			if (!Character.isLetter(name.charAt(i))) {
-				errors.add(errorName);
-				return;
-			}
-		}
-	}
-
-	private void checkEnteredInteger(String personalId, int size, String errorName) {
-		if (personalId.length() != size) {
-			errors.add(errorName);
-			return;
-		}
-		for (int i = 0; i < size; i++) {
-			if (!Character.isDigit(personalId.charAt(i))) {
-				errors.add(errorName);
-				return;
-			}
-		}
-	}
-
-	private Vector<String> errors;
 }
