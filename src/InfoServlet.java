@@ -1,7 +1,6 @@
 
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -37,7 +36,18 @@ public class InfoServlet extends HttpServlet {
 		int ticketNum = Integer.parseInt(request.getParameter("ticket"));
 		int companyId = Integer.parseInt(request.getParameter("companyId"));
 		CompanyInfo company = new CompanyInfo(ticketNum);
-		List<String> l = company.getGWPTaxes();
+		List<String> l;
+		switch (companyId) {
+         case 1: l = company.getTelasiTaxes(); 
+                  break;
+         case 2: l = company.getGWPTaxes(); 
+                  break;
+         case 3: l = company.getTrashTaxes();
+                  break;
+
+         default:l = company.getDefault();
+                  break;
+		}
 	    String json = new Gson().toJson(l);
 	    System.out.println(json);
 	    response.setContentType("application/json");

@@ -141,6 +141,16 @@ public class CompanyInfo {
 		l.add(name);
 		return l;
 	}
+	
+	
+	public ArrayList<String> getDefault() {
+		ArrayList<String> l = new ArrayList<String>();
+		l.add("არარსებული გადასახადი: ");
+		l.add("-");
+		l.add("- - -");
+		l.add("არარსებული");
+		return l;
+	}
 
 	/**
 	 * Connects to the url and scans whole source
