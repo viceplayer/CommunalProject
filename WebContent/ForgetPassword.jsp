@@ -12,7 +12,7 @@
 	<form action="ForgetPasswordServlet" method="post">
 		<h5>
 			<%
-				String error = (String) request.getAttribute("error");
+				String error = (String) request.getParameter("error");
 				if (error != null)
 					out.println("<font color=red size=4px>" + error + "</font>");
 			%>

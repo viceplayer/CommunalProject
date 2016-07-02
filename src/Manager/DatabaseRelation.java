@@ -456,7 +456,7 @@ public class DatabaseRelation {
 			PreparedStatement ps = con.prepareStatement(query);
 			ps.setInt(1, objectId);
 			ps.setInt(2, companyId);
-			ps.executeQuery();
+			ps.executeUpdate();
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

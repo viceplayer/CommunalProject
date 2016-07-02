@@ -32,7 +32,14 @@ public class DeleteTicketServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+
+		int companyId = Integer.parseInt(request.getParameter("companyId"));
+		int objectId = Integer.parseInt(request.getParameter("objectId"));
+		
+		DatabaseRelation.deleteTicket(objectId, companyId);
+		
+		System.out.print("Success! Ticket Deleted");
 	}
 
 	/**
@@ -43,15 +50,8 @@ public class DeleteTicketServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String path = "";
-		int objectId = Integer.parseInt(request.getParameter("objectId"));
-		int companyId = Integer.parseInt(request.getParameter("companyId"));
-		DatabaseRelation.deleteTicket(objectId, companyId);
-		path += "Home.jsp";
-		System.out.print("Success! Ticket Deleted");
-		RequestDispatcher dispatch = request.getRequestDispatcher(path);
-		dispatch.forward(request, response);
-		doGet(request, response);
+		
+		
 		
 	}
 }
