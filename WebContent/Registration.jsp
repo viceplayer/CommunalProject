@@ -9,71 +9,64 @@
 </head>
 <body>
 	<form action="RegistrationServlet" method="post">
-	
-			<br>
-			<%
-				String AccountAlreadyExists = (String) request.getParameter("AccountAlreadyExists");
-				if (AccountAlreadyExists != null)
-					out.println("<font color=red size=3px>" + AccountAlreadyExists + "</font>");
-			%>
-		PersonalId:
-		<br>
-			<%
-				String personalIdError = (String) request.getParameter("personalId");
-				if (personalIdError != null)
-					out.println("<font color=red size=3px>" + personalIdError + "</font>");
-			%>
-		<br> <input type="text" name="personalId"> <br>
-		First name:
-		<br>
-			<%
-				String firstNameError = (String) request.getParameter("firstName");
-				if (firstNameError != null)
-					out.println("<font color=red size=3px>" + firstNameError + "</font>");
-			%>
-		<br> <input type="text" name="firstName"><br>
-		Last name:
-		<br>
-			<%
-				String lastNameError = (String) request.getParameter("lastName");
-				if (lastNameError != null)
-					out.println("<font color=red size=3px>" + lastNameError + "</font>");
-			%>
-		<br> <input type="text" name="lastName"><br>
-		Password:
-		<br>
-			<%
-				String passwordError = (String) request.getParameter("password");
-				if (passwordError != null)
-					out.println("<font color=red size=3px>" + passwordError + "</font>");
-			%>
-		<br> <input type="Password" name="password"><br>
-		E-mail:
-		<br>
-			<%
-				String mailError = (String) request.getParameter("mail");
-				if (mailError != null)
-					out.println("<font color=red size=3px>" + mailError + "</font>");
-			%>
-		<br> <input type="text" name="mail"><br>
-		Birth Date:
-		<br>
-		<% 
-				String birthDateError = (String) request.getParameter("birthDate");
-				if (birthDateError != null)
-					out.println("<font color=red size=3px>" + birthDateError + "</font>");
-			%>
 
-		<br> <input type="text" name="date"><br>		
-		Mobile:
 		<br>
-			<% 
-				String mobileError = (String) request.getParameter("mobile");
-				if (mobileError != null)
-					out.println("<font color=red size=3px>" + mobileError + "</font>");
-			%>
-		<br> <input type="text" name="mobile"><br>
-		<input type="submit" value="Submit">
+		<%
+			String AccountAlreadyExists = (String) request.getParameter("AccountAlreadyExists");
+			if (AccountAlreadyExists != null)
+				out.println("<font color=red size=3px>" + AccountAlreadyExists + "</font>");
+		%>
+		PersonalId: <br>
+		<%
+			String personalIdError = (String) request.getParameter("personalId");
+			if (personalIdError != null)
+				out.println("<font color=red size=3px>" + personalIdError + "</font>");
+		%>
+		<br> <input type="text" name="personalId"> <br>
+		First name: <br>
+		<%
+			String firstNameError = (String) request.getParameter("firstName");
+			if (firstNameError != null)
+				out.println("<font color=red size=3px>" + firstNameError + "</font>");
+		%>
+		<br> <input type="text" name="firstName"><br> Last
+		name: <br>
+		<%
+			String lastNameError = (String) request.getParameter("lastName");
+			if (lastNameError != null)
+				out.println("<font color=red size=3px>" + lastNameError + "</font>");
+		%>
+		<br> <input type="text" name="lastName"><br>
+		Password: <br>
+		<%
+			String passwordError = (String) request.getParameter("password");
+			if (passwordError != null)
+				out.println("<font color=red size=3px>" + passwordError + "</font>");
+		%>
+		<br> <input type="Password" name="password"><br>
+		E-mail: <br>
+		<%
+			String mailError = (String) request.getParameter("mail");
+			if (mailError != null)
+				out.println("<font color=red size=3px>" + mailError + "</font>");
+		%>
+		<br> <input type="text" name="mail"><br> Birth Date:
+		<br>
+		<%
+			String birthDateError = (String) request.getParameter("birthDate");
+			if (birthDateError != null)
+				out.println("<font color=red size=3px>" + birthDateError + "</font>");
+		%>
+
+		<input type="date" name="date" max="2016-07-04" min="1900-01-01"><br>
+		Mobile: <br>
+		<%
+			String mobileError = (String) request.getParameter("mobile");
+			if (mobileError != null)
+				out.println("<font color=red size=3px>" + mobileError + "</font>");
+		%>
+		<br> <input type="text" name="mobile"><br> <input
+			type="submit" value="Submit">
 	</form>
 
 </body>
