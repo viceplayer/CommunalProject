@@ -34,8 +34,7 @@
 			First Name :
 			<%
 			out.write(DatabaseRelation.getUserData((int) session.getAttribute("userId"), "firstName"));
-		%>
-			<br> <br>
+			%>
 			<%
 				String firstNameError = (String) request.getParameter("firstName");
 				if (firstNameError != null)
@@ -48,7 +47,6 @@
 			<%
 			out.write(DatabaseRelation.getUserData((int) session.getAttribute("userId"), "lastName"));
 		%>
-			<br> <br>
 			<%
 				String lastNameError = (String) request.getParameter("lastName");
 				if (lastNameError != null)
@@ -61,7 +59,6 @@
 			<%
 			out.write(DatabaseRelation.getUserData((int) session.getAttribute("userId"), "mail"));
 		%>
-			<br> <br>
 			<%
 				String mailError = (String) request.getParameter("mail");
 				if (mailError != null)
@@ -74,7 +71,6 @@
 			<%
 			out.write(DatabaseRelation.getUserData((int) session.getAttribute("userId"), "mobile"));
 		%>
-			<br> <br>
 			<%
 				String mobileError = (String) request.getParameter("mobile");
 				if (mobileError != null)
@@ -88,21 +84,33 @@
 			if (match != null)
 				out.println("<font color=red size=3px>" + match + "</font>");
 		%>
-		<br>Old password: <br>
+		Old password:
 		<%
 			String oldPasswordError = (String) request.getParameter("oldPassword");
 			if (oldPasswordError != null)
 				out.println("<font color=red size=3px>" + oldPasswordError + "</font>");
 		%>
 		<br> <input type="password" name="oldPassword"> <br> New
-		password: <br>
+		password:
 		<%
 			String newPasswordError = (String) request.getParameter("newPassword");
 			if (newPasswordError != null)
 				out.println("<font color=red size=3px>" + newPasswordError + "</font>");
 		%>
-		<br> <input type="password" name="newPassword"> <br> <input
-			type="submit" value="Submit"> <br>
+		<br> <input type="password" name="newPassword"> <br> 
+				
+		Cards: <select name="cardId">
+			<%
+		for (int i = 0; i < DatabaseRelation.getCards((int)session.getAttribute("userId")).size(); i++) {
+		%>
+		<option value="i"><%(DatabaseRelation.getCards((int)session.getAttribute("userId"))).get(i).getCardNumber(); %> </option>
+		<%
+			}
+		%>
+		</select>
+		<input type="button" value="delete"> <br>
+		Add Card: <input type="text" name="cardNumber"> <br>
+		<input type="submit" value="Submit"> <br>
 	</form>
 
 
