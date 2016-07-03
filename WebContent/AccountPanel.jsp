@@ -108,7 +108,7 @@
 			}
 		%>
 		</select>
-		<input type="button" value="delete"> <br>
+		<input type="submit" value="delete"> <br>
 		Add Card: <input type="text" name="cardNumber"> <br>
 		<input type="submit" value="Submit"> <br>
 	</form>
