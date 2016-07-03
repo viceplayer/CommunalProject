@@ -51,8 +51,10 @@ $(document).on("click", ".Type0, .Type1, .Type2", function (ev) {
 	data.empty()
 	
 	$("<li>").text("Add").addClass("Add1").attr("id",ev.target.id).appendTo(data);
-	$("<li>").text("Back").addClass("Back").appendTo(data);
+	$("<li>").text("Back").addClass("BackNot").appendTo(data);
 	$("<li>").text("Delete Object").addClass("Delete").attr("id",ev.target.id).appendTo(data);
+	
+	jQuery.ajaxSetup({async:false});
 	$.get("TicketServlet",{id: ev.target.id}, function(responseJson) {      
         $.each(responseJson, function(index, Ticket) { 
         	$.get("InfoServlet",{ticket: Ticket.ticket,companyId: Ticket.companyId}, function(responseJson) { 
@@ -63,8 +65,12 @@ $(document).on("click", ".Type0, .Type1, .Type2", function (ev) {
         	});
         	
         });
+        
       
     });
+	$(".BackNot").toggleClass('Back');
+	
+	
 });
 
 $(document).on("click", ".Back", function (ev) {

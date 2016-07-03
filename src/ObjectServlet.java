@@ -38,7 +38,6 @@ public class ObjectServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
 		int userId = (int)session.getAttribute("userId");
-		System.out.println(userId);
 		List<object> objects = DatabaseRelation.getObjects(userId);
 	    String json = new Gson().toJson(objects);
 	    response.setContentType("application/json");

@@ -7,7 +7,7 @@ form{
 	text-align: center;
 }
 
-input[type=text], select, input[type=password], input[type=email] {
+input[type=text], select, input[type=password], input[type=email],input[type=date] {
     width:100%;
     padding: 9px;
     margin: 7px 0;

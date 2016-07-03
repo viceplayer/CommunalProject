@@ -39,7 +39,6 @@ public class TicketServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		int objectId = Integer.parseInt(request.getParameter("id"));
-		System.out.println(objectId);
 		List<Ticket> tickets = DatabaseRelation.getTickets(objectId);
 	    String json = new Gson().toJson(tickets);
 	    response.setContentType("application/json");

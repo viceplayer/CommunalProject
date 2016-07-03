@@ -32,11 +32,8 @@ public class DeleteObjectServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String path = "";
 		int objectId = Integer.parseInt(request.getParameter("objectId"));
 		DatabaseRelation.deleteObject(objectId);
-		path += "Home.jsp";
-		System.out.print("Success! Object Deleted");
 		
 	}
 
