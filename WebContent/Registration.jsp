@@ -52,12 +52,6 @@
 		%>
 		<br> <input type="text" name="mail"><br> Birth Date:
 		<br>
-		<%
-			String birthDateError = (String) request.getParameter("birthDate");
-			if (birthDateError != null)
-				out.println("<font color=red size=3px>" + birthDateError + "</font>");
-		%>
-
 		<input type="date" name="date" max="2016-07-04" min="1900-01-01"><br>
 		Mobile: <br>
 		<%

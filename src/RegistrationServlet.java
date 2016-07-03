@@ -65,7 +65,6 @@ public class RegistrationServlet extends HttpServlet {
 		errors = errors + "password=" + chackParametrs.checkPassword(password) + "&";
 		errors = errors + "mail=" + chackParametrs.checkMail(mail) + "&";
 		errors = errors + "mobile=" + chackParametrs.checkEnteredInteger(mobile, 9) + "&";
-		errors = errors + "birthDate=" + chackParametrs.checkDate(date);
 
 		if (chackParametrs.error == false) {
 			if (DatabaseRelation.getUserId(personalId) != -1) {

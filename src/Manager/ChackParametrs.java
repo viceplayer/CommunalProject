@@ -7,9 +7,6 @@ public class ChackParametrs {
 	
 	public  boolean error = false;
 	
-	public  String checkDate(String date) {
-		return "";
-	}
 
 	public  String checkMail(String mail) {
 		 String result = "";
