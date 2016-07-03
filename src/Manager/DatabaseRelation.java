@@ -181,7 +181,7 @@ public class DatabaseRelation {
 	}
 
 	public static void createCard(int userId, String cardNumber, String date, String firstName, String lastName) {
-		String query = "INSERT INTO card(userId, cardNumber, cardDate, firstName, lastName) VALUES(?,?,?,?,?,?)";
+		String query = "INSERT INTO card(userId, cardNumber, cardDate, firstName, lastName) VALUES(?,?,?,?,?)";
 		try {
 			PreparedStatement ps = con.prepareStatement(query);
 			ps.setInt(1, userId);

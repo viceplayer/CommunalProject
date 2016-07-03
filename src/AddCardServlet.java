@@ -48,14 +48,14 @@ public class AddCardServlet extends HttpServlet {
 		String month = request.getParameter("month");
 		String year = request.getParameter("year");
 		String date = month+"/" +year;
-		int type = Integer.parseInt(request.getParameter("type"));
+		
 		HttpSession session = request.getSession();
 		int userId = (int) session.getAttribute("userId");
 		if (!am.addCard(userId, cardNumber, date, firstName, lastName)) {
 			path += "CardAlreadyExists.jsp";
 			System.out.print("Card already exists");
 		} else {
-			path += "Home.jsp";
+			path += "AccountPanel.jsp";
 			System.out.print("Success! Card Added");
 
 		}
