@@ -45,7 +45,9 @@ public class AddCardServlet extends HttpServlet {
 		String firstName = request.getParameter("firstName");
 		String lastName = request.getParameter("lastName");
 		String cardNumber = request.getParameter("cardNumber");
-		String date = request.getParameter("date");
+		String month = request.getParameter("month");
+		String year = request.getParameter("year");
+		String date = month+"/" +year;
 		int type = Integer.parseInt(request.getParameter("type"));
 		HttpSession session = request.getSession();
 		int userId = (int) session.getAttribute("userId");

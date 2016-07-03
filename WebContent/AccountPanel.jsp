@@ -154,7 +154,6 @@
 			out.write("</option>");
 			
 			}%>
-		}
 		</select>
 		<input type="submit" value="Delete Card"> <br>
 		</form>
