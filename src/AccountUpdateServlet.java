@@ -62,7 +62,7 @@ public class AccountUpdateServlet extends HttpServlet {
 		if (!newMail.isEmpty())errors = errors + "mail=" + chackParametrs.checkMail(newMail) + "&";
 		if (!newMobile.isEmpty())errors = errors + "mobile=" + chackParametrs.checkEnteredInteger(newMobile, 9) + "&";
 		if (!oldPassword.isEmpty())errors = errors + "oldPassword=" + chackParametrs.checkPassword(oldPassword) + "&";
-		if (!newPassword.isEmpty())errors = errors + "newPassword=" + chackParametrs.checkPassword(newPassword);
+		if (!newPassword.isEmpty())errors = errors + "newPassword=" + chackParametrs.checkPassword(newPassword) + "&";
 		if (chackParametrs.error == false) {
 			try {
 				oldPassword = ShaOne.sha1(oldPassword);
@@ -74,7 +74,6 @@ public class AccountUpdateServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			int userId = (int) session.getAttribute("userId");
 			if (!newFirstName.isEmpty()) {
-				System.out.println("shesrulda name");
 				DatabaseRelation.makeUpdateToUsersInfo(userId, "firstName", newFirstName);
 			}
 			if (!newLastName.isEmpty()) {
@@ -90,9 +89,8 @@ public class AccountUpdateServlet extends HttpServlet {
 				if (oldPassword.equals(DatabaseRelation.getUserPassword(userId))) {
 					DatabaseRelation.makeUpdateToUsersInfo(userId, "password", newPassword);
 				} else {
-					System.out.println("Password doesn't match an old password");
+					errors = errors + "match=" + "Password doesn't match an old password";
 				}
-
 			}
 		}
 		path += "AccountPanel.jsp" + errors;

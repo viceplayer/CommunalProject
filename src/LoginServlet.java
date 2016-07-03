@@ -63,10 +63,8 @@ public class LoginServlet extends HttpServlet {
 		String path = "";
 		if (am.logIn(personalId, password)) {
 			path += "Home.jsp";
-			System.out.println("Success! Welcome");
 		} else {
 			path += "Login.jsp?error=Invalid Username or Password!";
-			System.out.println("Wrong input");
 		}
 		int userId = DatabaseRelation.getUserId(personalId);
 		HttpSession session = request.getSession();

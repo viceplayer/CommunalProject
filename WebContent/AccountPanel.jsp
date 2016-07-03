@@ -83,20 +83,25 @@
 			<br>Change: <input type="text" name="newMobile">
 		</h5>
 		<h5>Change Password:</h5>
-		Old password: <br>
+		<%
+			String match = (String) request.getParameter("match");
+			if (match != null)
+				out.println("<font color=red size=3px>" + match + "</font>");
+		%>
+		<br>Old password: <br>
 		<%
 			String oldPasswordError = (String) request.getParameter("oldPassword");
 			if (oldPasswordError != null)
 				out.println("<font color=red size=3px>" + oldPasswordError + "</font>");
 		%>
-		<br> <input type="text" name="oldPassword"> <br> New
+		<br> <input type="password" name="oldPassword"> <br> New
 		password: <br>
 		<%
 			String newPasswordError = (String) request.getParameter("newPassword");
 			if (newPasswordError != null)
 				out.println("<font color=red size=3px>" + newPasswordError + "</font>");
 		%>
-		<br> <input type="text" name="newPassword"> <br> <input
+		<br> <input type="password" name="newPassword"> <br> <input
 			type="submit" value="Submit"> <br>
 	</form>
 
