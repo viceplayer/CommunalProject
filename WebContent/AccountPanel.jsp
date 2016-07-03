@@ -27,7 +27,7 @@
 
 		</div>
 	</div>
-
+	<div style = "width:50%;float:left;">
 	<form action="AccountUpdateServlet" method="post"
 		style="margin-top: 50px;">
 		<h5>
@@ -99,19 +99,66 @@
 		%>
 		<br> <input type="password" name="newPassword"> <br> 
 				
-		Cards: <select name="cardId">
-			<%
-		for (int i = 0; i < DatabaseRelation.getCards((int)session.getAttribute("userId")).size(); i++) {
-		%>
-		<option value="i"><%(DatabaseRelation.getCards((int)session.getAttribute("userId"))).get(i).getCardNumber(); %> </option>
-		<%
-			}
-		%>
-		</select>
-		<input type="submit" value="delete"> <br>
-		Add Card: <input type="text" name="cardNumber"> <br>
+		
 		<input type="submit" value="Submit"> <br>
+		
 	</form>
+	</div>
+	<div style = "width:50%;float:right">
+	<form action="AddCardServlet" method="post"
+		style="margin-top: 50px;">
+		First Name:<input type="text" name="firstName" >
+		Last Name:<input type="text" name="lastName">
+		Card Name:<input type="text" name="cardNumber">
+		Expire Date:<select name="month">
+                
+                <option value="01">Jan (01)</option>
+                <option value="02">Feb (02)</option>
+                <option value="03">Mar (03)</option>
+                <option value="04">Apr (04)</option>
+                <option value="05">May (05)</option>
+                <option value="06">June (06)</option>
+                <option value="07">July (07)</option>
+                <option value="08">Aug (08)</option>
+                <option value="09">Sep (09)</option>
+                <option value="10">Oct (10)</option>
+                <option value="11">Nov (11)</option>
+                <option value="12">Dec (12)</option>
+              </select>
+              <select name="year">
+                <option value="16">2016</option>
+                <option value="17">2017</option>
+                <option value="18">2018</option>
+                <option value="19">2019</option>
+                <option value="20">2020</option>
+                <option value="21">2021</option>
+                <option value="22">2022</option>
+                <option value="23">2023</option>
+                <option value="19">2024</option>
+                <option value="20">2025</option>
+                <option value="21">2026</option>
+                <option value="22">2027</option>
+                <option value="23">2028</option>
+              </select>
+              <input type="submit" value="Add Card"> <br>
+	</form>
+	<form action="DeleteCardServlet" method="post"
+		style="margin-top: 50px;">
+		Card:
+		<select>
+		<% for (int i = 0; i < DatabaseRelation.getCards((int)session.getAttribute("userId")).size(); i++) {
+			out.write("<option value =");
+			out.write(i);
+			out.write(">");
+			out.write(DatabaseRelation.getCards((int)session.getAttribute("userId")).get(i).getCardNumber());
+			out.write("</option>");
+			
+			}%>
+		}
+		</select>
+		<input type="submit" value="Delete Card"> <br>
+		</form>
+	</div>
 
 
 
