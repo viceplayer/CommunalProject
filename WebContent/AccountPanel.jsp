@@ -41,6 +41,16 @@
 	<h5>Change Password:</h5>
 		Old password:<br> <input type="text" name="oldPassword"> <br>
 		New password:<br> <input type="text" name="newPassword"> <br>
+		
+		Cards: <select name="cardId">
+			<%
+		for (int i = 0; i < DatabaseRelation.getCards((int)session.getAttribute("userId")).size(); i++) {
+		%>
+		<option value="i"><%(DatabaseRelation.getCards((int)session.getAttribute("userId"))).get(i).getCardNumber(); %> </option>
+		<%
+			}
+		%>
+		</select>
 		<input type="submit" value="Submit"> <br> 
 	</form>
 
