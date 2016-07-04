@@ -35,7 +35,7 @@
 			<%
 			out.write(DatabaseRelation.getUserData((int) session.getAttribute("userId"), "firstName"));
 			%>
-			<%
+			<br><%
 				String firstNameError = (String) request.getParameter("firstName");
 				if (firstNameError != null)
 					out.println("<font color=red size=3px>" + firstNameError + "</font>");
@@ -47,7 +47,7 @@
 			<%
 			out.write(DatabaseRelation.getUserData((int) session.getAttribute("userId"), "lastName"));
 		%>
-			<%
+		<br><%
 				String lastNameError = (String) request.getParameter("lastName");
 				if (lastNameError != null)
 					out.println("<font color=red size=3px>" + lastNameError + "</font>");
@@ -59,7 +59,7 @@
 			<%
 			out.write(DatabaseRelation.getUserData((int) session.getAttribute("userId"), "mail"));
 		%>
-			<%
+			<br><%
 				String mailError = (String) request.getParameter("mail");
 				if (mailError != null)
 					out.println("<font color=red size=3px>" + mailError + "</font>");
@@ -71,7 +71,7 @@
 			<%
 			out.write(DatabaseRelation.getUserData((int) session.getAttribute("userId"), "mobile"));
 		%>
-			<%
+			<br><%
 				String mobileError = (String) request.getParameter("mobile");
 				if (mobileError != null)
 					out.println("<font color=red size=3px>" + mobileError + "</font>");
@@ -84,15 +84,15 @@
 			if (match != null)
 				out.println("<font color=red size=3px>" + match + "</font>");
 		%>
-		Old password:
-		<%
+		<br>Old password:
+		<br><%
 			String oldPasswordError = (String) request.getParameter("oldPassword");
 			if (oldPasswordError != null)
 				out.println("<font color=red size=3px>" + oldPasswordError + "</font>");
 		%>
 		<br> <input type="password" name="oldPassword"> <br> New
 		password:
-		<%
+		<br><%
 			String newPasswordError = (String) request.getParameter("newPassword");
 			if (newPasswordError != null)
 				out.println("<font color=red size=3px>" + newPasswordError + "</font>");
@@ -107,9 +107,37 @@
 	<div style = "width:50%;float:right">
 	<form action="AddCardServlet" method="post"
 		style="margin-top: 50px;">
-		First Name:<input type="text" name="firstName" >
-		Last Name:<input type="text" name="lastName">
-		Card Name:<input type="text" name="cardNumber">
+		<%
+			String cardError = (String) request.getParameter("cardError");
+			if (cardError != null)
+				out.println("<font color=red size=3px>" + cardError + "</font>");
+		%>
+		<br><%
+			String cardAdd = (String) request.getParameter("cardAdd");
+			if (cardAdd != null)
+				out.println("<font color=green size=3px>" + cardAdd + "</font>");
+		%>
+		<br>First Name:
+		<br><%
+			String cardFirstNameError = (String) request.getParameter("cardFirstName");
+			if (cardFirstNameError != null)
+				out.println("<font color=red size=3px>" + cardFirstNameError + "</font>");
+		%>
+		<input type="text" name="firstName" >
+		Last Name:
+		<br><%
+			String cardLastNameError = (String) request.getParameter("cardLastName");
+			if (cardLastNameError != null)
+				out.println("<font color=red size=3px>" + cardLastNameError + "</font>");
+		%>
+		<input type="text" name="lastName">
+		Card Name:
+		<br><%
+			String cardNameError = (String) request.getParameter("cardName");
+			if (cardNameError != null)
+				out.println("<font color=red size=3px>" + cardNameError + "</font>");
+		%>
+		<input type="text" name="cardNumber">
 		Expire Date:<select name="month">
                 
                 <option value="01">Jan (01)</option>

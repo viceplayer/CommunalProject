@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import Manager.ChackParametrs;
+
 /**
  * Servlet implementation class AddCardServlet
  */
@@ -47,18 +49,23 @@ public class AddCardServlet extends HttpServlet {
 		String cardNumber = request.getParameter("cardNumber");
 		String month = request.getParameter("month");
 		String year = request.getParameter("year");
-		String date = month+"/" +year;
-		
-		HttpSession session = request.getSession();
-		int userId = (int) session.getAttribute("userId");
-		if (!am.addCard(userId, cardNumber, date, firstName, lastName)) {
-			path += "CardAlreadyExists.jsp";
-			System.out.print("Card already exists");
-		} else {
-			path += "AccountPanel.jsp";
-			System.out.print("Success! Card Added");
-
+		String date = month + "/" + year;
+		String errors = "?";
+		ChackParametrs chackParametrs = new ChackParametrs();
+		if (!firstName.isEmpty())errors = errors + "cardFirstName=" + chackParametrs.checkName(firstName) + "&";
+		if (!lastName.isEmpty())errors = errors + "cardLastName=" + chackParametrs.checkName(lastName) + "&";
+		if (!cardNumber.isEmpty())errors = errors + "cardName=" + chackParametrs.checkEnteredInteger(cardNumber, 16) + "&";
+		if (chackParametrs.error == false) {
+			HttpSession session = request.getSession();
+			int userId = (int) session.getAttribute("userId");
+			if (!am.addCard(userId, cardNumber, date, firstName, lastName)) {
+				errors = errors + "cardError=Card already exists&";
+				
+			} else {
+				errors = errors + "cardAdd=Success! Card Added&";
+			}
 		}
+		path = path +  "AccountPanel.jsp" + errors;
 		response.sendRedirect(path);
 	}
 
