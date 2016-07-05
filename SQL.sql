@@ -42,15 +42,13 @@ CREATE TABLE user(
  
   create Table transaction(
 	id int auto_increment,
-    cardId int,
     amount double,
 	companyId int,
     transactionDate varchar(128),
-    objectId int,
+    userId int,
     primary key (id),
     foreign key (companyId) references company(id),
-    foreign key (cardId) references card(id),
-    foreign key (objectId) references object(id)
+    foreign key (userId) references user(id)
  );
  
   create Table ticket(
@@ -60,7 +58,3 @@ CREATE TABLE user(
     foreign key (objectId) references object(id),
     foreign key (companyId) references company(id)
  );
- 
- 
- 
- 
