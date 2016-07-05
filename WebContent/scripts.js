@@ -123,6 +123,7 @@ $(document).on("click", ".Delete", function (ev) {
 	
 });
 
+
 $(document).on("click", ".delTic", function (ev) {
 	if (confirm('Delete ticket?')) {
 		$.get("DeleteTicketServlet",{objectId:ev.target.parentNode.parentNode.id,companyId:ev.target.id}, function(responseJson) {      
