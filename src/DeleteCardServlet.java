@@ -36,7 +36,7 @@ public class DeleteCardServlet extends HttpServlet {
 		DatabaseRelation.deleteCard(userId, card);
 		
 		System.out.print("Success! Card Deleted");
-		String path = "AccountPanel.jsp";
+		String path = "AccountPanel.jsp?delete=Success! Card Deleted&";
 		response.sendRedirect(path);
 	}
 

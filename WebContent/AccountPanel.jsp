@@ -172,7 +172,12 @@
 	</form>
 	<form action="DeleteCardServlet" method="post"
 		style="margin-top: 50px;">
-		Card:
+		<br><%
+			String delete = (String) request.getParameter("delete");
+			if (delete != null)
+				out.println("<font color=green size=3px>" + delete + "</font>");
+		%>
+		<br>Card:
 		<select name=card>
 		<% for (int i = 0; i < DatabaseRelation.getCards((int)session.getAttribute("userId")).size(); i++) {
 			String card = DatabaseRelation.getCards((int)session.getAttribute("userId")).get(i).getCardNumber();
