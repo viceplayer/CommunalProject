@@ -51,7 +51,7 @@ public class AddObjectServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		int userId = (int)session.getAttribute("userId");
 		if (!am.addObject(userId, type, name)){
-			path += "ObjectAlreadyExists.jsp";
+			path += "AddObject.jsp?objectError=Object already exists&";
 			System.out.print("Object already exists");
 		} else {
 			path += "Home.jsp";

@@ -9,13 +9,17 @@
 </head>
 <body>
 	<form action="AddObjectServlet" method="post">
-		Name:<br> <input type="text" name="objectName"><br>
+		<%
+			String objectError = (String) request.getParameter("objectError");
+			if (objectError != null)
+				out.println("<font color=red size=4px>" + objectError + "</font>");
+		%>
+		<br>Name:<br> <input type="text" name="objectName"><br>
 		<select name="type">
-		  <option value="0">Home</option>
-		  <option value="1">Car</option>
-		  <option value="2">Other</option>
-		</select>
-		<input type="submit" value="Submit">
+			<option value="0">Home</option>
+			<option value="1">Car</option>
+			<option value="2">Other</option>
+		</select> <input type="submit" value="Submit">
 	</form>
 </body>
 </html>
