@@ -1,5 +1,9 @@
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -46,13 +50,12 @@ public class PayServlet extends HttpServlet {
 		errors = errors + "cvc=" + chackParametrs.checkEnteredInteger(cvc, 3) + "&";
 		errors = errors + "amount=" + chackParametrs.checkEnteredInteger(amount, -1) + "&";
 
-		// Tu error moxda am paths damatebuli erroris parametrebi
-		// response.sendRedirect(path);
-
 		if (chackParametrs.error == false) {
 			HttpSession session = request.getSession();
 			int userId = (int) session.getAttribute("userId");
-			String date = "asd"; //// gasaketebelia
+			DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+			Calendar cal = Calendar.getInstance();
+			String date = dateFormat.format(cal.getTime());
 			DatabaseRelation.createTransaction(userId, Integer.parseInt(amount), companyId, date);
 			errors += "success=Success Pay !";
 			path += "Pay.jsp" + errors;
