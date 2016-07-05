@@ -79,6 +79,18 @@ $(document).on("click", ".Back", function (ev) {
 	show()
 });
 
+$(document).on("click", ".pay", function (ev) {
+	var path = "Pay.jsp"
+	path+="?companyId="
+	path+=ev.target.id;
+	path+="&objectId="
+	path+=ev.target.parentNode.parentNode.id
+	
+	
+	paymentWindow = window.open(path, "paymentWindow", "location=no,width=500,height=300"); 
+});
+
+
 
 
 $(document).on("click", ".Add", function (ev) {
@@ -87,6 +99,13 @@ $(document).on("click", ".Add", function (ev) {
 
 $(document).on("click", ".Add1", function (ev) {
 	window.location.href = ("http://localhost:8080/CommunalProject/AddTicket.jsp?id=" + ev.target.id);
+});
+
+$(document).on("click", "#close", function (ev) {
+	if(window.opener && !window.opener.closed){
+		window.opener.location.href = window.opener.location.href;
+	}
+	window.close();
 });
 
 $(document).on("click", ".Delete", function (ev) {

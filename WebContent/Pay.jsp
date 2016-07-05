@@ -9,19 +9,23 @@
 <title>Pay</title>
 </head>
 <body>
-	<form action="PayServlet" method="post">
-		<input type="hidden" name="id" value=<%=request.getParameter("id")%> />
+	<form action="PayServlet" method="post" style = "margin-top:10px;">
+		<input type="hidden" name="objectId" value=<%=request.getParameter("objectId")%> />
+		<input type="hidden" name="companyId" value=<%=request.getParameter("companyId")%> />
 		Choose Card: <select name="cardId">
-			<%
-		for (int i = 0; i < DatabaseRelation.getCards((int)session.getAttribute("userId")).size(); i++) {
-		%>
-		<option value="i"><%(DatabaseRelation.getCards((int)session.getAttribute("userId"))).get(i).getCardNumber(); %> </option>
-		<%
-			}
-		%>
+			<% for (int i = 0; i < DatabaseRelation.getCards((int)session.getAttribute("userId")).size(); i++) {
+			String card = DatabaseRelation.getCards((int)session.getAttribute("userId")).get(i).getCardNumber();
+			out.write("<option value =");
+			out.write(card);
+			out.write(">");
+			out.write(card);
+			out.write("</option>");
+			
+			}%>
 		</select> 
-		 Amount: <input type="number" name="amount" min="1" max="1000"> <br>
-		 <input type="submit" value="Submit"> <br>
+		 Amount: <input type="text" name="amount"> <br>
+		 CVC: <input type="text" name="CVC"><br>
+		 <input type="submit" value="Pay"> <br>
 	</form>
 
 </body>

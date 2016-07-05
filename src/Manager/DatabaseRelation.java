@@ -147,6 +147,23 @@ public class DatabaseRelation {
 		}
 		return result;
 	}
+	
+	
+	public static int getCardId(String cardNumber) {
+		String query = "SELECT id FROM card WHERE cardNumber = ?";
+		int result = -1;
+		try {
+			PreparedStatement ps = con.prepareStatement(query);
+			ps.setString(1, cardNumber);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				result = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 
 	/**
 	 * This method is being used, while registering. It receives all the
