@@ -39,6 +39,7 @@ public class PayServlet extends HttpServlet {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		String amount = request.getParameter("amount");
 		String cardNumber = request.getParameter("cardId");
+		System.out.println(cardNumber);
 		int cardId = DatabaseRelation.getCardId(cardNumber);
 		String cvc = request.getParameter("CVC");
 		int companyId = Integer.parseInt(request.getParameter("companyId"));
@@ -49,8 +50,8 @@ public class PayServlet extends HttpServlet {
 		String errors = "?companyId=" + companyId + "&";
 		errors = errors + "cvc=" + chackParametrs.checkEnteredInteger(cvc, 3) + "&";
 		errors = errors + "amount=" + chackParametrs.checkEnteredInteger(amount, -1) + "&";
-
-		if (chackParametrs.error == false) {
+		if (cardNumber == null)errors = errors + "cardNum=You do not have the card!&";
+		if (chackParametrs.error == false  && cardNumber != null) {
 			HttpSession session = request.getSession();
 			int userId = (int) session.getAttribute("userId");
 			DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");

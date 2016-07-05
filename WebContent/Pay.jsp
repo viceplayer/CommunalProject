@@ -16,6 +16,11 @@
 			if (success != null)
 				out.println("<font color=green size=3px>" + success + "</font>");
 		%>
+		<br><%
+			String cardNum = (String) request.getParameter("cardNum");
+			if (cardNum != null)
+				out.println("<font color=red size=3px>" + cardNum + "</font>");
+		%>
 		<br>Choose Card: <select name="cardId">
 			<% for (int i = 0; i < DatabaseRelation.getCards((int)session.getAttribute("userId")).size(); i++) {
 			String card = DatabaseRelation.getCards((int)session.getAttribute("userId")).get(i).getCardNumber();

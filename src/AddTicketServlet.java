@@ -2,6 +2,7 @@
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -53,7 +54,8 @@ public class AddTicketServlet extends HttpServlet {
 		} else {
 			path += "Home.jsp";
 		}
-		response.sendRedirect(path);
+		RequestDispatcher dispatch = request.getRequestDispatcher(path);
+		dispatch.forward(request, response);
 	}
 
 }
