@@ -1,5 +1,4 @@
 
-
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import Manager.ChackParametrs;
 import Manager.DatabaseRelation;
 
 /**
@@ -16,50 +16,59 @@ import Manager.DatabaseRelation;
 @WebServlet("/PayServlet")
 public class PayServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public PayServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-		//shemowmemeba informaciis, 
-		int amount = Integer.parseInt(request.getParameter("amount"));
-		String cardNumber = request.getParameter("cardId");
-		int  cardId = DatabaseRelation.getCardId(cardNumber);
-		int companyId = Integer.parseInt(request.getParameter("companyId"));
-		String path = request.getRequestURI();
-		path += "?companyId=";
-		path+=companyId;
-		//Tu error moxda am paths damatebuli erroris parametrebi
-		// response.sendRedirect(path);
-		
-		
-		HttpSession session = request.getSession();
-		int userId = (int)session.getAttribute("userId");
-		
-		
-		String date = "asd";   //// gasaketebelia
-		DatabaseRelation.createTransaction(userId, amount, companyId, date);
-		response.sendRedirect("Confirm.jsp");
-	
-		
-		
-		
+	public PayServlet() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+		String amount = request.getParameter("amount");
+		String cardNumber = request.getParameter("cardId");
+		int cardId = DatabaseRelation.getCardId(cardNumber);
+		String cvc = request.getParameter("CVC");
+		int companyId = Integer.parseInt(request.getParameter("companyId"));
+		// String path = request.getRequestURI();
+		// path += "?companyId=" + companyId;
+		String path = "";
+		ChackParametrs chackParametrs = new ChackParametrs();
+		String errors = "?companyId=" + companyId + "&";
+		errors = errors + "cvc=" + chackParametrs.checkEnteredInteger(cvc, 3) + "&";
+		errors = errors + "amount=" + chackParametrs.checkEnteredInteger(amount, -1) + "&";
+
+		// Tu error moxda am paths damatebuli erroris parametrebi
+		// response.sendRedirect(path);
+
+		if (chackParametrs.error == false) {
+			HttpSession session = request.getSession();
+			int userId = (int) session.getAttribute("userId");
+			String date = "asd"; //// gasaketebelia
+			DatabaseRelation.createTransaction(userId, Integer.parseInt(amount), companyId, date);
+			errors += "success=Success Pay !";
+			path += "Pay.jsp" + errors;
+		} else {
+			path += "Pay.jsp" + errors;
+		}
+		response.sendRedirect(path);
+
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
