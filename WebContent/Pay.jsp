@@ -10,7 +10,6 @@
 </head>
 <body>
 	<form action="PayServlet" method="post" style = "margin-top:10px;">
-		<input type="hidden" name="objectId" value=<%=request.getParameter("objectId")%> />
 		<input type="hidden" name="companyId" value=<%=request.getParameter("companyId")%> />
 		Choose Card: <select name="cardId">
 			<% for (int i = 0; i < DatabaseRelation.getCards((int)session.getAttribute("userId")).size(); i++) {

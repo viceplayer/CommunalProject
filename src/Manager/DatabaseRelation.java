@@ -148,6 +148,12 @@ public class DatabaseRelation {
 		return result;
 	}
 	
+	/**
+	 * This method returns the id of the specified card from the database.
+	 * 
+	 * @param cardNumber
+	 * @return
+	 */
 	
 	public static int getCardId(String cardNumber) {
 		String query = "SELECT id FROM card WHERE cardNumber = ?";
@@ -288,15 +294,14 @@ public class DatabaseRelation {
 	 * @param date
 	 * @param objectId
 	 */
-	public static void createTransaction(int cardId, double amount, int companyId, String date, int objectId) {
-		String query = "INSERT INTO transaction(cardId, amount, companyId, transactionDate, objectId) VALUES(?,?,?,?,?)";
+	public static void createTransaction(int userId, double amount, int companyId, String date) {
+		String query = "INSERT INTO transaction(userId, amount, companyId, transactionDate) VALUES(?,?,?,?)";
 		try {
 			PreparedStatement ps = con.prepareStatement(query);
-			ps.setInt(1, cardId);
+			ps.setInt(1, userId);
 			ps.setDouble(2, amount);
 			ps.setInt(3, companyId);
 			ps.setString(4, date);
-			ps.setInt(5, objectId);
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -359,20 +364,15 @@ public class DatabaseRelation {
 	 * @param arr
 	 * @return
 	 */
-	public static ArrayList<Transaction> getTransactions(ArrayList<object> arr) {
-		String query = "SELECT cardNumber,companyName,amount, transactionDate FROM transaction a join company b join card c join object d on a.companyId = b.id AND a.cardId = c.id AND a.objectId = d.id WHERE objectId = ";
-		for (int i = 0; i < arr.size(); i++) {
-			query += arr.get(i).getId();
-			if (i != arr.size() - 1) {
-				query += " OR objectId = ";
-			}
-		}
+	public static ArrayList<Transaction> getTransactions(int userId) {
+		String query = "SELECT companyName,amount,transactionDate FROM transaction a join company b  join user d on a.companyId = b.id  AND a.userId = d.id WHERE userId = ?";
 		ArrayList<Transaction> result = new ArrayList<Transaction>();
 		try {
 			PreparedStatement ps = con.prepareStatement(query);
+			ps.setInt(1, userId);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				Transaction temp = new Transaction(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getString(4));
+				Transaction temp = new Transaction(rs.getString(1), rs.getDouble(2), rs.getString(3));
 				result.add(temp);
 			}
 		} catch (SQLException e) {
@@ -516,8 +516,7 @@ public class DatabaseRelation {
 	}
 	
 	/**
-	 * This method at first deletes all the tickets in the given object, and
-	 * then deletes object itself
+	 * This method at first deletes the card registered with specified user
 	 * 
 	 * @param objectId
 	 */

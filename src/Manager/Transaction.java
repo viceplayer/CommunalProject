@@ -2,8 +2,7 @@ package Manager;
 
 public class Transaction {
 
-	private int cardNumber;
-	private int amount;
+	private double amount;
 	private String date;
 	private String companyName;
 
@@ -16,25 +15,18 @@ public class Transaction {
 	 * @param amount
 	 * @param date
 	 */
-	public Transaction(int cardNumber, String companyName, int amount, String date) {
-		this.cardNumber = cardNumber;
+	public Transaction(String companyName, double amount, String date) {
 		this.amount = amount;
 		this.date = date;
 		this.companyName = companyName;
 	}
 
-	/**
-	 * @return 16 digit number of the card
-	 */
-	public int getCardNumber() {
-		return cardNumber;
-	}
 
 	/**
 	 * 
 	 * @return amount to pay
 	 */
-	public int getAmount() {
+	public double getAmount() {
 		return amount;
 	}
 	/**

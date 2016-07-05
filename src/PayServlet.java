@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import Manager.DatabaseRelation;
 
@@ -35,21 +36,19 @@ public class PayServlet extends HttpServlet {
 		String cardNumber = request.getParameter("cardId");
 		int  cardId = DatabaseRelation.getCardId(cardNumber);
 		int companyId = Integer.parseInt(request.getParameter("companyId"));
-		int objectId = Integer.parseInt(request.getParameter("objectId"));
 		String path = request.getRequestURI();
 		path += "?companyId=";
 		path+=companyId;
-		path+="&objectId=";
-		path+=objectId;
 		//Tu error moxda am paths damatebuli erroris parametrebi
 		// response.sendRedirect(path);
 		
 		
-		
+		HttpSession session = request.getSession();
+		int userId = (int)session.getAttribute("userId");
 		
 		
 		String date = "asd";   //// gasaketebelia
-		DatabaseRelation.createTransaction(cardId, amount, companyId, date, objectId);
+		DatabaseRelation.createTransaction(userId, amount, companyId, date);
 		response.sendRedirect("Confirm.jsp");
 	
 		
