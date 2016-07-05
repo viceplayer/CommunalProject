@@ -6,6 +6,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import Manager.DatabaseRelation;
 
 /**
  * Servlet implementation class DeleteCardServlet
@@ -27,7 +30,14 @@ public class DeleteCardServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		String card = request.getParameter("card");
+		HttpSession session = request.getSession();
+		int userId = (int) session.getAttribute("userId");
+		DatabaseRelation.deleteCard(userId, card);
+		
+		System.out.print("Success! Card Deleted");
+		String path = "AccountPanel.jsp";
+		response.sendRedirect(path);
 	}
 
 	/**

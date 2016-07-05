@@ -173,12 +173,13 @@
 	<form action="DeleteCardServlet" method="post"
 		style="margin-top: 50px;">
 		Card:
-		<select>
+		<select name=card>
 		<% for (int i = 0; i < DatabaseRelation.getCards((int)session.getAttribute("userId")).size(); i++) {
+			String card = DatabaseRelation.getCards((int)session.getAttribute("userId")).get(i).getCardNumber();
 			out.write("<option value =");
-			out.write(i);
+			out.write(card);
 			out.write(">");
-			out.write(DatabaseRelation.getCards((int)session.getAttribute("userId")).get(i).getCardNumber());
+			out.write(card);
 			out.write("</option>");
 			
 			}%>

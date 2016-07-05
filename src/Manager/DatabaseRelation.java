@@ -497,6 +497,29 @@ public class DatabaseRelation {
 		}
 
 	}
+	
+	/**
+	 * This method at first deletes all the tickets in the given object, and
+	 * then deletes object itself
+	 * 
+	 * @param objectId
+	 */
+	public static void deleteCard(int userId,String card) {
+		String query = "DELETE FROM card WHERE userId = ? AND cardNumber = ?";
+
+		try {
+			System.out.println(userId);
+			System.out.println(card);
+			PreparedStatement ps = con.prepareStatement(query);
+			ps.setInt(1, userId);
+			ps.setString(2,card);
+			ps.executeUpdate();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 	@Override
 	protected Object clone() throws CloneNotSupportedException {
