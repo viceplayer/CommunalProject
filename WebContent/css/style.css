@@ -175,3 +175,30 @@ html {
 	background-color: #000000;
 }
 
+table {
+		color: white;
+		border: 1px solid red;
+		border-collapse: collapse;
+		margin:0 auto;
+		margin-top:100px;
+		
+}
+table tr:hover td {
+		background-color: #000000;
+
+}
+
+table td{
+	border-width: 1px;
+		padding: 10px;
+		border: 1px solid red;
+		    background: #262626;
+}
+
+table th{
+	border-width: 1px;
+		padding: 10px;
+		border: 1px solid red;
+		    background: #000000;
+}
+

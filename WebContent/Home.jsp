@@ -22,7 +22,7 @@
 		<div class = nav>
 			<ul>
 			<li><a href="http://localhost:8080/CommunalProject/LogOutServlet">Logout</a></li>
-			<li><a href="#">Transactions</a></li>
+			<li><a href="http://localhost:8080/CommunalProject/Transactions.jsp">Transactions</a></li>
 				<li><a href="http://localhost:8080/CommunalProject/AccountPanel.jsp">Panel</a></li>
 				<li><a href="#" class="active">Home</a></li>
 				<li class="title"><a class="title">Communal Project</a></li>
