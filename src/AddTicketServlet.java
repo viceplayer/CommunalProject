@@ -49,12 +49,9 @@ public class AddTicketServlet extends HttpServlet {
 		int objectId = Integer.parseInt(request.getParameter("id"));
 
 		if (!am.addTicket(objectId, companyId, ticketNumber)){
-			path += "TicketAlreadyExists.jsp";
-			System.out.print("Ticket already exists");
+			path += "AddTicket.jsp?companyError=Ticket of this company already exists&";
 		} else {
 			path += "Home.jsp";
-			System.out.print("Success! Ticket Added");
-
 		}
 		response.sendRedirect(path);
 	}

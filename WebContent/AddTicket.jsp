@@ -11,7 +11,12 @@
 <body>
 	<form action="AddTicketServlet" method="post">
 	<input type="hidden" name="id" value=<%= request.getParameter("id") %> />
-		Company:
+		<%
+			String companyError = (String) request.getParameter("companyError");
+			if (companyError != null)
+				out.println("<font color=red size=3px>" + companyError + "</font>");
+		%>
+		<br>Company:
 		<select name="companyId">
 			<option value="1">Telasi</option>
 			<option value="2">GWP</option>
